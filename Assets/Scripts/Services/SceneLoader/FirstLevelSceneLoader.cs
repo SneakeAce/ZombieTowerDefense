@@ -4,11 +4,8 @@ using UnityEngine.SceneManagement;
 
 public class FirstLevelSceneLoader : ISceneLoader
 {
-    private IAssetProvider _assetProvider;
-
-    public FirstLevelSceneLoader(IAssetProvider assetProvider)
+    public FirstLevelSceneLoader()
     {
-        _assetProvider = assetProvider;
     }
 
     public async UniTaskVoid LoadSceneAsync(AssetReference sceneReference)
