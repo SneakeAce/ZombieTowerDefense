@@ -1,11 +1,11 @@
 using System;
 using UnityEngine;
 
-public class EntityHealth : IEntityHealth
+public class UnitHealth : IUnitHealth
 {
     public event Action<float> CurrentValueChanged;
     public event Action<float> MaxValueChanged;
-    public event Action<IEntity> EntityDied;
+    public event Action<IUnit> UnitDied;
 
     public void TakeDamage()
     {

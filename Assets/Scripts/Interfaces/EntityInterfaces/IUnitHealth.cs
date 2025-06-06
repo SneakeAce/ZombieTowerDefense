@@ -1,10 +1,10 @@
 using System;
 
-public interface IEntityHealth
+public interface IUnitHealth
 {
     void TakeDamage();
 
     event Action<float> CurrentValueChanged;
     event Action<float> MaxValueChanged;
-    event Action<IEntity> EntityDied;
+    event Action<IUnit> UnitDied;
 }

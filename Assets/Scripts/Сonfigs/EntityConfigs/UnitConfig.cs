@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Configs/EntityConfig")]
-public class EntityConfig : ScriptableObject
+public class UnitConfig : ScriptableObject
 {
     [field: SerializeField] public GameObject Prefab { get; private set; }
 
