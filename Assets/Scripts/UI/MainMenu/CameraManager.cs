@@ -11,26 +11,30 @@ public class CameraManager
     private AssetReference _mainCameraPrefab;
     private AssetReference _virtualCameraPrefab;
 
-    private IMainMenuSceneAsyncObjectFactory _mainMenuSceneObjectFactory;
+    private SpawnCameraData _spawnCameraData;
+
+    private ISceneAsyncObjectFactory _sceneObjectFactory;
 
     private Camera _mainCamera;
     private CinemachineCamera _cinemachineVirtualCamera;
     private DiContainer _container;
 
-    public CameraManager(AssetReference cameraPrefab, AssetReference virtualCameraPrefab, DiContainer container,
-        IMainMenuSceneAsyncObjectFactory mainMenuSceneObjectFactory)
+    public CameraManager(SpawnCameraData spawnCameraData, DiContainer container, ISceneAsyncObjectFactory sceneObjectFactory)
     {
         Debug.Log("CameraManager constructor called.");
+        _spawnCameraData = spawnCameraData;
 
-        _mainCameraPrefab = cameraPrefab;
-        _virtualCameraPrefab = virtualCameraPrefab;
+        _mainCameraPrefab = _spawnCameraData.CameraPrefab;
+        _virtualCameraPrefab = _spawnCameraData.VirtualCameraPrefab;
+
         _container = container;
-        _mainMenuSceneObjectFactory = mainMenuSceneObjectFactory;
+        _sceneObjectFactory = sceneObjectFactory;
     }
 
     public async UniTask LoadAndCreateCameraAsync()
     {
-        _mainCamera = await _mainMenuSceneObjectFactory.CreateAsync<Camera>(_mainCameraPrefab);
+        _mainCamera = await _sceneObjectFactory.CreateAsync<Camera>(_mainCameraPrefab, 
+            _spawnCameraData.MainCameraSpawnPosition, _spawnCameraData.MainCameraRotation);
 
         _mainCamera.tag = "MainCamera";
 
@@ -39,14 +43,15 @@ public class CameraManager
 
         BindCamera(_mainCamera);
 
-        _cinemachineVirtualCamera = await _mainMenuSceneObjectFactory.CreateAsync<CinemachineCamera>(_virtualCameraPrefab);
+        _cinemachineVirtualCamera = await _sceneObjectFactory.CreateAsync<CinemachineCamera>(_virtualCameraPrefab,
+            _spawnCameraData.VirtualCameraSpawnPosition, _spawnCameraData.VirtualCameraRotation);
 
         if (_cinemachineVirtualCamera == null)
             throw new NullReferenceException("CinemachineCamera component is missing on the virtual camera prefab!");
 
         BindCamera(_cinemachineVirtualCamera);
 
-        //Повесить персонажа на камеру.
+        //сделать контроллер для камеры, где будет вешаться персонаж
     } 
 
     private void BindCamera<T>(T prefab) where T : Object

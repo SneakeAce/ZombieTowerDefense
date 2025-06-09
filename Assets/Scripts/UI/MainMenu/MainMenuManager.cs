@@ -6,26 +6,29 @@ using Zenject;
 
 public class MainMenuManager
 {
-    private AssetReference _mainMenuPrefab;
+    private AssetReference _mainMenuCanvasPrefab;
+    private Vector3 _spawnPositionCanvas = new Vector3(0f, 0f, 0f);
 
-    private IMainMenuSceneAsyncObjectFactory _mainMenuSceneObjectFactory;
+    private ISceneAsyncObjectFactory _mainMenuSceneObjectFactory;
 
     private MainMenuView _mainMenuView;
     private Canvas _mainMenuCanvas;
     private DiContainer _container;
 
     public MainMenuManager(AssetReference mainMenuPrefab, DiContainer container,
-        IMainMenuSceneAsyncObjectFactory mainMenuSceneObjectFactory)
+        ISceneAsyncObjectFactory mainMenuSceneObjectFactory)
     {
         Debug.Log("MainMenuManager constructor called.");   
-        _mainMenuPrefab = mainMenuPrefab;
+        _mainMenuCanvasPrefab = mainMenuPrefab;
         _container = container;
         _mainMenuSceneObjectFactory = mainMenuSceneObjectFactory;
     }
 
     public async UniTask LoadMainMenuPrefabAsync()
     {
-        _mainMenuCanvas = await _mainMenuSceneObjectFactory.CreateAsync<Canvas>(_mainMenuPrefab);
+        _mainMenuCanvas = await _mainMenuSceneObjectFactory.CreateAsync<Canvas>(_mainMenuCanvasPrefab,
+            _spawnPositionCanvas, Quaternion.identity);
+
         _mainMenuView = _mainMenuCanvas.GetComponentInChildren<MainMenuView>();
 
         if (_mainMenuView == null)

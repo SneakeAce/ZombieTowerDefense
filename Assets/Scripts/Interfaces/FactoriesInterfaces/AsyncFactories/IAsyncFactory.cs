@@ -4,5 +4,5 @@ using UnityEngine.AddressableAssets;
 
 public interface IAsyncFactory 
 {
-    UniTask<T> CreateAsync<T>(AssetReference reference) where T : Object;
+    UniTask<T> CreateAsync<T>(AssetReference reference, Vector3 spawnPosition, Quaternion rotation) where T : Object;
 }

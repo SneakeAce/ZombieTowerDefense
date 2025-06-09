@@ -4,11 +4,11 @@ using UnityEngine;
 using UnityEngine.AddressableAssets;
 using Object = UnityEngine.Object;
 
-public class MainMenuSceneObjectFactory : IMainMenuSceneAsyncObjectFactory
+public class SceneObjectFactory : ISceneAsyncObjectFactory
 {
-    public async UniTask<T> CreateAsync<T>(AssetReference reference) where T : Object
+    public async UniTask<T> CreateAsync<T>(AssetReference reference, Vector3 spawnPosition, Quaternion rotation) where T : Object
     {
-        GameObject instance = await reference.InstantiateAsync();
+        GameObject instance = await reference.InstantiateAsync(spawnPosition, rotation, null);
 
         if (instance == null)
             throw new NullReferenceException("Instance Object in MainMenuFactory is Null!");
