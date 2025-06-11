@@ -1,14 +1,18 @@
 using System;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
-using UnityEngine.AddressableAssets;
 using Object = UnityEngine.Object;
 
-public class SceneObjectFactory : ISceneAsyncObjectFactory
+public class SceneObjectFactory : IAsyncObjectFactory
 {
-    public async UniTask<T> CreateAsync<T>(AssetReference reference, Vector3 spawnPosition, Quaternion rotation) where T : Object
+    public async UniTask<T> CreateAsync<T, TArgs>(TArgs args)
+        where T : Object
+        where TArgs : IFactoryArguments
     {
-        GameObject instance = await reference.InstantiateAsync(spawnPosition, rotation, null);
+        if (args is not ObjectSpawnArguments objectSpawnArgs)
+            throw new ArgumentException("Invalid arguments provided for SceneObjectFactory.");
+
+        GameObject instance = await objectSpawnArgs.AssetReference.InstantiateAsync(objectSpawnArgs.SpawnPosition, objectSpawnArgs.SpawnRotation, null);
 
         if (instance == null)
             throw new NullReferenceException("Instance Object in MainMenuFactory is Null!");

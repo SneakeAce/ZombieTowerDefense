@@ -9,14 +9,14 @@ public class MainMenuManager
     private AssetReference _mainMenuCanvasPrefab;
     private Vector3 _spawnPositionCanvas = new Vector3(0f, 0f, 0f);
 
-    private ISceneAsyncObjectFactory _mainMenuSceneObjectFactory;
+    private IAsyncObjectFactory _mainMenuSceneObjectFactory;
 
     private MainMenuView _mainMenuView;
     private Canvas _mainMenuCanvas;
     private DiContainer _container;
 
     public MainMenuManager(AssetReference mainMenuPrefab, DiContainer container,
-        ISceneAsyncObjectFactory mainMenuSceneObjectFactory)
+        IAsyncObjectFactory mainMenuSceneObjectFactory)
     {
         Debug.Log("MainMenuManager constructor called.");   
         _mainMenuCanvasPrefab = mainMenuPrefab;
@@ -26,8 +26,10 @@ public class MainMenuManager
 
     public async UniTask LoadMainMenuPrefabAsync()
     {
-        _mainMenuCanvas = await _mainMenuSceneObjectFactory.CreateAsync<Canvas>(_mainMenuCanvasPrefab,
+        ObjectSpawnArguments objectSpawnArguments = new ObjectSpawnArguments(_mainMenuCanvasPrefab,
             _spawnPositionCanvas, Quaternion.identity);
+
+        _mainMenuCanvas = await _mainMenuSceneObjectFactory.CreateAsync<Canvas, ObjectSpawnArguments>(objectSpawnArguments);
 
         _mainMenuView = _mainMenuCanvas.GetComponentInChildren<MainMenuView>();
 

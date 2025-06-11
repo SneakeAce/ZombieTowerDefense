@@ -1,8 +1,10 @@
 using Cysharp.Threading.Tasks;
 using UnityEngine;
-using UnityEngine.AddressableAssets;
 
-public interface IAsyncFactory 
+public interface IAsyncFactory
 {
-    UniTask<T> CreateAsync<T>(AssetReference reference, Vector3 spawnPosition, Quaternion rotation) where T : Object;
+    UniTask<T> CreateAsync<T, TArgs>(TArgs args) 
+        where T : Object
+        where TArgs : IFactoryArguments;
 }
+

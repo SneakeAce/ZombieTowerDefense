@@ -16,7 +16,7 @@ public class FirstLevelSceneInstaller : MonoInstaller
 
     private void BindSceneObjectFactory()
     {
-        Container.Bind<ISceneAsyncObjectFactory>()
+        Container.Bind<IAsyncObjectFactory>()
             .To<SceneObjectFactory>()
             .AsSingle();
     }
