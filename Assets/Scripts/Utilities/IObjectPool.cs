@@ -1,9 +1,8 @@
 using UnityEngine;
 
-public interface IObjectPool<T>
-    where T : MonoBehaviour
+public interface IObjectPool
 {
-    public T GetPoolObject();
+    public Object GetObjectFromPool();
 
-    public void ReturnPoolObject(T poolObject);
+    public void ReturnPoolObject(Object poolObject);
 }

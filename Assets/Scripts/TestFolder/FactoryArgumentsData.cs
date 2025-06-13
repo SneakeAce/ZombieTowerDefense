@@ -17,12 +17,14 @@ public struct ObjectSpawnArguments : IFactoryArguments
 
 public struct PoolCreatingArguments : IFactoryArguments
 {
-    public PoolCreatingArguments(AssetReference assetReference, UnitType unitType)
+    public PoolCreatingArguments(int poolSize, bool canExpandPool, Transform container)
     {
-        AssetReference = assetReference;
-        UnitType = unitType;
+        PoolSize = poolSize;
+        CanExpandPool = canExpandPool;
+        Container = container;
     }
 
-    public AssetReference AssetReference { get; }
-    public UnitType UnitType { get; }
+    public int PoolSize { get; }
+    public bool CanExpandPool { get; } 
+    public Transform Container { get; }
 }

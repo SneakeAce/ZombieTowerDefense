@@ -1,9 +1,10 @@
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 [CreateAssetMenu(menuName = "Configs/UnitConfig/TESTCONFIG", fileName = "TESTMarineConfig")]
 public class UnitConfig : ScriptableObject
 {
-    [field: SerializeField] public GameObject Prefab { get; private set; }
+    [field: SerializeField] public AssetReference Prefab { get; private set; }
     [field: SerializeField] public UnitType UnitType { get; private set; }
 
     [field: SerializeField] public MoveStats MoveStats { get; private set; }

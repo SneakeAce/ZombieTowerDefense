@@ -1,36 +1,79 @@
+using System;
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 using Object = UnityEngine.Object;
 
-public class ObjectPool<TObject> : IObjectPool<TObject>
-    where TObject : MonoBehaviour
+public class ObjectPool<TObject> : IObjectPool, IDisposable
+    where TObject : Component
 {
     private const int CountPerSpawn = 1;
 
     private Queue<TObject> _availableObjects;
     private HashSet<TObject> _objectsInUse;
 
-    private TObject _prefab;
-    
+    private GameObject _prefab;
+    private AssetReference _assetReference;
+
     private Transform _container;
 
     private int _countPoolObject;
+    private int _poolSize;
 
     private bool _canExpandPool;
 
-    public ObjectPool(TObject prefab, int initialSize, Transform container = null, bool canExpandPool = false)
+    public ObjectPool(AssetReference assetReference, PoolCreatingArguments poolArguments)
     {
-        _prefab = prefab;
-        _container = container;
-        _canExpandPool = canExpandPool;
+        _assetReference = assetReference;
+
+        _poolSize = poolArguments.PoolSize;
+        _canExpandPool = poolArguments.CanExpandPool;
+        _container = poolArguments.Container;
 
         _availableObjects = new Queue<TObject>();
         _objectsInUse = new HashSet<TObject>();
-
-        CreatePool(initialSize);
     }
 
-    public TObject GetPoolObject()
+    public void Dispose()
+    {
+        if (_prefab != null)
+            Addressables.Release(_prefab);
+    }
+
+    public async UniTask CreatePool()
+    {
+        if (_prefab == null)
+        {
+            try
+            {
+                _prefab = await _assetReference.LoadAssetAsync<GameObject>().ToUniTask();
+
+                if (_prefab == null)
+                    throw new NullReferenceException("Loaded prefab is null from Addressables!");
+            }
+            catch (Exception ex)
+            {
+                Debug.LogError($"Failed to load prefab from Addressables: {_assetReference.AssetGUID}, reason: {ex}");
+                throw;
+            }
+        }
+
+        for (int i = 0; i < _poolSize; i++)
+            CreatePoolObject();
+    }
+
+    public Object GetObjectFromPool()
+    {
+        return GetPoolObject();
+    }
+
+    public void ReturnPoolObject(Object poolObject)
+    {
+        ReturnObject(poolObject as TObject);
+    }
+
+    private TObject GetPoolObject()
     {
         TObject poolObject = GetObject();
 
@@ -43,31 +86,27 @@ public class ObjectPool<TObject> : IObjectPool<TObject>
         return null;
     }
 
-    public void ReturnPoolObject(TObject poolObject)
+    private void ReturnObject(TObject poolObject)
     {
         if (_objectsInUse.Contains(poolObject) == false)
             return;
 
-        poolObject.gameObject.SetActive(false);
+        SetActiveObject(poolObject, false);
 
         _objectsInUse.Remove(poolObject);
         _availableObjects.Enqueue(poolObject);
     }
 
-    private void CreatePool(int sizePool)
-    {
-        for (int i = 0; i < sizePool; i++)
-            CreatePoolObject();
-    }
-
     private TObject CreatePoolObject(bool isActiveByDefault = false)
     {
-        TObject poolObject = Object.Instantiate(_prefab, _container);
+        var instancePoolObject = Object.Instantiate(_prefab, _container);
+        var poolObject = instancePoolObject.GetComponent<TObject>();
 
         _countPoolObject += CountPerSpawn;
-        poolObject.name = _prefab.name + _countPoolObject.ToString();
+        instancePoolObject.name = _prefab.name + _countPoolObject.ToString();
 
-        poolObject.gameObject.SetActive(isActiveByDefault);
+        SetActiveObject(poolObject, isActiveByDefault);
+
         _availableObjects.Enqueue(poolObject);
 
         return poolObject;
@@ -82,8 +121,24 @@ public class ObjectPool<TObject> : IObjectPool<TObject>
 
         _objectsInUse.Add(poolObject);
 
-        poolObject.gameObject.SetActive(true);
+        SetActiveObject(poolObject, true);
 
         return poolObject;
     }
+
+    private void SetActiveObject(TObject poolObject, bool value)
+    {
+        switch (poolObject)
+        {
+            case GameObject go:
+                go.SetActive(value);
+                break;
+            case Component comp:
+                comp.gameObject.SetActive(value);
+                break;
+            default:
+                throw new InvalidOperationException("TObject должен быть GameObject или Component");
+        }
+    }
+
 }

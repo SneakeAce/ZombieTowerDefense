@@ -12,7 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0d10aa9094135f4ca05f5f501b57747, type: 3}
   m_Name: UnitConfig
   m_EditorClassIdentifier: 
-  <Prefab>k__BackingField: {fileID: 2715009427425215595, guid: e9daa590996fb5f4daea14c0dcf788d4, type: 3}
+  <Prefab>k__BackingField:
+    m_AssetGUID: e9daa590996fb5f4daea14c0dcf788d4
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_SubObjectGUID: 
+    m_EditorAssetChanged: 0
+  <UnitType>k__BackingField: -1
   <MoveStats>k__BackingField:
     <MoveSpeed>k__BackingField: 1.69
   <HealthStats>k__BackingField:

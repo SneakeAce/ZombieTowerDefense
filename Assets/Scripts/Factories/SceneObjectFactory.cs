@@ -12,10 +12,20 @@ public class SceneObjectFactory : IAsyncObjectFactory
         if (args is not ObjectSpawnArguments objectSpawnArgs)
             throw new ArgumentException("Invalid arguments provided for SceneObjectFactory.");
 
-        GameObject instance = await objectSpawnArgs.AssetReference.InstantiateAsync(objectSpawnArgs.SpawnPosition, objectSpawnArgs.SpawnRotation, null);
+        GameObject instance = null;
 
-        if (instance == null)
-            throw new NullReferenceException("Instance Object in MainMenuFactory is Null!");
+        try
+        {
+            instance = await objectSpawnArgs.AssetReference.InstantiateAsync(objectSpawnArgs.SpawnPosition, objectSpawnArgs.SpawnRotation, null);
+
+            if (instance == null)
+                throw new NullReferenceException("Instance Object in MainMenuFactory is Null!");
+        }
+        catch(Exception ex)
+        {
+            Debug.LogError($"Failed to instantiate object: {objectSpawnArgs.AssetReference.AssetGUID}, reason: {ex}");
+            throw;
+        }
 
         return instance.GetComponent<T>();
     }

@@ -1,36 +1,44 @@
 using System;
 using System.Collections.Generic;
-using UnityEngine;
-using Object = UnityEngine.Object;
+using Cysharp.Threading.Tasks;
 
 public class PoolManager
 {
-    private IAsyncPoolFactory _poolFactory;
+    private readonly Dictionary<PoolType, Dictionary<Enum, IObjectPool>> _pools = new Dictionary<PoolType, Dictionary<Enum, IObjectPool>>();
 
-    // Словарь для хранения пулов
+    private IAsyncPoolFactory _currentPoolFactory;
 
-    
-
-    public PoolManager(IAsyncPoolFactory poolFactory, List<IPoolConfig> poolConfigs)
+    public PoolManager(List<IAsyncPoolFactory> poolFactories)
     {
-        _poolFactory = poolFactory;
+        UnityEngine.Debug.Log($"PoolManager contrusct called. poolFactories = {poolFactories}");
 
-        foreach (var conf in poolConfigs)
-        {
-            foreach (var conf2 in conf.Configs)
-            {
-                
-            }
-            
-        }
-
-        CreatePools();
+        CreatePoolsAsync(poolFactories).Forget();
     }
 
-    private void CreatePools()
+    public IObjectPool GetPool(PoolType poolType, Enum type)
     {
+        if (_pools.TryGetValue(poolType, out var dictionaryPools))
+        {
+            if (dictionaryPools.TryGetValue(type, out var pool))
+            {
+                return pool;
+            }
+        }
 
+        throw new KeyNotFoundException($"Pool not found: {poolType} -> {type}");
+    }
 
+    private async UniTask CreatePoolsAsync(List<IAsyncPoolFactory> poolFactories)
+    {
+        UnityEngine.Debug.Log($"CreatePoolsAsync in PoolManager called");
 
+        for (int i = 0; i < poolFactories.Count; i++)
+        {
+            Dictionary<Enum, IObjectPool> pools = await poolFactories[i].CreateAsync();
+
+            UnityEngine.Debug.Log($"CreatePoolsAsync cycle For. pools.Keys = {pools.Keys.Count}, pools.Values = {pools.Values.Count}");
+
+            _pools.Add(poolFactories[i].PoolType, pools);
+        }
     }
 }
