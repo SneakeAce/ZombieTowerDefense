@@ -15,23 +15,23 @@ MonoBehaviour:
   m_GroupName: Default Local Group
   m_GUID: c9f5cafabe8294741a3b526ef09ec80f
   m_SerializeEntries:
-  - m_GUID: 0349b673b8c887c4fbc94245be32ac81
-    m_Address: EntityConfigAsset
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 16aa1c038fa6a8d42a46a607dbfcf15d
     m_Address: MainMenuCanvasPrefab
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 81b88205ddba17040b049a577a306e2b
-    m_Address: MainCameraPrefab
+    m_Address: MainMenuMainCameraPrefab
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 99c9720ab356a0642a771bea13969a05
     m_Address: FirstLevelScene
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: cbe5d67e86f89ef4fa1f41f289358289
+    m_Address: FirstLevelMainCameraPrefab
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

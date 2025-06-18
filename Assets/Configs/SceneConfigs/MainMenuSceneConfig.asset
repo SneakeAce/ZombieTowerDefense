@@ -18,3 +18,26 @@ MonoBehaviour:
     m_SubObjectType: 
     m_SubObjectGUID: 
     m_EditorAssetChanged: 1
+  <MainMenuCanvasPrefab>k__BackingField:
+    m_AssetGUID: 16aa1c038fa6a8d42a46a607dbfcf15d
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_SubObjectGUID: 
+    m_EditorAssetChanged: 0
+  <SpawnCameraData>k__BackingField:
+    <CameraPrefab>k__BackingField:
+      m_AssetGUID: 81b88205ddba17040b049a577a306e2b
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_SubObjectGUID: 
+      m_EditorAssetChanged: 0
+    <MainCameraSpawnPosition>k__BackingField: {x: 0, y: 0, z: 0}
+    <MainCameraRotation>k__BackingField: {x: 0, y: 0, z: 0, w: 0}
+    <VirtualCameraPrefab>k__BackingField:
+      m_AssetGUID: e74bb9b6a82c9f24fae5dbaf13f2c2fc
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_SubObjectGUID: 
+      m_EditorAssetChanged: 0
+    <VirtualCameraSpawnPosition>k__BackingField: {x: 0, y: 0, z: 0}
+    <VirtualCameraRotation>k__BackingField: {x: 0, y: 0, z: 0, w: 0}

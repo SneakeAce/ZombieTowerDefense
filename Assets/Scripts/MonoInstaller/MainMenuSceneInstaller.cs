@@ -6,15 +6,11 @@ public class MainMenuSceneInstaller : MonoInstaller
 {
     [SerializeField] private MainMenuSceneConfig _mainMenuSceneConfig;
 
-    [SerializeField] private AssetReference _mainMenuCanvasPrefab;
-    [SerializeField] private AssetReference _cameraPrefab;
-    [SerializeField] private AssetReference _virtualCameraPrefab;
-
     public override void InstallBindings()
     {
         BindMainMenuControllerBinder();
 
-        BindMainMenuFactory();
+        BindSceneObjectFactory();
 
         BindSceneComponents();
 
@@ -28,10 +24,10 @@ public class MainMenuSceneInstaller : MonoInstaller
         Container.Bind<MainMenuControllerBinder>().AsSingle();
     }
 
-    private void BindMainMenuFactory()
+    private void BindSceneObjectFactory()
     {
-        Container.Bind<IMainMenuSceneAsyncObjectFactory>()
-            .To<MainMenuSceneObjectFactory>()
+        Container.Bind<IAsyncObjectFactory>()
+            .To<SceneObjectFactory>()
             .AsSingle();
     }
 
@@ -39,12 +35,12 @@ public class MainMenuSceneInstaller : MonoInstaller
     {
         Container.Bind<CameraManager>()
             .AsSingle()
-            .WithArguments(_cameraPrefab, _virtualCameraPrefab);
+            .WithArguments(_mainMenuSceneConfig.SpawnCameraData);
 
 
         Container.Bind<MainMenuManager>()
             .AsSingle()
-            .WithArguments(_mainMenuCanvasPrefab);
+            .WithArguments(_mainMenuSceneConfig.MainMenuCanvasPrefab);
 
         Container.BindInterfacesAndSelfTo<MainMenuSceneBootstrapper>()
             .AsSingle()
