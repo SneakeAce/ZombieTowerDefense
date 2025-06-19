@@ -276,24 +276,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _mainMenuSceneConfig: {fileID: 11400000, guid: e9a7c9146f4671847bbc8f0e12148145, type: 2}
-  _mainMenuCanvasPrefab:
-    m_AssetGUID: 16aa1c038fa6a8d42a46a607dbfcf15d
-    m_SubObjectName: 
-    m_SubObjectType: 
-    m_SubObjectGUID: 
-    m_EditorAssetChanged: 0
-  _cameraPrefab:
-    m_AssetGUID: 81b88205ddba17040b049a577a306e2b
-    m_SubObjectName: 
-    m_SubObjectType: 
-    m_SubObjectGUID: 
-    m_EditorAssetChanged: 1
-  _virtualCameraPrefab:
-    m_AssetGUID: e74bb9b6a82c9f24fae5dbaf13f2c2fc
-    m_SubObjectName: 
-    m_SubObjectType: 
-    m_SubObjectGUID: 
-    m_EditorAssetChanged: 0
 --- !u!1 &1325761246
 GameObject:
   m_ObjectHideFlags: 0

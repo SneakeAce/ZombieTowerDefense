@@ -6,5 +6,5 @@ public interface IAsyncPoolFactory
 {
     PoolType PoolType { get; }
 
-    UniTask<Dictionary<Enum, IObjectPool>> CreateAsync();
+    UniTask<Dictionary<int, IObjectPool>> CreateAsync();
 }

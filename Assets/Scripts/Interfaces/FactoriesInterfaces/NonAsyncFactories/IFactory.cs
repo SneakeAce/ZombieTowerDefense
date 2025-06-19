@@ -2,5 +2,7 @@ using UnityEngine;
 
 public interface IFactory
 {
-    T CreateObject<T>() where T : Object;
+    T CreateObject<T, TArgs>(TArgs args) 
+        where T : Object
+        where TArgs : IFactoryArguments;
 }

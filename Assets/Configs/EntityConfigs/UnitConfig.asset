@@ -18,7 +18,7 @@ MonoBehaviour:
     m_SubObjectType: 
     m_SubObjectGUID: 
     m_EditorAssetChanged: 0
-  <UnitType>k__BackingField: -1
+  <UnitType>k__BackingField: 1
   <MoveStats>k__BackingField:
     <MoveSpeed>k__BackingField: 1.69
   <HealthStats>k__BackingField:

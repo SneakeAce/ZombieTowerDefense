@@ -68,6 +68,34 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "UISelectUnit",
+            "id": "d680b787-d788-452d-989c-d3e28c8635b1",
+            "actions": [
+                {
+                    "name": "MarineUnitCreate",
+                    "type": "Button",
+                    "id": "9108f508-bad8-4158-b48f-0d3283b8ad5e",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "ec65596f-55b7-46b7-97d9-909f53ce7a35",
+                    "path": "<Keyboard>/1",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MarineUnitCreate",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": [

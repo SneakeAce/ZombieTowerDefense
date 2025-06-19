@@ -15,6 +15,21 @@ public struct ObjectSpawnArguments : IFactoryArguments
     public Quaternion SpawnRotation { get; }
 }
 
+public struct UnitSpawnArguments : IFactoryArguments
+{
+    public UnitSpawnArguments(IObjectPool pool, Vector3 spawnPosition, Quaternion spawnRotation)
+    {
+        Pool = pool;
+        SpawnPosition = spawnPosition;
+        SpawnRotation = spawnRotation;
+    }
+
+    public IObjectPool Pool { get; }
+    public Vector3 SpawnPosition { get; }
+    public Quaternion SpawnRotation { get; }
+}
+
+
 public struct PoolCreatingArguments : IFactoryArguments
 {
     public PoolCreatingArguments(int poolSize, bool canExpandPool, Transform container)

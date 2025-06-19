@@ -11,6 +11,7 @@ public class FirstLevelInstaller : MonoInstaller
 
         BindServices();
 
+        BindPlayerUnitSpawner();
     }
 
 
@@ -30,7 +31,8 @@ public class FirstLevelInstaller : MonoInstaller
             .AsSingle()
             .NonLazy();
 
-        Container.Bind<PlayerControlledUnitConfigs>()
+        Container.Bind<IPoolConfig<UnitConfig>>()
+            .To<PlayerControlledUnitConfigs>()
             .FromInstance(_unitConfig)
             .AsSingle();
 
@@ -38,6 +40,15 @@ public class FirstLevelInstaller : MonoInstaller
             .To<PlayerUnitPoolsFactory>()
             .AsSingle();
 
-        Container.Bind<PoolManager>().AsSingle().NonLazy();
+        Container.Bind<IPoolManager>().To<PoolManager>().AsSingle();
+    }
+
+    private void BindPlayerUnitSpawner()
+    {
+        Container.Bind<IPlayerControlledUnitsFactory>().To<PlayerControlledUnitsFactory>().AsSingle();
+
+        Container.Bind<IPlayerUnitSpawner>().To<PlayerControlledUnitSpawner>().AsSingle();
+
+        Container.Bind<SpawnerManager>().AsSingle().NonLazy();
     }
 }

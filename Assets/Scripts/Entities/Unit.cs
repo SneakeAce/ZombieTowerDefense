@@ -14,10 +14,9 @@ public class Unit : MonoBehaviour, IUnit
     private bool _isSelected;
 
     [Inject]
-    private void Construct(IUnitHealth health, UnitConfig config)
+    private void Construct(IUnitHealth health)
     {
         _health = health;
-        _config = config;
     }
 
     public Transform Transform => transform;
@@ -39,7 +38,7 @@ public class Unit : MonoBehaviour, IUnit
         }
     }
 
-    //public void SetConfig(UnitConfig config) => _config = config; 
+    public void SetConfig(UnitConfig config) => _config = config; 
 
     private void Start()
     {

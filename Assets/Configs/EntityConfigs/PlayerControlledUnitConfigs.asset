@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6de4b21cf7963646b7ac2560510095a, type: 3}
   m_Name: PlayerControlledUnitConfigs
   m_EditorClassIdentifier: 
-  <PoolSize>k__BackingField: 10
-  <CanExpand>k__BackingField: 0
-  <Type>k__BackingField: 1
-  <PoolContainer>k__BackingField: {fileID: 0}
-  <UnitConfigs>k__BackingField:
-  - {fileID: 11400000, guid: a8798e8db8b321147a877f501518b6b1, type: 2}
+  <PoolCharacteristics>k__BackingField:
+    <PoolSize>k__BackingField: 10
+    <CanExpand>k__BackingField: 1
+    <Type>k__BackingField: 1
+    <PoolContainer>k__BackingField: {fileID: 0}
+    <Configs>k__BackingField:
+    - {fileID: 11400000, guid: a8798e8db8b321147a877f501518b6b1, type: 2}
