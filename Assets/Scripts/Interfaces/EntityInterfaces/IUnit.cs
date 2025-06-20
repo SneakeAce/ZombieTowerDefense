@@ -6,7 +6,7 @@ public interface IUnit
     Rigidbody Rigidbody { get; }
     Collider Collider { get; }
     Animator Animator { get; }
-    UnitConfig UnitConfig { get; }
+    PlayerUnitConfig UnitConfig { get; }
     IUnitHealth Health { get; }
     IUnitStateMachine UnitStateMachine { get; }
     bool IsSelected { get; set; }

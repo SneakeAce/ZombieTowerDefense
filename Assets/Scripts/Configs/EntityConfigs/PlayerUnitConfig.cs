@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.AddressableAssets;
 
 [CreateAssetMenu(menuName = "Configs/UnitConfig/TESTCONFIG", fileName = "TESTMarineConfig")]
-public class UnitConfig : ScriptableObject
+public class PlayerUnitConfig : ScriptableObject
 {
     [field: SerializeField] public AssetReference Prefab { get; private set; }
     [field: SerializeField] public UnitType UnitType { get; private set; }

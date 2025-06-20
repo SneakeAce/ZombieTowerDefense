@@ -4,10 +4,10 @@ using Cysharp.Threading.Tasks;
 
 public class PlayerUnitPoolsFactory : IAsyncPoolFactory
 {
-    private readonly IPoolConfig<UnitConfig> _config;
+    private readonly IPoolConfig<PlayerUnitConfig> _config;
     private readonly PoolType _poolType = PoolType.PlayerUnitPool;
 
-    public PlayerUnitPoolsFactory(IPoolConfig<UnitConfig> config)
+    public PlayerUnitPoolsFactory(IPoolConfig<PlayerUnitConfig> config)
     {
         UnityEngine.Debug.Log($"PlayerUnitPoolsFactory contruct called. config = {config}");
 
@@ -20,7 +20,7 @@ public class PlayerUnitPoolsFactory : IAsyncPoolFactory
     {
         Dictionary<int, IObjectPool> unitPools = new Dictionary<int, IObjectPool>();
 
-        foreach (UnitConfig unitConfig in _config.Configs)
+        foreach (PlayerUnitConfig unitConfig in _config.Configs)
         {
             PoolCreatingArguments poolArgs = new PoolCreatingArguments(_config.PoolSize, _config.CanExpand, _config.PoolContainer);
 

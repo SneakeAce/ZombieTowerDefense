@@ -31,7 +31,7 @@ public class FirstLevelInstaller : MonoInstaller
             .AsSingle()
             .NonLazy();
 
-        Container.Bind<IPoolConfig<UnitConfig>>()
+        Container.Bind<IPoolConfig<PlayerUnitConfig>>()
             .To<PlayerControlledUnitConfigs>()
             .FromInstance(_unitConfig)
             .AsSingle();

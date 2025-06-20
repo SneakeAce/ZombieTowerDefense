@@ -6,7 +6,7 @@ public class Unit : MonoBehaviour, IUnit
     private Rigidbody _rigidbody;
     private Collider _collider;
     private Animator _animator;
-    private UnitConfig _config;
+    private PlayerUnitConfig _config;
 
     private IUnitHealth _health;
     private IUnitStateMachine _unitStateMachine;
@@ -23,7 +23,7 @@ public class Unit : MonoBehaviour, IUnit
     public Rigidbody Rigidbody => _rigidbody;
     public Collider Collider => _collider;
     public Animator Animator => _animator;
-    public UnitConfig UnitConfig => _config;
+    public PlayerUnitConfig UnitConfig => _config;
     public IUnitHealth Health => _health;
     public IUnitStateMachine UnitStateMachine => _unitStateMachine;
     public bool IsSelected
@@ -38,7 +38,7 @@ public class Unit : MonoBehaviour, IUnit
         }
     }
 
-    public void SetConfig(UnitConfig config) => _config = config; 
+    public void SetConfig(PlayerUnitConfig config) => _config = config; 
 
     private void Start()
     {

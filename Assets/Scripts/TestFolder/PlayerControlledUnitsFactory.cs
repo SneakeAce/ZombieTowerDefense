@@ -5,9 +5,9 @@ using Object = UnityEngine.Object;
 public class PlayerControlledUnitsFactory : IPlayerControlledUnitsFactory
 {
     private DiContainer _container;
-    private IPoolConfig<UnitConfig> _unitConfigs;
+    private IPoolConfig<PlayerUnitConfig> _unitConfigs;
 
-    public PlayerControlledUnitsFactory(DiContainer container, IPoolConfig<UnitConfig> unitConfigs)
+    public PlayerControlledUnitsFactory(DiContainer container, IPoolConfig<PlayerUnitConfig> unitConfigs)
     {
         _container = container;
         _unitConfigs = unitConfigs;
