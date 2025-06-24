@@ -2,9 +2,8 @@ using System;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
-using Zenject;
 
-public class MainMenuManager
+public class MainMenuManager : IMainMenuManager
 {
     private AssetReference _mainMenuCanvasPrefab;
     private Vector3 _spawnPositionCanvas = new Vector3(0f, 0f, 0f);
@@ -13,41 +12,30 @@ public class MainMenuManager
 
     private MainMenuView _mainMenuView;
     private Canvas _mainMenuCanvas;
-    private DiContainer _container;
 
-    public MainMenuManager(AssetReference mainMenuPrefab, DiContainer container,
-        IAsyncObjectFactory mainMenuSceneObjectFactory)
+    public MainMenuManager(AssetReference mainMenuPrefab, IAsyncObjectFactory mainMenuSceneObjectFactory)
     {
         Debug.Log("MainMenuManager constructor called.");   
         _mainMenuCanvasPrefab = mainMenuPrefab;
-        _container = container;
         _mainMenuSceneObjectFactory = mainMenuSceneObjectFactory;
     }
 
-    public async UniTask LoadMainMenuPrefabAsync()
+    public MainMenuView MainMenuView => _mainMenuView;
+    public Canvas MainMenuCanvas => _mainMenuCanvas;
+
+    public async UniTask LoadPrefabAsync()
     {
         ObjectSpawnArguments objectSpawnArguments = new ObjectSpawnArguments(_mainMenuCanvasPrefab,
             _spawnPositionCanvas, Quaternion.identity);
 
         _mainMenuCanvas = await _mainMenuSceneObjectFactory.CreateAsync<Canvas, ObjectSpawnArguments>(objectSpawnArguments);
 
+        if (_mainMenuCanvas == null)
+            throw new NullReferenceException("MainMenuCanvas is null!");
+
         _mainMenuView = _mainMenuCanvas.GetComponentInChildren<MainMenuView>();
 
         if (_mainMenuView == null)
             throw new NullReferenceException("MainMenuView component is missing on the main menu prefab!");
-
-        if (_mainMenuCanvas == null)
-            throw new NullReferenceException("MainMenuCanvas is null!");
-
-        BindMainMenuView();
     }
-
-    private void BindMainMenuView()
-    {
-        Debug.Log("BindMainMenuView");
-
-        _container.Bind<MainMenuView>()
-            .FromInstance(_mainMenuView)
-            .AsSingle();
-    }   
 }

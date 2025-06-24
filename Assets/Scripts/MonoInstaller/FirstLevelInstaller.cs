@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.TextCore.Text;
 using Zenject;
 
 public class FirstLevelInstaller : MonoInstaller
@@ -8,10 +7,7 @@ public class FirstLevelInstaller : MonoInstaller
 
     public override void InstallBindings()
     {
-
         BindServices();
-
-        BindPlayerUnitSpawner();
     }
 
 
@@ -43,12 +39,4 @@ public class FirstLevelInstaller : MonoInstaller
         Container.Bind<IPoolManager>().To<PoolManager>().AsSingle();
     }
 
-    private void BindPlayerUnitSpawner()
-    {
-        Container.Bind<IPlayerControlledUnitsFactory>().To<PlayerControlledUnitsFactory>().AsSingle();
-
-        Container.Bind<IPlayerUnitSpawner>().To<PlayerControlledUnitSpawner>().AsSingle();
-
-        Container.Bind<SpawnerManager>().AsSingle().NonLazy();
-    }
 }

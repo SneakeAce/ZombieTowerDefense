@@ -4,11 +4,19 @@ using Zenject;
 
 public class FirstLevelSceneBootstrapper : IInitializable
 {
-    private CameraManager _cameraManager;
+    private ICameraManager _cameraManager;
+    private IWindowHiringUnitsManager _windowHiringUnitsManager;
 
-    public FirstLevelSceneBootstrapper(CameraManager cameraManager)
+    private IHiringUnitButtonsController _buttonsController;
+    private IWindowHiringUnitsController _windowHiringUnitsController;
+    public FirstLevelSceneBootstrapper(ICameraManager cameraManager, 
+        IWindowHiringUnitsManager windowHiringUnitsManager, IHiringUnitButtonsController buttonsController,
+        IWindowHiringUnitsController windowHiringUnitsController)
     {
         _cameraManager = cameraManager;
+        _windowHiringUnitsManager = windowHiringUnitsManager;
+        _buttonsController = buttonsController;
+        _windowHiringUnitsController = windowHiringUnitsController;
     }
 
     public void Initialize()
@@ -21,6 +29,10 @@ public class FirstLevelSceneBootstrapper : IInitializable
     private async UniTask LoadManagersAsync()
     {
         await _cameraManager.LoadAndCreateCameraAsync();
+        await _windowHiringUnitsManager.LoadPrefabAsync();
+
+        _windowHiringUnitsController.Initialization();
+        _buttonsController.Initialization();
 
         Debug.Log("FirstLevelSceneBootstrapper LoadManagersAsync end");
 

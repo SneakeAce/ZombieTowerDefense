@@ -15,7 +15,12 @@ public class GlobalInstaller : MonoInstaller
     }
 
     private void BindAssetProvider() => Container.Bind<IAssetProvider>().To<AssetProvider>().AsSingle();
-    private void BindPlayerInput() => Container.Bind<PlayerInput>().AsSingle();
+    private void BindPlayerInput()
+    {
+        Container.Bind<PlayerInput>().AsSingle();
+
+        Container.Bind<PlayerInputManager>().AsSingle().NonLazy();
+    }
 
     private void BindCoroutinePerformer()
     {

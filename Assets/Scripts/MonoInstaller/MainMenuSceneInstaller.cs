@@ -33,12 +33,13 @@ public class MainMenuSceneInstaller : MonoInstaller
 
     private void BindSceneComponents()
     {
-        Container.Bind<CameraManager>()
+        Container.Bind<ICameraManager>()
+            .To<CameraManager>()
             .AsSingle()
             .WithArguments(_mainMenuSceneConfig.SpawnCameraData);
 
-
-        Container.Bind<MainMenuManager>()
+        Container.Bind<IMainMenuManager>()
+            .To<MainMenuManager>()
             .AsSingle()
             .WithArguments(_mainMenuSceneConfig.MainMenuCanvasPrefab);
 

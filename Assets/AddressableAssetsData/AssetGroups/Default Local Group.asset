@@ -20,6 +20,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 70095c148fe850042b8fe1cd5d55563b
+    m_Address: WindowOrderingUnitsPrefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 81b88205ddba17040b049a577a306e2b
     m_Address: MainMenuMainCameraPrefab
     m_ReadOnly: 0

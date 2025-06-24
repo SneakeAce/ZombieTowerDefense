@@ -2,10 +2,8 @@ using System;
 using Cysharp.Threading.Tasks;
 using Unity.Cinemachine;
 using UnityEngine;
-using Zenject;
-using Object = UnityEngine.Object;
 
-public class CameraManager
+public class CameraManager : ICameraManager
 {
     private SpawnCameraData _spawnCameraData;
 
@@ -13,16 +11,17 @@ public class CameraManager
 
     private Camera _mainCamera;
     private CinemachineCamera _cinemachineVirtualCamera;
-    private DiContainer _container;
 
-    public CameraManager(SpawnCameraData spawnCameraData, DiContainer container, IAsyncObjectFactory sceneObjectFactory)
+    public CameraManager(SpawnCameraData spawnCameraData, IAsyncObjectFactory sceneObjectFactory)
     {
         Debug.Log("CameraManager constructor called.");
         _spawnCameraData = spawnCameraData;
 
-        _container = container;
         _sceneObjectFactory = sceneObjectFactory;
     }
+
+    public Camera MainCamera => _mainCamera;
+    public CinemachineCamera VirtualCamera => _cinemachineVirtualCamera;
 
     public async UniTask LoadAndCreateCameraAsync()
     {
@@ -36,7 +35,7 @@ public class CameraManager
     private async UniTask CreateMainCamera()
     {
         ObjectSpawnArguments cameraSpawnArguments = new ObjectSpawnArguments(_spawnCameraData.CameraPrefab,
-     _spawnCameraData.MainCameraSpawnPosition, _spawnCameraData.MainCameraRotation);
+            _spawnCameraData.MainCameraSpawnPosition, _spawnCameraData.MainCameraRotation);
 
         _mainCamera = await _sceneObjectFactory.CreateAsync<Camera, ObjectSpawnArguments>(cameraSpawnArguments);
 
@@ -44,8 +43,6 @@ public class CameraManager
 
         if (_mainCamera.GetComponent<CinemachineBrain>() == null)
             throw new NullReferenceException("CinemachineBrain on Camera is missing!");
-
-        BindCamera(_mainCamera);
     }
 
     private async UniTask CreateVirtualCamera()
@@ -57,15 +54,5 @@ public class CameraManager
 
         if (_cinemachineVirtualCamera == null)
             throw new NullReferenceException("CinemachineCamera component is missing on the virtual camera prefab!");
-
-        BindCamera(_cinemachineVirtualCamera);
     }
-
-    private void BindCamera<T>(T prefab) where T : Object
-    {
-        _container.Bind<T>()
-            .FromInstance(prefab)
-            .AsSingle();
-    }
-
 }

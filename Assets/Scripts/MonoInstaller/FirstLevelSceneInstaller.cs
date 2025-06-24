@@ -23,7 +23,8 @@ public class FirstLevelSceneInstaller : MonoInstaller
 
     private void BindSceneComponents()
     {
-        Container.Bind<CameraManager>()
+        Container.Bind<ICameraManager>()
+            .To<CameraManager>()
             .AsSingle()
             .WithArguments(_firstLevelSceneConfig.SpawnCameraData);
 

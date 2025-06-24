@@ -156,13 +156,13 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             ]
         },
         {
-            ""name"": ""UISelectUnit"",
+            ""name"": ""CallWindowHiringUnits"",
             ""id"": ""d680b787-d788-452d-989c-d3e28c8635b1"",
             ""actions"": [
                 {
-                    ""name"": ""MarineUnitCreate"",
+                    ""name"": ""ToggleWindowHiringUnits"",
                     ""type"": ""Button"",
-                    ""id"": ""9108f508-bad8-4158-b48f-0d3283b8ad5e"",
+                    ""id"": ""18497600-2aa3-4535-8554-a43909352068"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
@@ -172,12 +172,40 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             ""bindings"": [
                 {
                     ""name"": """",
-                    ""id"": ""ec65596f-55b7-46b7-97d9-909f53ce7a35"",
+                    ""id"": ""ddb46dfe-97a7-4434-ad98-daad42b08158"",
+                    ""path"": ""<Keyboard>/b"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ToggleWindowHiringUnits"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""HireUnits"",
+            ""id"": ""04b3d4c1-97d3-4fd9-a1f7-064cf9e884aa"",
+            ""actions"": [
+                {
+                    ""name"": ""CreateMarineUnit"",
+                    ""type"": ""Button"",
+                    ""id"": ""30b221d5-145c-4d4d-b2e5-c35d827910b9"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""fae45d0c-22d4-44c9-9f0c-0680f27d7fe6"",
                     ""path"": ""<Keyboard>/1"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""MarineUnitCreate"",
+                    ""action"": ""CreateMarineUnit"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -252,15 +280,19 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         m_SelectionUnit_SelectUnit = m_SelectionUnit.FindAction("SelectUnit", throwIfNotFound: true);
         m_SelectionUnit_ChoosePoint = m_SelectionUnit.FindAction("ChoosePoint", throwIfNotFound: true);
         m_SelectionUnit_MousePosition = m_SelectionUnit.FindAction("MousePosition", throwIfNotFound: true);
-        // UISelectUnit
-        m_UISelectUnit = asset.FindActionMap("UISelectUnit", throwIfNotFound: true);
-        m_UISelectUnit_MarineUnitCreate = m_UISelectUnit.FindAction("MarineUnitCreate", throwIfNotFound: true);
+        // CallWindowHiringUnits
+        m_CallWindowHiringUnits = asset.FindActionMap("CallWindowHiringUnits", throwIfNotFound: true);
+        m_CallWindowHiringUnits_ToggleWindowHiringUnits = m_CallWindowHiringUnits.FindAction("ToggleWindowHiringUnits", throwIfNotFound: true);
+        // HireUnits
+        m_HireUnits = asset.FindActionMap("HireUnits", throwIfNotFound: true);
+        m_HireUnits_CreateMarineUnit = m_HireUnits.FindAction("CreateMarineUnit", throwIfNotFound: true);
     }
 
     ~@PlayerInput()
     {
         UnityEngine.Debug.Assert(!m_SelectionUnit.enabled, "This will cause a leak and performance issues, PlayerInput.SelectionUnit.Disable() has not been called.");
-        UnityEngine.Debug.Assert(!m_UISelectUnit.enabled, "This will cause a leak and performance issues, PlayerInput.UISelectUnit.Disable() has not been called.");
+        UnityEngine.Debug.Assert(!m_CallWindowHiringUnits.enabled, "This will cause a leak and performance issues, PlayerInput.CallWindowHiringUnits.Disable() has not been called.");
+        UnityEngine.Debug.Assert(!m_HireUnits.enabled, "This will cause a leak and performance issues, PlayerInput.HireUnits.Disable() has not been called.");
     }
 
     /// <summary>
@@ -451,29 +483,29 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     /// </summary>
     public SelectionUnitActions @SelectionUnit => new SelectionUnitActions(this);
 
-    // UISelectUnit
-    private readonly InputActionMap m_UISelectUnit;
-    private List<IUISelectUnitActions> m_UISelectUnitActionsCallbackInterfaces = new List<IUISelectUnitActions>();
-    private readonly InputAction m_UISelectUnit_MarineUnitCreate;
+    // CallWindowHiringUnits
+    private readonly InputActionMap m_CallWindowHiringUnits;
+    private List<ICallWindowHiringUnitsActions> m_CallWindowHiringUnitsActionsCallbackInterfaces = new List<ICallWindowHiringUnitsActions>();
+    private readonly InputAction m_CallWindowHiringUnits_ToggleWindowHiringUnits;
     /// <summary>
-    /// Provides access to input actions defined in input action map "UISelectUnit".
+    /// Provides access to input actions defined in input action map "CallWindowHiringUnits".
     /// </summary>
-    public struct UISelectUnitActions
+    public struct CallWindowHiringUnitsActions
     {
         private @PlayerInput m_Wrapper;
 
         /// <summary>
         /// Construct a new instance of the input action map wrapper class.
         /// </summary>
-        public UISelectUnitActions(@PlayerInput wrapper) { m_Wrapper = wrapper; }
+        public CallWindowHiringUnitsActions(@PlayerInput wrapper) { m_Wrapper = wrapper; }
         /// <summary>
-        /// Provides access to the underlying input action "UISelectUnit/MarineUnitCreate".
+        /// Provides access to the underlying input action "CallWindowHiringUnits/ToggleWindowHiringUnits".
         /// </summary>
-        public InputAction @MarineUnitCreate => m_Wrapper.m_UISelectUnit_MarineUnitCreate;
+        public InputAction @ToggleWindowHiringUnits => m_Wrapper.m_CallWindowHiringUnits_ToggleWindowHiringUnits;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
-        public InputActionMap Get() { return m_Wrapper.m_UISelectUnit; }
+        public InputActionMap Get() { return m_Wrapper.m_CallWindowHiringUnits; }
         /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Enable()" />
         public void Enable() { Get().Enable(); }
         /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Disable()" />
@@ -481,9 +513,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.enabled" />
         public bool enabled => Get().enabled;
         /// <summary>
-        /// Implicitly converts an <see ref="UISelectUnitActions" /> to an <see ref="InputActionMap" /> instance.
+        /// Implicitly converts an <see ref="CallWindowHiringUnitsActions" /> to an <see ref="InputActionMap" /> instance.
         /// </summary>
-        public static implicit operator InputActionMap(UISelectUnitActions set) { return set.Get(); }
+        public static implicit operator InputActionMap(CallWindowHiringUnitsActions set) { return set.Get(); }
         /// <summary>
         /// Adds <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
         /// </summary>
@@ -491,14 +523,14 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         /// <remarks>
         /// If <paramref name="instance" /> is <c>null</c> or <paramref name="instance"/> have already been added this method does nothing.
         /// </remarks>
-        /// <seealso cref="UISelectUnitActions" />
-        public void AddCallbacks(IUISelectUnitActions instance)
+        /// <seealso cref="CallWindowHiringUnitsActions" />
+        public void AddCallbacks(ICallWindowHiringUnitsActions instance)
         {
-            if (instance == null || m_Wrapper.m_UISelectUnitActionsCallbackInterfaces.Contains(instance)) return;
-            m_Wrapper.m_UISelectUnitActionsCallbackInterfaces.Add(instance);
-            @MarineUnitCreate.started += instance.OnMarineUnitCreate;
-            @MarineUnitCreate.performed += instance.OnMarineUnitCreate;
-            @MarineUnitCreate.canceled += instance.OnMarineUnitCreate;
+            if (instance == null || m_Wrapper.m_CallWindowHiringUnitsActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_CallWindowHiringUnitsActionsCallbackInterfaces.Add(instance);
+            @ToggleWindowHiringUnits.started += instance.OnToggleWindowHiringUnits;
+            @ToggleWindowHiringUnits.performed += instance.OnToggleWindowHiringUnits;
+            @ToggleWindowHiringUnits.canceled += instance.OnToggleWindowHiringUnits;
         }
 
         /// <summary>
@@ -507,21 +539,21 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         /// <remarks>
         /// Calling this method when <paramref name="instance" /> have not previously been registered has no side-effects.
         /// </remarks>
-        /// <seealso cref="UISelectUnitActions" />
-        private void UnregisterCallbacks(IUISelectUnitActions instance)
+        /// <seealso cref="CallWindowHiringUnitsActions" />
+        private void UnregisterCallbacks(ICallWindowHiringUnitsActions instance)
         {
-            @MarineUnitCreate.started -= instance.OnMarineUnitCreate;
-            @MarineUnitCreate.performed -= instance.OnMarineUnitCreate;
-            @MarineUnitCreate.canceled -= instance.OnMarineUnitCreate;
+            @ToggleWindowHiringUnits.started -= instance.OnToggleWindowHiringUnits;
+            @ToggleWindowHiringUnits.performed -= instance.OnToggleWindowHiringUnits;
+            @ToggleWindowHiringUnits.canceled -= instance.OnToggleWindowHiringUnits;
         }
 
         /// <summary>
-        /// Unregisters <param cref="instance" /> and unregisters all input action callbacks via <see cref="UISelectUnitActions.UnregisterCallbacks(IUISelectUnitActions)" />.
+        /// Unregisters <param cref="instance" /> and unregisters all input action callbacks via <see cref="CallWindowHiringUnitsActions.UnregisterCallbacks(ICallWindowHiringUnitsActions)" />.
         /// </summary>
-        /// <seealso cref="UISelectUnitActions.UnregisterCallbacks(IUISelectUnitActions)" />
-        public void RemoveCallbacks(IUISelectUnitActions instance)
+        /// <seealso cref="CallWindowHiringUnitsActions.UnregisterCallbacks(ICallWindowHiringUnitsActions)" />
+        public void RemoveCallbacks(ICallWindowHiringUnitsActions instance)
         {
-            if (m_Wrapper.m_UISelectUnitActionsCallbackInterfaces.Remove(instance))
+            if (m_Wrapper.m_CallWindowHiringUnitsActionsCallbackInterfaces.Remove(instance))
                 UnregisterCallbacks(instance);
         }
 
@@ -531,21 +563,117 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         /// <remarks>
         /// If <paramref name="instance" /> is <c>null</c>, calling this method will only unregister all existing callbacks but not register any new callbacks.
         /// </remarks>
-        /// <seealso cref="UISelectUnitActions.AddCallbacks(IUISelectUnitActions)" />
-        /// <seealso cref="UISelectUnitActions.RemoveCallbacks(IUISelectUnitActions)" />
-        /// <seealso cref="UISelectUnitActions.UnregisterCallbacks(IUISelectUnitActions)" />
-        public void SetCallbacks(IUISelectUnitActions instance)
+        /// <seealso cref="CallWindowHiringUnitsActions.AddCallbacks(ICallWindowHiringUnitsActions)" />
+        /// <seealso cref="CallWindowHiringUnitsActions.RemoveCallbacks(ICallWindowHiringUnitsActions)" />
+        /// <seealso cref="CallWindowHiringUnitsActions.UnregisterCallbacks(ICallWindowHiringUnitsActions)" />
+        public void SetCallbacks(ICallWindowHiringUnitsActions instance)
         {
-            foreach (var item in m_Wrapper.m_UISelectUnitActionsCallbackInterfaces)
+            foreach (var item in m_Wrapper.m_CallWindowHiringUnitsActionsCallbackInterfaces)
                 UnregisterCallbacks(item);
-            m_Wrapper.m_UISelectUnitActionsCallbackInterfaces.Clear();
+            m_Wrapper.m_CallWindowHiringUnitsActionsCallbackInterfaces.Clear();
             AddCallbacks(instance);
         }
     }
     /// <summary>
-    /// Provides a new <see cref="UISelectUnitActions" /> instance referencing this action map.
+    /// Provides a new <see cref="CallWindowHiringUnitsActions" /> instance referencing this action map.
     /// </summary>
-    public UISelectUnitActions @UISelectUnit => new UISelectUnitActions(this);
+    public CallWindowHiringUnitsActions @CallWindowHiringUnits => new CallWindowHiringUnitsActions(this);
+
+    // HireUnits
+    private readonly InputActionMap m_HireUnits;
+    private List<IHireUnitsActions> m_HireUnitsActionsCallbackInterfaces = new List<IHireUnitsActions>();
+    private readonly InputAction m_HireUnits_CreateMarineUnit;
+    /// <summary>
+    /// Provides access to input actions defined in input action map "HireUnits".
+    /// </summary>
+    public struct HireUnitsActions
+    {
+        private @PlayerInput m_Wrapper;
+
+        /// <summary>
+        /// Construct a new instance of the input action map wrapper class.
+        /// </summary>
+        public HireUnitsActions(@PlayerInput wrapper) { m_Wrapper = wrapper; }
+        /// <summary>
+        /// Provides access to the underlying input action "HireUnits/CreateMarineUnit".
+        /// </summary>
+        public InputAction @CreateMarineUnit => m_Wrapper.m_HireUnits_CreateMarineUnit;
+        /// <summary>
+        /// Provides access to the underlying input action map instance.
+        /// </summary>
+        public InputActionMap Get() { return m_Wrapper.m_HireUnits; }
+        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Enable()" />
+        public void Enable() { Get().Enable(); }
+        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Disable()" />
+        public void Disable() { Get().Disable(); }
+        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.enabled" />
+        public bool enabled => Get().enabled;
+        /// <summary>
+        /// Implicitly converts an <see ref="HireUnitsActions" /> to an <see ref="InputActionMap" /> instance.
+        /// </summary>
+        public static implicit operator InputActionMap(HireUnitsActions set) { return set.Get(); }
+        /// <summary>
+        /// Adds <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
+        /// </summary>
+        /// <param name="instance">Callback instance.</param>
+        /// <remarks>
+        /// If <paramref name="instance" /> is <c>null</c> or <paramref name="instance"/> have already been added this method does nothing.
+        /// </remarks>
+        /// <seealso cref="HireUnitsActions" />
+        public void AddCallbacks(IHireUnitsActions instance)
+        {
+            if (instance == null || m_Wrapper.m_HireUnitsActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_HireUnitsActionsCallbackInterfaces.Add(instance);
+            @CreateMarineUnit.started += instance.OnCreateMarineUnit;
+            @CreateMarineUnit.performed += instance.OnCreateMarineUnit;
+            @CreateMarineUnit.canceled += instance.OnCreateMarineUnit;
+        }
+
+        /// <summary>
+        /// Removes <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
+        /// </summary>
+        /// <remarks>
+        /// Calling this method when <paramref name="instance" /> have not previously been registered has no side-effects.
+        /// </remarks>
+        /// <seealso cref="HireUnitsActions" />
+        private void UnregisterCallbacks(IHireUnitsActions instance)
+        {
+            @CreateMarineUnit.started -= instance.OnCreateMarineUnit;
+            @CreateMarineUnit.performed -= instance.OnCreateMarineUnit;
+            @CreateMarineUnit.canceled -= instance.OnCreateMarineUnit;
+        }
+
+        /// <summary>
+        /// Unregisters <param cref="instance" /> and unregisters all input action callbacks via <see cref="HireUnitsActions.UnregisterCallbacks(IHireUnitsActions)" />.
+        /// </summary>
+        /// <seealso cref="HireUnitsActions.UnregisterCallbacks(IHireUnitsActions)" />
+        public void RemoveCallbacks(IHireUnitsActions instance)
+        {
+            if (m_Wrapper.m_HireUnitsActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        /// <summary>
+        /// Replaces all existing callback instances and previously registered input action callbacks associated with them with callbacks provided via <param cref="instance" />.
+        /// </summary>
+        /// <remarks>
+        /// If <paramref name="instance" /> is <c>null</c>, calling this method will only unregister all existing callbacks but not register any new callbacks.
+        /// </remarks>
+        /// <seealso cref="HireUnitsActions.AddCallbacks(IHireUnitsActions)" />
+        /// <seealso cref="HireUnitsActions.RemoveCallbacks(IHireUnitsActions)" />
+        /// <seealso cref="HireUnitsActions.UnregisterCallbacks(IHireUnitsActions)" />
+        public void SetCallbacks(IHireUnitsActions instance)
+        {
+            foreach (var item in m_Wrapper.m_HireUnitsActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_HireUnitsActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    /// <summary>
+    /// Provides a new <see cref="HireUnitsActions" /> instance referencing this action map.
+    /// </summary>
+    public HireUnitsActions @HireUnits => new HireUnitsActions(this);
     private int m_KeyboardMouseSchemeIndex = -1;
     /// <summary>
     /// Provides access to the input control scheme.
@@ -641,18 +769,33 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         void OnMousePosition(InputAction.CallbackContext context);
     }
     /// <summary>
-    /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "UISelectUnit" which allows adding and removing callbacks.
+    /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "CallWindowHiringUnits" which allows adding and removing callbacks.
     /// </summary>
-    /// <seealso cref="UISelectUnitActions.AddCallbacks(IUISelectUnitActions)" />
-    /// <seealso cref="UISelectUnitActions.RemoveCallbacks(IUISelectUnitActions)" />
-    public interface IUISelectUnitActions
+    /// <seealso cref="CallWindowHiringUnitsActions.AddCallbacks(ICallWindowHiringUnitsActions)" />
+    /// <seealso cref="CallWindowHiringUnitsActions.RemoveCallbacks(ICallWindowHiringUnitsActions)" />
+    public interface ICallWindowHiringUnitsActions
     {
         /// <summary>
-        /// Method invoked when associated input action "MarineUnitCreate" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// Method invoked when associated input action "ToggleWindowHiringUnits" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnMarineUnitCreate(InputAction.CallbackContext context);
+        void OnToggleWindowHiringUnits(InputAction.CallbackContext context);
+    }
+    /// <summary>
+    /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "HireUnits" which allows adding and removing callbacks.
+    /// </summary>
+    /// <seealso cref="HireUnitsActions.AddCallbacks(IHireUnitsActions)" />
+    /// <seealso cref="HireUnitsActions.RemoveCallbacks(IHireUnitsActions)" />
+    public interface IHireUnitsActions
+    {
+        /// <summary>
+        /// Method invoked when associated input action "CreateMarineUnit" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnCreateMarineUnit(InputAction.CallbackContext context);
     }
 }

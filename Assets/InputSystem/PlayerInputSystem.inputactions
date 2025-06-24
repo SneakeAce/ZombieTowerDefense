@@ -70,13 +70,13 @@
             ]
         },
         {
-            "name": "UISelectUnit",
+            "name": "CallWindowHiringUnits",
             "id": "d680b787-d788-452d-989c-d3e28c8635b1",
             "actions": [
                 {
-                    "name": "MarineUnitCreate",
+                    "name": "ToggleWindowHiringUnits",
                     "type": "Button",
-                    "id": "9108f508-bad8-4158-b48f-0d3283b8ad5e",
+                    "id": "18497600-2aa3-4535-8554-a43909352068",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -86,12 +86,40 @@
             "bindings": [
                 {
                     "name": "",
-                    "id": "ec65596f-55b7-46b7-97d9-909f53ce7a35",
+                    "id": "ddb46dfe-97a7-4434-ad98-daad42b08158",
+                    "path": "<Keyboard>/b",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ToggleWindowHiringUnits",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "HireUnits",
+            "id": "04b3d4c1-97d3-4fd9-a1f7-064cf9e884aa",
+            "actions": [
+                {
+                    "name": "CreateMarineUnit",
+                    "type": "Button",
+                    "id": "30b221d5-145c-4d4d-b2e5-c35d827910b9",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "fae45d0c-22d4-44c9-9f0c-0680f27d7fe6",
                     "path": "<Keyboard>/1",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "MarineUnitCreate",
+                    "action": "CreateMarineUnit",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

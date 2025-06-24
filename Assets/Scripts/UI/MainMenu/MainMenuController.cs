@@ -3,20 +3,19 @@ using UnityEngine;
 
 public class MainMenuController
 {
-    private MainMenuView _mainMenuView;
-    private MainMenuSceneConfig _mainMenuSceneConfig;
+    private IMainMenuManager _mainMenuManager;
+    private ICameraManager _cameraManager;
     private ISceneLoader _sceneLoader;
 
-    private Camera _camera;
-    private Canvas _mainMenuCanvas;
+    private MainMenuSceneConfig _mainMenuSceneConfig;
 
-    public MainMenuController(MainMenuView mainMenuView, Camera camera, MainMenuSceneConfig mainMenuSceneConfig, 
-        ISceneLoader sceneLoader)
+    public MainMenuController(IMainMenuManager mainMenuManager, ICameraManager cameraManager, 
+        MainMenuSceneConfig mainMenuSceneConfig, ISceneLoader sceneLoader)
     {
         UnityEngine.Debug.Log("MainMenuController");
 
-        _mainMenuView = mainMenuView;
-        _camera = camera;
+        _mainMenuManager = mainMenuManager;
+        _cameraManager = cameraManager;
         _mainMenuSceneConfig = mainMenuSceneConfig;
         _sceneLoader = sceneLoader;
 
@@ -26,15 +25,11 @@ public class MainMenuController
     private void Initialize()
     {
         UnityEngine.Debug.Log("MainMenuController / Initialize");
-        _mainMenuCanvas = _mainMenuView.GetComponent<Canvas>();
 
-        if (_mainMenuCanvas == null)
-            throw new NullReferenceException("MainMenuCanvas is null!");
+        _mainMenuManager.MainMenuCanvas.worldCamera = _cameraManager.MainCamera;
+        UnityEngine.Debug.Log($"MainMenuController /  _mainMenuCanvas.worldCamera = {_mainMenuManager.MainMenuCanvas.worldCamera}");
 
-        _mainMenuCanvas.worldCamera = _camera;
-        UnityEngine.Debug.Log($"MainMenuController /  _mainMenuCanvas.worldCamera = { _mainMenuCanvas.worldCamera}");
-
-        _mainMenuView.StartLevelButton.onClick.AddListener(OnClickStartLevelButton);
+        _mainMenuManager.MainMenuView.StartLevelButton.onClick.AddListener(OnClickStartLevelButton);
     }
 
     private void OnClickStartLevelButton()
