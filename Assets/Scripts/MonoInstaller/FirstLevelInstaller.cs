@@ -4,10 +4,13 @@ using Zenject;
 public class FirstLevelInstaller : MonoInstaller
 {
     [SerializeField] private PlayerControlledUnitConfigs _unitConfig;
+    [SerializeField] private GridManagerConfig _gridManagerConfig;
 
     public override void InstallBindings()
     {
         BindServices();
+
+        BindGridManager();
     }
 
 
@@ -39,4 +42,12 @@ public class FirstLevelInstaller : MonoInstaller
         Container.Bind<IPoolManager>().To<PoolManager>().AsSingle();
     }
 
+    private void BindGridManager()
+    {
+        Container.Bind<GridManagerConfig>().FromInstance(_gridManagerConfig).AsSingle();
+
+        Container.Bind<IGridCellFactory>().To<GridCellFactory>().AsSingle();
+
+        Container.Bind<IGridManager>().To<GridManager>().AsSingle().NonLazy();
+    }
 }

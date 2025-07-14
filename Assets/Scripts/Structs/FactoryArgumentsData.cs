@@ -29,7 +29,6 @@ public struct UnitSpawnArguments : IFactoryArguments
     public Quaternion SpawnRotation { get; }
 }
 
-
 public struct PoolCreatingArguments : IFactoryArguments
 {
     public PoolCreatingArguments(int poolSize, bool canExpandPool, Transform container)
@@ -42,4 +41,20 @@ public struct PoolCreatingArguments : IFactoryArguments
     public int PoolSize { get; }
     public bool CanExpandPool { get; } 
     public Transform Container { get; }
+}
+
+public struct GridCellCreatingArguments : IFactoryArguments
+{
+    public GridCellCreatingArguments(Vector3 position, Quaternion rotation, Transform parent, GridCell gridCellPrefab)
+    {
+        Position = position;
+        Rotation = rotation;
+        Parent = parent;
+        GridCellPrefab = gridCellPrefab;
+    }
+
+    public Vector3 Position { get; }
+    public Quaternion Rotation { get; }
+    public Transform Parent { get; }
+    public GridCell GridCellPrefab { get; }
 }

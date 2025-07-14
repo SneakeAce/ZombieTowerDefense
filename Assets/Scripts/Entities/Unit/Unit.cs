@@ -26,17 +26,7 @@ public class Unit : MonoBehaviour, IUnit
     public PlayerUnitConfig UnitConfig => _config;
     public IUnitHealth Health => _health;
     public IUnitStateMachine UnitStateMachine => _unitStateMachine;
-    public bool IsSelected
-    {
-        get
-        {
-            return _isSelected;
-        }
-        set
-        {
-            _isSelected = value;
-        }
-    }
+    public bool IsSelected { get => _isSelected; set => _isSelected = value; }
 
     public void SetConfig(PlayerUnitConfig config) => _config = config; 
 
@@ -46,7 +36,4 @@ public class Unit : MonoBehaviour, IUnit
         _collider = GetComponent<Collider>();
         _unitStateMachine = GetComponent<UnitStateMachine>();
     }
-
-
-
 }

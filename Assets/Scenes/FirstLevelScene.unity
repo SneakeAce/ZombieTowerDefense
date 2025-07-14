@@ -323,6 +323,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _unitConfig: {fileID: 11400000, guid: cc9835ef2f10469448f174c995a21cfd, type: 2}
+  _gridManagerConfig: {fileID: 11400000, guid: bb6995422326c7f448c1c80360b44d06, type: 2}
 --- !u!114 &851059613
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -777,6 +778,6 @@ SceneRoots:
   - {fileID: 832575519}
   - {fileID: 1151504812}
   - {fileID: 1045376370}
-  - {fileID: 851059614}
-  - {fileID: 990336540}
   - {fileID: 5497511171832721622}
+  - {fileID: 990336540}
+  - {fileID: 851059614}

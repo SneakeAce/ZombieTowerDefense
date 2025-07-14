@@ -4,9 +4,9 @@ public class PlayerControlledUnitSpawner : IPlayerUnitSpawner
 {
     private IPoolManager _poolManager;
     private IPlayerControlledUnitsFactory _playerUnitFactory;
-    private ICoroutinePerformer _coroutinePerformer;
+    private ICoroutinePerformer _coroutinePerformer; // пока не используется
 
-    private Coroutine _createUnitCoroutine;
+    private Coroutine _createUnitCoroutine; // пока не используется
 
     public PlayerControlledUnitSpawner(ICoroutinePerformer coroutinePerformer, IPoolManager poolManager,
         IPlayerControlledUnitsFactory playerUnitFactory)
