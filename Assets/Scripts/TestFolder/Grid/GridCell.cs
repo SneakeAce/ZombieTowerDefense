@@ -2,9 +2,54 @@ using UnityEngine;
 
 public class GridCell : MonoBehaviour, IGridCell
 {
-    public bool IsEmpty => throw new System.NotImplementedException();
+    private Color _defaultColor;
+    private Material _cellMaterial;
 
-    public bool WalkableCell => throw new System.NotImplementedException();
+    public bool IsEmpty { get; private set; }
+    public bool WalkableCell { get; private set; }
+    public bool IsSelected { get; private set; }
 
     public GameObject GameObject => this.gameObject;
+    public IUnit CurrentUnit => throw new System.NotImplementedException();
+
+    private void Start()
+    {
+        IsEmpty = true;
+        WalkableCell = true;
+        IsSelected = false;
+        
+        _cellMaterial = GetComponent<MeshRenderer>().material;
+        _defaultColor = _cellMaterial.color;
+    }
+
+    public void SetColor(Color color) => _cellMaterial.color = color;
+    
+    public void SetDefaultColor() => _cellMaterial.color = _defaultColor;
+
+    public void OccupyCell()
+    {
+        IsEmpty = false;
+        WalkableCell = false;
+    }
+
+    public void FreeCell()
+    {
+        IsEmpty = true;
+        WalkableCell = true;
+    }
+
+    public void SelectCell(Color color)
+    {
+        IsSelected = true;
+
+        _cellMaterial.color = color;
+    }
+
+    public void DeselectCell()
+    {
+        IsSelected = false;
+
+        _cellMaterial.color = _defaultColor;
+    }
+
 }

@@ -4,7 +4,6 @@ using UnityEngine.InputSystem;
 public class SelectUnit
 {
     private PlayerInput _playerInput;
-    private Camera _camera;
 
     private UnitMoveTargetSelector _unitMoveTargetSelector;
 

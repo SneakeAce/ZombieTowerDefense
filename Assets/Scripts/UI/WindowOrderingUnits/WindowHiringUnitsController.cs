@@ -1,31 +1,23 @@
 using System;
-using UnityEngine.InputSystem;
 using UnityEngine;
 
-public class WindowHiringUnitsController : IWindowHiringUnitsController, IDisposable
+public class WindowHiringUnitsController : IWindowHiringUnitsController
 {
-    private PlayerInput _playerInput;
-
     private ICameraManager _cameraManager;
     private IWindowHiringUnitsManager _windowHiringUnitsManager;
 
     private bool _windowIsOpen;
 
-    public WindowHiringUnitsController(PlayerInput playerInput, ICameraManager cameraManager, 
+    public WindowHiringUnitsController(ICameraManager cameraManager, 
         IWindowHiringUnitsManager windowHiringUnitsManager)
     {
         Debug.Log("WindowHiringUnitsController Construct called");
 
-        _playerInput = playerInput;
-        _playerInput.CallWindowHiringUnits.Enable();
-
         _cameraManager = cameraManager;
         _windowHiringUnitsManager = windowHiringUnitsManager;
-
-        _playerInput.CallWindowHiringUnits.ToggleWindowHiringUnits.performed += OnToggleWindowHiringUnits;
     }
 
-    public void Initialization()
+    public void Initialize()
     {
         _windowHiringUnitsManager.WindowOrderingCanvas.worldCamera = _cameraManager.MainCamera;
 
@@ -33,27 +25,11 @@ public class WindowHiringUnitsController : IWindowHiringUnitsController, IDispos
             throw new NullReferenceException("WorldCamera on WindowOrderingUnitsCanvas is Null!");
 
         _windowHiringUnitsManager.WindowOrderingCanvas.gameObject.SetActive(false);
-
     }
 
-    private void OnToggleWindowHiringUnits(InputAction.CallbackContext context) 
+    public void ToggleWindowHiringUnits(bool canBeOpened) 
     {
-        _windowIsOpen = !_windowIsOpen;
-
-        if (_windowIsOpen)
-        {
-            _playerInput.HireUnits.Enable();
-        }
-        else
-        {
-            _playerInput.HireUnits.Disable();
-        }
-
-        _windowHiringUnitsManager.WindowOrderingCanvas.gameObject.SetActive(_windowIsOpen);
+        _windowHiringUnitsManager.WindowOrderingCanvas.gameObject.SetActive(canBeOpened);
     }
 
-    public void Dispose()
-    {
-        _playerInput.CallWindowHiringUnits.ToggleWindowHiringUnits.performed -= OnToggleWindowHiringUnits;
-    }
 }

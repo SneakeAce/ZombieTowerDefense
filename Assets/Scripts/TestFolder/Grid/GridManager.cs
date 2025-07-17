@@ -15,6 +15,7 @@ public class GridManager : IGridManager
     private float _cellSize;
 
     private Quaternion _rotationCell;
+    private Vector3 _spawnPositionContainer = new Vector3(0f, 0f, 0f);
 
     private GameObject _cellContainerPrefab;
     private GameObject _cellContainer;
@@ -35,22 +36,14 @@ public class GridManager : IGridManager
         GeneratedGrid();
     }
 
-    public void ActivatedGrid()
+    public void ToggleGridActivity(bool isActive)
     {
-        Debug.Log("Activated Grid");
-
-        _cellContainer.SetActive(true);
-    }
-
-    public void DeactivatedGrid() 
-    {
-        Debug.Log("Deactivated Grid");
-        _cellContainer.SetActive(false);
+        _cellContainer.SetActive(isActive);
     }
 
     private void GeneratedGrid()
     {
-        _cellContainer = GameObject.Instantiate(_cellContainerPrefab);
+        _cellContainer = GameObject.Instantiate(_cellContainerPrefab, _spawnPositionContainer, Quaternion.identity);
 
         _gridCells = new GridCell[_config.GridManagerStats.GridWidth, _config.GridManagerStats.GridHeight];
 
@@ -59,9 +52,9 @@ public class GridManager : IGridManager
             for (int y = 0; y < _gridHeight; y++)
             {
                 float posX = (x - _gridWidth / OffsetFromCenter) * _cellSize;
-                float posY = (y - _gridHeight / OffsetFromCenter) * _cellSize;
+                float posZ = (y - _gridHeight / OffsetFromCenter) * _cellSize;
 
-                Vector3 positionCell = new Vector3(posX, DefaultCellYPosition, posY);
+                Vector3 positionCell = new Vector3(posX, DefaultCellYPosition, posZ);
                 Quaternion rotationCell = _rotationCell;
 
                 GridCellCreatingArguments arguments = new GridCellCreatingArguments(positionCell,
@@ -72,11 +65,10 @@ public class GridManager : IGridManager
                 GridCell cell = _cellfactory.CreateObject<GridCell, GridCellCreatingArguments>(arguments);
 
                 _gridCells[x, y] = cell;
-                Debug.Log($"Cell position X = {posX}, Y = {posY}");
             }
         }
 
-        DeactivatedGrid();
+        ToggleGridActivity(false);
     }
 
 }

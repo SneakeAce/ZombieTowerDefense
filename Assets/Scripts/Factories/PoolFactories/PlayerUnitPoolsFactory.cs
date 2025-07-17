@@ -9,8 +9,6 @@ public class PlayerUnitPoolsFactory : IAsyncPoolFactory
 
     public PlayerUnitPoolsFactory(IPoolConfig<PlayerUnitConfig> config)
     {
-        UnityEngine.Debug.Log($"PlayerUnitPoolsFactory contruct called. config = {config}");
-
         _config = config;
     }
 

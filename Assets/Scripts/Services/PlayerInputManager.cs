@@ -5,7 +5,7 @@ public class PlayerInputManager
         playerInput.Enable();
 
         playerInput.SelectionUnit.Disable();
-        playerInput.CallWindowHiringUnits.Disable();
+        playerInput.BuildMode.Disable();
         playerInput.HireUnits.Disable();
     }
 }

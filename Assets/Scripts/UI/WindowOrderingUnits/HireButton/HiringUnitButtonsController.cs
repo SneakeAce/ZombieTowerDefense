@@ -19,7 +19,7 @@ public class HiringUnitButtonsController : IHiringUnitButtonsController
         _configs = configs;
     }
 
-    public void Initialization()
+    public void Initialize()
     {
         _view = _lazyView.Value;
 

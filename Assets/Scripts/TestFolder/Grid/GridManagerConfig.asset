@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: GridManagerConfig
   m_EditorClassIdentifier: 
   <GridManagerStats>k__BackingField:
-    <GridWidth>k__BackingField: 40
-    <GridHeight>k__BackingField: 40
+    <GridWidth>k__BackingField: 4
+    <GridHeight>k__BackingField: 4
     <CellSize>k__BackingField: 1
+    <RotationCell>k__BackingField: {x: 0.70710677, y: 0, z: 0, w: 0.70710677}
     <GridCellPrefab>k__BackingField: {fileID: 7548486974758233012, guid: b39a2b64a77010340961ff53c26b9034, type: 3}
+    <CellContainer>k__BackingField: {fileID: 7423838424102264465, guid: c3893ac8a36ea7c4487ec1a1ce4565ae, type: 3}

@@ -9,20 +9,21 @@ public class FirstLevelSceneBootstrapper : IInitializable
 
     private IHiringUnitButtonsController _buttonsController;
     private IWindowHiringUnitsController _windowHiringUnitsController;
+    private IBuildModeController _buildModeController;
+
     public FirstLevelSceneBootstrapper(ICameraManager cameraManager, 
         IWindowHiringUnitsManager windowHiringUnitsManager, IHiringUnitButtonsController buttonsController,
-        IWindowHiringUnitsController windowHiringUnitsController)
+        IWindowHiringUnitsController windowHiringUnitsController, IBuildModeController buildModeController)
     {
         _cameraManager = cameraManager;
         _windowHiringUnitsManager = windowHiringUnitsManager;
         _buttonsController = buttonsController;
         _windowHiringUnitsController = windowHiringUnitsController;
+        _buildModeController = buildModeController;
     }
 
     public void Initialize()
     {
-        Debug.Log("FirstLevelSceneBootstrapper Initialize");
-
         LoadManagersAsync().Forget();
     }
 
@@ -31,10 +32,10 @@ public class FirstLevelSceneBootstrapper : IInitializable
         await _cameraManager.LoadAndCreateCameraAsync();
         await _windowHiringUnitsManager.LoadPrefabAsync();
 
-        _windowHiringUnitsController.Initialization();
-        _buttonsController.Initialization();
+        _windowHiringUnitsController.Initialize();
+        _buttonsController.Initialize();
+        _buildModeController.Initialize();
 
         Debug.Log("FirstLevelSceneBootstrapper LoadManagersAsync end");
-
     }
 }

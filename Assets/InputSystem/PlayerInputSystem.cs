@@ -156,34 +156,6 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             ]
         },
         {
-            ""name"": ""CallWindowHiringUnits"",
-            ""id"": ""d680b787-d788-452d-989c-d3e28c8635b1"",
-            ""actions"": [
-                {
-                    ""name"": ""ToggleWindowHiringUnits"",
-                    ""type"": ""Button"",
-                    ""id"": ""18497600-2aa3-4535-8554-a43909352068"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                }
-            ],
-            ""bindings"": [
-                {
-                    ""name"": """",
-                    ""id"": ""ddb46dfe-97a7-4434-ad98-daad42b08158"",
-                    ""path"": ""<Keyboard>/b"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""ToggleWindowHiringUnits"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                }
-            ]
-        },
-        {
             ""name"": ""HireUnits"",
             ""id"": ""04b3d4c1-97d3-4fd9-a1f7-064cf9e884aa"",
             ""actions"": [
@@ -206,6 +178,94 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""CreateMarineUnit"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""BuildMode"",
+            ""id"": ""c285b686-ee43-4458-a468-51f6a7897cf0"",
+            ""actions"": [
+                {
+                    ""name"": ""MousePosition"",
+                    ""type"": ""Value"",
+                    ""id"": ""b1b30ac0-38c7-4110-aa60-d386c9c414c1"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""SelectCell"",
+                    ""type"": ""Button"",
+                    ""id"": ""e1ca4afc-4b9e-4052-98f1-1c84ab8b90e1"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""DeselectCell"",
+                    ""type"": ""Button"",
+                    ""id"": ""72808ec8-061f-4e36-9e5e-21c2453cfb7a"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ActivateBuildMode"",
+                    ""type"": ""Button"",
+                    ""id"": ""7357d4e1-2bd8-4e70-925e-d9e6d4e9cfe9"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""ec3542eb-b9f7-44eb-b567-166379a8c73e"",
+                    ""path"": ""<Mouse>/position"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MousePosition"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d0bf82ea-9756-44ef-b5d7-d3db4ed51a06"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SelectCell"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""358b70c7-5f36-454f-b865-cb14b946fb14"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""DeselectCell"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""64345e78-a3d4-4b81-ace2-f935833e4821"",
+                    ""path"": ""<Keyboard>/b"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ActivateBuildMode"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -280,19 +340,22 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         m_SelectionUnit_SelectUnit = m_SelectionUnit.FindAction("SelectUnit", throwIfNotFound: true);
         m_SelectionUnit_ChoosePoint = m_SelectionUnit.FindAction("ChoosePoint", throwIfNotFound: true);
         m_SelectionUnit_MousePosition = m_SelectionUnit.FindAction("MousePosition", throwIfNotFound: true);
-        // CallWindowHiringUnits
-        m_CallWindowHiringUnits = asset.FindActionMap("CallWindowHiringUnits", throwIfNotFound: true);
-        m_CallWindowHiringUnits_ToggleWindowHiringUnits = m_CallWindowHiringUnits.FindAction("ToggleWindowHiringUnits", throwIfNotFound: true);
         // HireUnits
         m_HireUnits = asset.FindActionMap("HireUnits", throwIfNotFound: true);
         m_HireUnits_CreateMarineUnit = m_HireUnits.FindAction("CreateMarineUnit", throwIfNotFound: true);
+        // BuildMode
+        m_BuildMode = asset.FindActionMap("BuildMode", throwIfNotFound: true);
+        m_BuildMode_MousePosition = m_BuildMode.FindAction("MousePosition", throwIfNotFound: true);
+        m_BuildMode_SelectCell = m_BuildMode.FindAction("SelectCell", throwIfNotFound: true);
+        m_BuildMode_DeselectCell = m_BuildMode.FindAction("DeselectCell", throwIfNotFound: true);
+        m_BuildMode_ActivateBuildMode = m_BuildMode.FindAction("ActivateBuildMode", throwIfNotFound: true);
     }
 
     ~@PlayerInput()
     {
         UnityEngine.Debug.Assert(!m_SelectionUnit.enabled, "This will cause a leak and performance issues, PlayerInput.SelectionUnit.Disable() has not been called.");
-        UnityEngine.Debug.Assert(!m_CallWindowHiringUnits.enabled, "This will cause a leak and performance issues, PlayerInput.CallWindowHiringUnits.Disable() has not been called.");
         UnityEngine.Debug.Assert(!m_HireUnits.enabled, "This will cause a leak and performance issues, PlayerInput.HireUnits.Disable() has not been called.");
+        UnityEngine.Debug.Assert(!m_BuildMode.enabled, "This will cause a leak and performance issues, PlayerInput.BuildMode.Disable() has not been called.");
     }
 
     /// <summary>
@@ -483,102 +546,6 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     /// </summary>
     public SelectionUnitActions @SelectionUnit => new SelectionUnitActions(this);
 
-    // CallWindowHiringUnits
-    private readonly InputActionMap m_CallWindowHiringUnits;
-    private List<ICallWindowHiringUnitsActions> m_CallWindowHiringUnitsActionsCallbackInterfaces = new List<ICallWindowHiringUnitsActions>();
-    private readonly InputAction m_CallWindowHiringUnits_ToggleWindowHiringUnits;
-    /// <summary>
-    /// Provides access to input actions defined in input action map "CallWindowHiringUnits".
-    /// </summary>
-    public struct CallWindowHiringUnitsActions
-    {
-        private @PlayerInput m_Wrapper;
-
-        /// <summary>
-        /// Construct a new instance of the input action map wrapper class.
-        /// </summary>
-        public CallWindowHiringUnitsActions(@PlayerInput wrapper) { m_Wrapper = wrapper; }
-        /// <summary>
-        /// Provides access to the underlying input action "CallWindowHiringUnits/ToggleWindowHiringUnits".
-        /// </summary>
-        public InputAction @ToggleWindowHiringUnits => m_Wrapper.m_CallWindowHiringUnits_ToggleWindowHiringUnits;
-        /// <summary>
-        /// Provides access to the underlying input action map instance.
-        /// </summary>
-        public InputActionMap Get() { return m_Wrapper.m_CallWindowHiringUnits; }
-        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Enable()" />
-        public void Enable() { Get().Enable(); }
-        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Disable()" />
-        public void Disable() { Get().Disable(); }
-        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.enabled" />
-        public bool enabled => Get().enabled;
-        /// <summary>
-        /// Implicitly converts an <see ref="CallWindowHiringUnitsActions" /> to an <see ref="InputActionMap" /> instance.
-        /// </summary>
-        public static implicit operator InputActionMap(CallWindowHiringUnitsActions set) { return set.Get(); }
-        /// <summary>
-        /// Adds <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
-        /// </summary>
-        /// <param name="instance">Callback instance.</param>
-        /// <remarks>
-        /// If <paramref name="instance" /> is <c>null</c> or <paramref name="instance"/> have already been added this method does nothing.
-        /// </remarks>
-        /// <seealso cref="CallWindowHiringUnitsActions" />
-        public void AddCallbacks(ICallWindowHiringUnitsActions instance)
-        {
-            if (instance == null || m_Wrapper.m_CallWindowHiringUnitsActionsCallbackInterfaces.Contains(instance)) return;
-            m_Wrapper.m_CallWindowHiringUnitsActionsCallbackInterfaces.Add(instance);
-            @ToggleWindowHiringUnits.started += instance.OnToggleWindowHiringUnits;
-            @ToggleWindowHiringUnits.performed += instance.OnToggleWindowHiringUnits;
-            @ToggleWindowHiringUnits.canceled += instance.OnToggleWindowHiringUnits;
-        }
-
-        /// <summary>
-        /// Removes <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
-        /// </summary>
-        /// <remarks>
-        /// Calling this method when <paramref name="instance" /> have not previously been registered has no side-effects.
-        /// </remarks>
-        /// <seealso cref="CallWindowHiringUnitsActions" />
-        private void UnregisterCallbacks(ICallWindowHiringUnitsActions instance)
-        {
-            @ToggleWindowHiringUnits.started -= instance.OnToggleWindowHiringUnits;
-            @ToggleWindowHiringUnits.performed -= instance.OnToggleWindowHiringUnits;
-            @ToggleWindowHiringUnits.canceled -= instance.OnToggleWindowHiringUnits;
-        }
-
-        /// <summary>
-        /// Unregisters <param cref="instance" /> and unregisters all input action callbacks via <see cref="CallWindowHiringUnitsActions.UnregisterCallbacks(ICallWindowHiringUnitsActions)" />.
-        /// </summary>
-        /// <seealso cref="CallWindowHiringUnitsActions.UnregisterCallbacks(ICallWindowHiringUnitsActions)" />
-        public void RemoveCallbacks(ICallWindowHiringUnitsActions instance)
-        {
-            if (m_Wrapper.m_CallWindowHiringUnitsActionsCallbackInterfaces.Remove(instance))
-                UnregisterCallbacks(instance);
-        }
-
-        /// <summary>
-        /// Replaces all existing callback instances and previously registered input action callbacks associated with them with callbacks provided via <param cref="instance" />.
-        /// </summary>
-        /// <remarks>
-        /// If <paramref name="instance" /> is <c>null</c>, calling this method will only unregister all existing callbacks but not register any new callbacks.
-        /// </remarks>
-        /// <seealso cref="CallWindowHiringUnitsActions.AddCallbacks(ICallWindowHiringUnitsActions)" />
-        /// <seealso cref="CallWindowHiringUnitsActions.RemoveCallbacks(ICallWindowHiringUnitsActions)" />
-        /// <seealso cref="CallWindowHiringUnitsActions.UnregisterCallbacks(ICallWindowHiringUnitsActions)" />
-        public void SetCallbacks(ICallWindowHiringUnitsActions instance)
-        {
-            foreach (var item in m_Wrapper.m_CallWindowHiringUnitsActionsCallbackInterfaces)
-                UnregisterCallbacks(item);
-            m_Wrapper.m_CallWindowHiringUnitsActionsCallbackInterfaces.Clear();
-            AddCallbacks(instance);
-        }
-    }
-    /// <summary>
-    /// Provides a new <see cref="CallWindowHiringUnitsActions" /> instance referencing this action map.
-    /// </summary>
-    public CallWindowHiringUnitsActions @CallWindowHiringUnits => new CallWindowHiringUnitsActions(this);
-
     // HireUnits
     private readonly InputActionMap m_HireUnits;
     private List<IHireUnitsActions> m_HireUnitsActionsCallbackInterfaces = new List<IHireUnitsActions>();
@@ -674,6 +641,135 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     /// Provides a new <see cref="HireUnitsActions" /> instance referencing this action map.
     /// </summary>
     public HireUnitsActions @HireUnits => new HireUnitsActions(this);
+
+    // BuildMode
+    private readonly InputActionMap m_BuildMode;
+    private List<IBuildModeActions> m_BuildModeActionsCallbackInterfaces = new List<IBuildModeActions>();
+    private readonly InputAction m_BuildMode_MousePosition;
+    private readonly InputAction m_BuildMode_SelectCell;
+    private readonly InputAction m_BuildMode_DeselectCell;
+    private readonly InputAction m_BuildMode_ActivateBuildMode;
+    /// <summary>
+    /// Provides access to input actions defined in input action map "BuildMode".
+    /// </summary>
+    public struct BuildModeActions
+    {
+        private @PlayerInput m_Wrapper;
+
+        /// <summary>
+        /// Construct a new instance of the input action map wrapper class.
+        /// </summary>
+        public BuildModeActions(@PlayerInput wrapper) { m_Wrapper = wrapper; }
+        /// <summary>
+        /// Provides access to the underlying input action "BuildMode/MousePosition".
+        /// </summary>
+        public InputAction @MousePosition => m_Wrapper.m_BuildMode_MousePosition;
+        /// <summary>
+        /// Provides access to the underlying input action "BuildMode/SelectCell".
+        /// </summary>
+        public InputAction @SelectCell => m_Wrapper.m_BuildMode_SelectCell;
+        /// <summary>
+        /// Provides access to the underlying input action "BuildMode/DeselectCell".
+        /// </summary>
+        public InputAction @DeselectCell => m_Wrapper.m_BuildMode_DeselectCell;
+        /// <summary>
+        /// Provides access to the underlying input action "BuildMode/ActivateBuildMode".
+        /// </summary>
+        public InputAction @ActivateBuildMode => m_Wrapper.m_BuildMode_ActivateBuildMode;
+        /// <summary>
+        /// Provides access to the underlying input action map instance.
+        /// </summary>
+        public InputActionMap Get() { return m_Wrapper.m_BuildMode; }
+        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Enable()" />
+        public void Enable() { Get().Enable(); }
+        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Disable()" />
+        public void Disable() { Get().Disable(); }
+        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.enabled" />
+        public bool enabled => Get().enabled;
+        /// <summary>
+        /// Implicitly converts an <see ref="BuildModeActions" /> to an <see ref="InputActionMap" /> instance.
+        /// </summary>
+        public static implicit operator InputActionMap(BuildModeActions set) { return set.Get(); }
+        /// <summary>
+        /// Adds <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
+        /// </summary>
+        /// <param name="instance">Callback instance.</param>
+        /// <remarks>
+        /// If <paramref name="instance" /> is <c>null</c> or <paramref name="instance"/> have already been added this method does nothing.
+        /// </remarks>
+        /// <seealso cref="BuildModeActions" />
+        public void AddCallbacks(IBuildModeActions instance)
+        {
+            if (instance == null || m_Wrapper.m_BuildModeActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_BuildModeActionsCallbackInterfaces.Add(instance);
+            @MousePosition.started += instance.OnMousePosition;
+            @MousePosition.performed += instance.OnMousePosition;
+            @MousePosition.canceled += instance.OnMousePosition;
+            @SelectCell.started += instance.OnSelectCell;
+            @SelectCell.performed += instance.OnSelectCell;
+            @SelectCell.canceled += instance.OnSelectCell;
+            @DeselectCell.started += instance.OnDeselectCell;
+            @DeselectCell.performed += instance.OnDeselectCell;
+            @DeselectCell.canceled += instance.OnDeselectCell;
+            @ActivateBuildMode.started += instance.OnActivateBuildMode;
+            @ActivateBuildMode.performed += instance.OnActivateBuildMode;
+            @ActivateBuildMode.canceled += instance.OnActivateBuildMode;
+        }
+
+        /// <summary>
+        /// Removes <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
+        /// </summary>
+        /// <remarks>
+        /// Calling this method when <paramref name="instance" /> have not previously been registered has no side-effects.
+        /// </remarks>
+        /// <seealso cref="BuildModeActions" />
+        private void UnregisterCallbacks(IBuildModeActions instance)
+        {
+            @MousePosition.started -= instance.OnMousePosition;
+            @MousePosition.performed -= instance.OnMousePosition;
+            @MousePosition.canceled -= instance.OnMousePosition;
+            @SelectCell.started -= instance.OnSelectCell;
+            @SelectCell.performed -= instance.OnSelectCell;
+            @SelectCell.canceled -= instance.OnSelectCell;
+            @DeselectCell.started -= instance.OnDeselectCell;
+            @DeselectCell.performed -= instance.OnDeselectCell;
+            @DeselectCell.canceled -= instance.OnDeselectCell;
+            @ActivateBuildMode.started -= instance.OnActivateBuildMode;
+            @ActivateBuildMode.performed -= instance.OnActivateBuildMode;
+            @ActivateBuildMode.canceled -= instance.OnActivateBuildMode;
+        }
+
+        /// <summary>
+        /// Unregisters <param cref="instance" /> and unregisters all input action callbacks via <see cref="BuildModeActions.UnregisterCallbacks(IBuildModeActions)" />.
+        /// </summary>
+        /// <seealso cref="BuildModeActions.UnregisterCallbacks(IBuildModeActions)" />
+        public void RemoveCallbacks(IBuildModeActions instance)
+        {
+            if (m_Wrapper.m_BuildModeActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        /// <summary>
+        /// Replaces all existing callback instances and previously registered input action callbacks associated with them with callbacks provided via <param cref="instance" />.
+        /// </summary>
+        /// <remarks>
+        /// If <paramref name="instance" /> is <c>null</c>, calling this method will only unregister all existing callbacks but not register any new callbacks.
+        /// </remarks>
+        /// <seealso cref="BuildModeActions.AddCallbacks(IBuildModeActions)" />
+        /// <seealso cref="BuildModeActions.RemoveCallbacks(IBuildModeActions)" />
+        /// <seealso cref="BuildModeActions.UnregisterCallbacks(IBuildModeActions)" />
+        public void SetCallbacks(IBuildModeActions instance)
+        {
+            foreach (var item in m_Wrapper.m_BuildModeActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_BuildModeActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    /// <summary>
+    /// Provides a new <see cref="BuildModeActions" /> instance referencing this action map.
+    /// </summary>
+    public BuildModeActions @BuildMode => new BuildModeActions(this);
     private int m_KeyboardMouseSchemeIndex = -1;
     /// <summary>
     /// Provides access to the input control scheme.
@@ -769,21 +865,6 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         void OnMousePosition(InputAction.CallbackContext context);
     }
     /// <summary>
-    /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "CallWindowHiringUnits" which allows adding and removing callbacks.
-    /// </summary>
-    /// <seealso cref="CallWindowHiringUnitsActions.AddCallbacks(ICallWindowHiringUnitsActions)" />
-    /// <seealso cref="CallWindowHiringUnitsActions.RemoveCallbacks(ICallWindowHiringUnitsActions)" />
-    public interface ICallWindowHiringUnitsActions
-    {
-        /// <summary>
-        /// Method invoked when associated input action "ToggleWindowHiringUnits" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
-        /// </summary>
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnToggleWindowHiringUnits(InputAction.CallbackContext context);
-    }
-    /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "HireUnits" which allows adding and removing callbacks.
     /// </summary>
     /// <seealso cref="HireUnitsActions.AddCallbacks(IHireUnitsActions)" />
@@ -797,5 +878,41 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnCreateMarineUnit(InputAction.CallbackContext context);
+    }
+    /// <summary>
+    /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "BuildMode" which allows adding and removing callbacks.
+    /// </summary>
+    /// <seealso cref="BuildModeActions.AddCallbacks(IBuildModeActions)" />
+    /// <seealso cref="BuildModeActions.RemoveCallbacks(IBuildModeActions)" />
+    public interface IBuildModeActions
+    {
+        /// <summary>
+        /// Method invoked when associated input action "MousePosition" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnMousePosition(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "SelectCell" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnSelectCell(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "DeselectCell" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnDeselectCell(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "ActivateBuildMode" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnActivateBuildMode(InputAction.CallbackContext context);
     }
 }
