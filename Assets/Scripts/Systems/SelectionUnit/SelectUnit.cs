@@ -1,7 +1,8 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class SelectUnit
+public class SelectUnit : IDisposable
 {
     private PlayerInput _playerInput;
 
@@ -17,6 +18,11 @@ public class SelectUnit
         _unitMoveTargetSelector = unitMoveTargetSelector;
 
         _playerInput.SelectionUnit.SelectUnit.performed += OnSelectionUnit;
+    }
+
+    public void Dispose()
+    {
+        _playerInput.SelectionUnit.SelectUnit.performed -= OnSelectionUnit;
     }
 
     private void OnSelectionUnit(InputAction.CallbackContext context)

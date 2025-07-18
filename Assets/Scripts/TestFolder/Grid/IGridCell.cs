@@ -8,6 +8,7 @@ public interface IGridCell
     GameObject GameObject { get; }
     IUnit CurrentUnit { get; }
 
+    void SetUnit(IUnit unit);
     void SetColor(Color color);
     void SetDefaultColor();
     void OccupyCell();

@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.AI;
 using Zenject;
 
 public class Unit : MonoBehaviour, IUnit
@@ -7,6 +8,7 @@ public class Unit : MonoBehaviour, IUnit
     private Collider _collider;
     private Animator _animator;
     private PlayerUnitConfig _config;
+    private NavMeshAgent _navMeshAgent;
 
     private IUnitHealth _health;
     private IUnitStateMachine _unitStateMachine;
@@ -23,6 +25,7 @@ public class Unit : MonoBehaviour, IUnit
     public Rigidbody Rigidbody => _rigidbody;
     public Collider Collider => _collider;
     public Animator Animator => _animator;
+    public NavMeshAgent NavMeshAgent => _navMeshAgent;
     public PlayerUnitConfig UnitConfig => _config;
     public IUnitHealth Health => _health;
     public IUnitStateMachine UnitStateMachine => _unitStateMachine;
@@ -30,10 +33,11 @@ public class Unit : MonoBehaviour, IUnit
 
     public void SetConfig(PlayerUnitConfig config) => _config = config; 
 
-    private void Start()
+    public void Initialize()
     {
         _rigidbody = GetComponent<Rigidbody>();
         _collider = GetComponent<Collider>();
+        _navMeshAgent = GetComponent<NavMeshAgent>();
         _unitStateMachine = GetComponent<UnitStateMachine>();
     }
 }

@@ -10,7 +10,7 @@ public class GridCell : MonoBehaviour, IGridCell
     public bool IsSelected { get; private set; }
 
     public GameObject GameObject => this.gameObject;
-    public IUnit CurrentUnit => throw new System.NotImplementedException();
+    public IUnit CurrentUnit { get; private set; }
 
     private void Start()
     {
@@ -21,6 +21,8 @@ public class GridCell : MonoBehaviour, IGridCell
         _cellMaterial = GetComponent<MeshRenderer>().material;
         _defaultColor = _cellMaterial.color;
     }
+
+    public void SetUnit(IUnit unit) => CurrentUnit = unit;
 
     public void SetColor(Color color) => _cellMaterial.color = color;
     

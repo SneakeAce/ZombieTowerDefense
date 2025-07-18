@@ -20,21 +20,23 @@ public class PlayerControlledUnitsFactory : IPlayerControlledUnitsFactory
         if (args is not UnitSpawnArguments spawnArgs)
             throw new ArgumentException("Invalid arguments provided for SceneObjectFactory.");
 
-        T unit = (T)spawnArgs.Pool.GetObjectFromPool();
+        T unitT = (T)spawnArgs.Pool.GetObjectFromPool();
 
-        if (unit == null)
+        if (unitT == null)
             throw new NullReferenceException("Unit is Null!");
 
-        _container.Inject(unit);
+        _container.Inject(unitT);
         
-        if (unit is Unit un)
+        if (unitT is Unit unit)
         {
             foreach (var config in _unitConfigs.Configs)
             {
-                un.SetConfig(config);
+                unit.SetConfig(config);
+                unit.transform.position = spawnArgs.SpawnPosition;
+                unit.transform.rotation = spawnArgs.SpawnRotation;
             }
         }
 
-        return unit;
+        return unitT;
     }
 }

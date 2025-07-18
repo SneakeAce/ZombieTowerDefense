@@ -45,8 +45,6 @@ public class WindowHiringUnitsManager : IWindowHiringUnitsManager
 
     private void BindWindowHiringUnitsView()
     {
-        Debug.Log("BindMainMenuView");
-
         _container.Bind<WindowHiringUnitsView>()
             .FromInstance(_windowHiringUnitsView)
             .AsSingle();

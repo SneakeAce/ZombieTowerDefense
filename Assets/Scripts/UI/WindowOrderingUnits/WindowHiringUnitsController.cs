@@ -11,8 +11,6 @@ public class WindowHiringUnitsController : IWindowHiringUnitsController
     public WindowHiringUnitsController(ICameraManager cameraManager, 
         IWindowHiringUnitsManager windowHiringUnitsManager)
     {
-        Debug.Log("WindowHiringUnitsController Construct called");
-
         _cameraManager = cameraManager;
         _windowHiringUnitsManager = windowHiringUnitsManager;
     }

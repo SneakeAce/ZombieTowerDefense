@@ -19,6 +19,8 @@ public class HiringUnitButtonsController : IHiringUnitButtonsController
         _configs = configs;
     }
 
+    public List<IHiringUnitButton> HiringButtons => _hiringButtons;
+
     public void Initialize()
     {
         _view = _lazyView.Value;
@@ -28,8 +30,7 @@ public class HiringUnitButtonsController : IHiringUnitButtonsController
             var button = _view.HireUnitButtons[i];
             var config = _configs.Configs[i];
 
-            var hiringButton = new HiringUnitButton();
-            hiringButton.SetParameters(button, config, _spawnerManager.OnTrySpawn);
+            var hiringButton = new HiringUnitButton(button, config, _spawnerManager.OnTrySpawn);
 
             _hiringButtons.Add(hiringButton);
         }

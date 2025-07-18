@@ -14,7 +14,6 @@ public class CameraManager : ICameraManager
 
     public CameraManager(SpawnCameraData spawnCameraData, IAsyncObjectFactory sceneObjectFactory)
     {
-        Debug.Log("CameraManager constructor called.");
         _spawnCameraData = spawnCameraData;
 
         _sceneObjectFactory = sceneObjectFactory;

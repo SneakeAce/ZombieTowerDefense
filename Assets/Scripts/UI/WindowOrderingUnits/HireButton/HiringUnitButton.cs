@@ -1,17 +1,19 @@
 using System;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class HiringUnitButton : IHiringUnitButton
 {
     private Button _button;
     private HireUnitButtonConfig _config;
-    public Action<UnitType> _onHireRequested;
 
-    public HiringUnitButton()
-    {
-    }
+    private Vector3 _position;
 
-    public void SetParameters(Button button, HireUnitButtonConfig config, Action<UnitType> onHireRequested)
+    public Action<UnitType, Vector3> _onHireRequested;
+
+    public event Action ButtonWasPressed;
+
+    public HiringUnitButton(Button button, HireUnitButtonConfig config, Action<UnitType, Vector3> onHireRequested)
     {
         _button = button;
         _config = config;
@@ -20,8 +22,11 @@ public class HiringUnitButton : IHiringUnitButton
         _button.onClick.AddListener(OnClick);
     }
 
+    public void SetPosition(Vector3 position) => _position = position;
+
     private void OnClick()
     {
-        _onHireRequested?.Invoke(_config.UnitType);
+        _onHireRequested?.Invoke(_config.UnitType, _position);
+        ButtonWasPressed?.Invoke();
     }
 }

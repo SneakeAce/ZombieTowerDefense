@@ -51,7 +51,6 @@ public class BuildModeInputHandler
                 _previousCell?.SetDefaultColor(); 
                 _previousCell = currentCell;
 
-
                 if (currentCell.IsEmpty)
                     currentCell.SetColor(_colorAvailableCell);
                 else
@@ -77,13 +76,18 @@ public class BuildModeInputHandler
     {
         Debug.Log("BMIH Click");
 
-        if (_previousCell == null || _previousCell.IsEmpty == false || _previousCell.IsSelected 
-            || _currentSelectedCell != null)
+        if (_previousCell == null || _previousCell.IsEmpty == false || _previousCell.IsSelected)
             return null;
+         
+        if (_currentSelectedCell != null)
+            return _currentSelectedCell;
 
         _currentSelectedCell = _previousCell;
 
+        Debug.Log($"BMIH Click. _currentSelectedCell = {_currentSelectedCell}");
+
         _currentSelectedCell.SelectCell(_colorSelectedCell);
+        _currentSelectedCell.OccupyCell();
 
         return _currentSelectedCell;
     }

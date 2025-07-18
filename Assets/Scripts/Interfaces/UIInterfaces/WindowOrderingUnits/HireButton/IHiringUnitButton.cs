@@ -1,7 +1,8 @@
 using System;
-using UnityEngine.UI;
+using UnityEngine;
 
 public interface IHiringUnitButton
 {
-    void SetParameters(Button button, HireUnitButtonConfig config, Action<UnitType> onHireRequested);
+    event Action ButtonWasPressed;
+    void SetPosition(Vector3 position);
 }

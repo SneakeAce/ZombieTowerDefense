@@ -4,6 +4,8 @@ using Object = UnityEngine.Object;
 
 public class GridCellFactory : IGridCellFactory
 {
+    private int _countCells = 0;
+
     public T CreateObject<T, TArgs>(TArgs args)
         where T : Object
         where TArgs : IFactoryArguments
@@ -13,6 +15,9 @@ public class GridCellFactory : IGridCellFactory
 
         GameObject cellPrefab = arguments.GridCellPrefab.GameObject;
         GameObject cellObject = GameObject.Instantiate(cellPrefab);
+
+        cellObject.name = cellPrefab.name + "_" + _countCells.ToString();
+        _countCells++;
 
         cellObject.transform.position = arguments.Position;
         cellObject.transform.parent = arguments.Parent;
