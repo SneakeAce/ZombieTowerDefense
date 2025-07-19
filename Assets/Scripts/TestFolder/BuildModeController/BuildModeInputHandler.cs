@@ -14,11 +14,8 @@ public class BuildModeInputHandler
     private IGridCell _currentSelectedCell;
     private BuildModeInputHandlerConfig _config;
 
-    private IGridManager _gridManager;
-
-    public BuildModeInputHandler(IGridManager gridManager, BuildModeInputHandlerConfig config)
+    public BuildModeInputHandler(BuildModeInputHandlerConfig config)
     {
-        _gridManager = gridManager;
         _config = config;
     }
 
@@ -74,8 +71,6 @@ public class BuildModeInputHandler
 
     public IGridCell SelectCell()
     {
-        Debug.Log("BMIH Click");
-
         if (_previousCell == null || _previousCell.IsEmpty == false || _previousCell.IsSelected)
             return null;
          
@@ -83,8 +78,6 @@ public class BuildModeInputHandler
             return _currentSelectedCell;
 
         _currentSelectedCell = _previousCell;
-
-        Debug.Log($"BMIH Click. _currentSelectedCell = {_currentSelectedCell}");
 
         _currentSelectedCell.SelectCell(_colorSelectedCell);
         _currentSelectedCell.OccupyCell();

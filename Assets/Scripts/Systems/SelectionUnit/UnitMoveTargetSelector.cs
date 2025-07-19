@@ -1,7 +1,8 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class UnitMoveTargetSelector
+public class UnitMoveTargetSelector : IDisposable, IInitialize
 {
     private PlayerInput _playerInput;
     private LayerMask _groundLayer = 1 << 7;
@@ -12,8 +13,17 @@ public class UnitMoveTargetSelector
     {   
         _playerInput = playerInput;
         _commandInvoker = commandInvoker;
+    }
 
+    public void Initialize()
+    {
         _playerInput.SelectionUnit.ChoosePoint.performed += OnChooseMoveTarget;
+    }
+
+    public void Dispose()
+    {
+        _playerInput.SelectionUnit.ChoosePoint.performed -= OnChooseMoveTarget;
+
     }
 
     public void SetUnit(IUnit unit) => _unit = unit;

@@ -8,20 +8,13 @@ public class MainMenuSceneInstaller : MonoInstaller
 
     public override void InstallBindings()
     {
-        BindMainMenuControllerBinder();
+        BindMainMenuConfig();
 
         BindSceneObjectFactory();
 
         BindSceneComponents();
 
         BindFirstLevelSceneLoader();
-
-        BindMainMenuConfig();
-    }
-
-    private void BindMainMenuControllerBinder()
-    {
-        Container.Bind<MainMenuControllerBinder>().AsSingle();
     }
 
     private void BindSceneObjectFactory()
@@ -43,6 +36,10 @@ public class MainMenuSceneInstaller : MonoInstaller
             .AsSingle()
             .WithArguments(_mainMenuSceneConfig.MainMenuCanvasPrefab);
 
+        Container.Bind<IMainMenuController>()
+            .To<MainMenuController>()
+            .AsSingle();
+            
         Container.BindInterfacesAndSelfTo<MainMenuSceneBootstrapper>()
             .AsSingle()
             .NonLazy();

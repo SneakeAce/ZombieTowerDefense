@@ -1,7 +1,4 @@
-using System;
-using UnityEngine;
-
-public class MainMenuController
+public class MainMenuController : IMainMenuController, IInitialize
 {
     private IMainMenuManager _mainMenuManager;
     private ICameraManager _cameraManager;
@@ -18,11 +15,9 @@ public class MainMenuController
         _cameraManager = cameraManager;
         _mainMenuSceneConfig = mainMenuSceneConfig;
         _sceneLoader = sceneLoader;
-
-        Initialize();
     }
 
-    private void Initialize()
+    public void Initialize()
     {
         UnityEngine.Debug.Log("MainMenuController / Initialize");
 

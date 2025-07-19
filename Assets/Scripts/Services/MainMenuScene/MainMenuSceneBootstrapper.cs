@@ -1,19 +1,22 @@
 using Cysharp.Threading.Tasks;
 using Zenject;
 using UnityEngine;
+using System.Collections.Generic;
 
-public class MainMenuSceneBootstrapper : IInitializable 
+public class MainMenuSceneBootstrapper : IInitializable
 {
     private IMainMenuManager _mainMenuManager;
     private ICameraManager _cameraManager;
-    private MainMenuControllerBinder _mainMenuControllerBinder;
+    private IMainMenuController _mainMenuController;
+    private IInitializer _initializer;
 
-    public MainMenuSceneBootstrapper(IMainMenuManager mainMenuManager, ICameraManager cameraManager,
-        MainMenuControllerBinder mainMenuControllerBinder)
+    public MainMenuSceneBootstrapper(IMainMenuManager mainMenuManager, ICameraManager cameraManager, 
+        IMainMenuController mainMenuController, IInitializer initializer)
     {
         _mainMenuManager = mainMenuManager;
         _cameraManager = cameraManager;
-        _mainMenuControllerBinder = mainMenuControllerBinder;
+        _mainMenuController = mainMenuController;
+        _initializer = initializer;
     }
 
     public void Initialize()
@@ -29,7 +32,8 @@ public class MainMenuSceneBootstrapper : IInitializable
 
         await _mainMenuManager.LoadPrefabAsync();
 
-        _mainMenuControllerBinder.BindMainMenuController();
+        _initializer.Initialize(_mainMenuController);
+
         Debug.Log("MainMenuBootstrapper LoadManagersAsync end");
     }
 }

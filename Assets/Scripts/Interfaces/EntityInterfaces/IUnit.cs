@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.AI;
 
-public interface IUnit
+public interface IUnit : IInitialize
 {
     Transform Transform { get; }
     Rigidbody Rigidbody { get; }
@@ -12,6 +12,4 @@ public interface IUnit
     IUnitHealth Health { get; }
     IUnitStateMachine UnitStateMachine { get; }
     bool IsSelected { get; set; }
-
-    void Initialize();
 }

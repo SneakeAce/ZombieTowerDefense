@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using Zenject;
 
-public class Unit : MonoBehaviour, IUnit
+public class Unit : MonoBehaviour, IUnit, IInitialize
 {
     private Rigidbody _rigidbody;
     private Collider _collider;
@@ -39,5 +39,7 @@ public class Unit : MonoBehaviour, IUnit
         _collider = GetComponent<Collider>();
         _navMeshAgent = GetComponent<NavMeshAgent>();
         _unitStateMachine = GetComponent<UnitStateMachine>();
+
+        _navMeshAgent.speed = _config.MoveStats.MoveSpeed;
     }
 }

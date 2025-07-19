@@ -1,4 +1,3 @@
-public interface IBuildModeController
+public interface IBuildModeController : IInitialize
 {
-    void Initialize();
 }

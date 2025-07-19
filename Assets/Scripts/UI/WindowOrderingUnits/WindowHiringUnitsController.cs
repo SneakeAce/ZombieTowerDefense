@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class WindowHiringUnitsController : IWindowHiringUnitsController
+public class WindowHiringUnitsController : IWindowHiringUnitsController, IInitialize
 {
     private ICameraManager _cameraManager;
     private IWindowHiringUnitsManager _windowHiringUnitsManager;

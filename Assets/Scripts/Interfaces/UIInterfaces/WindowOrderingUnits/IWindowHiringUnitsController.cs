@@ -1,5 +1,4 @@
-public interface IWindowHiringUnitsController
+public interface IWindowHiringUnitsController : IInitialize
 {
-    void Initialize();
     void ToggleWindowHiringUnits(bool canBeOpened);
 }

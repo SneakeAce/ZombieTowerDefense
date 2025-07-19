@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Zenject;
 
-public class HiringUnitButtonsController : IHiringUnitButtonsController
+public class HiringUnitButtonsController : IHiringUnitButtonsController, IInitialize
 {
     private IPlayerUnitSpawnerManager _spawnerManager;
 

@@ -1,8 +1,6 @@
 using System.Collections.Generic;
 
-public interface IHiringUnitButtonsController
+public interface IHiringUnitButtonsController : IInitialize
 {
     List<IHiringUnitButton> HiringButtons { get; }
-
-    void Initialize();
 }

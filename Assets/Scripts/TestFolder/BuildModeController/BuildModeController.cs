@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class BuildModeController : IBuildModeController, IDisposable
+public class BuildModeController : IBuildModeController, IDisposable, IInitialize
 {
     private PlayerInput _playerInput;
 

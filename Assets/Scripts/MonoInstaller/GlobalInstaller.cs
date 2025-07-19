@@ -11,10 +11,15 @@ public class GlobalInstaller : MonoInstaller
 
         BindAssetProvider();
 
+        BindInitializer();
+
         BindCoroutinePerformer();
     }
 
     private void BindAssetProvider() => Container.Bind<IAssetProvider>().To<AssetProvider>().AsSingle();
+
+    private void BindInitializer() => Container.Bind<IInitializer>().To<Initializer>().AsSingle();
+
     private void BindPlayerInput()
     {
         Container.Bind<PlayerInput>().AsSingle();
