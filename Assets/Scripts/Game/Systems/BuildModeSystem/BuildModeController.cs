@@ -2,28 +2,32 @@ using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class BuildModeController : IBuildModeController, IDisposable, IInitialize
+public class BuildModeController : IBuildModeController, IDisposable
 {
     private PlayerInput _playerInput;
 
     private IGridCell _currentCell;
 
     private IGridManager _gridManager;
-    private IWindowHiringUnitsController _windowHiringUnitsController;
-    private IHiringUnitButtonsController _buttonsController;
+    private IWindowUnitsHiringController _windowUnitsHiringController;
+    private IUnitHiringController _unitHiringController;
+
     private BuildModeInputHandler _buildModeInputHandler;
 
+    private Vector3 _currentCellPosition;
+
     private bool _isActiveBuildMode;
+    private bool _isOpenWindowUnitHiring;
 
     public BuildModeController(PlayerInput playerInput, IGridManager gridManager, 
-        IWindowHiringUnitsController windowHiringUnitsController, IHiringUnitButtonsController buttonsController,
+        IWindowUnitsHiringController windowHiringUnitsController, IUnitHiringController unitHiringController,
         BuildModeInputHandler buildModeInputHandler)
     {
         _playerInput = playerInput;
 
         _gridManager = gridManager;
-        _windowHiringUnitsController = windowHiringUnitsController;
-        _buttonsController = buttonsController;
+        _windowUnitsHiringController = windowHiringUnitsController;
+        _unitHiringController = unitHiringController;
 
         _buildModeInputHandler = buildModeInputHandler;
     }
@@ -64,29 +68,31 @@ public class BuildModeController : IBuildModeController, IDisposable, IInitializ
 
     private void SubscribeButtonEvents()
     {
-        for (int i = 0; i < _buttonsController.HiringButtons.Count; i++)
+        for (int i = 0; i < _unitHiringController.UnitHiringButtonsController.HiringButtons.Count; i++)
         {
-            IHiringUnitButton button = _buttonsController.HiringButtons[i];
+            IUnitHiringButton button = _unitHiringController.UnitHiringButtonsController.HiringButtons[i];
 
             if (button == null)
                 continue;
 
-            button.SetPosition(_currentCell.GameObject.transform.position);
-            button.ButtonWasPressed += ExitBuildMode;
+            _unitHiringController.SetSpawnPositionProvider(OnGetCellPosition);
+
+            button.ButtonWasPressed += ResetSelectedCell;
         }
     }
 
     private void UnsubscribeButtonEvents()
     {
-        for (int i = 0; i < _buttonsController.HiringButtons.Count; i++)
+        for (int i = 0; i < _unitHiringController.UnitHiringButtonsController.HiringButtons.Count; i++)
         {
-            IHiringUnitButton button = _buttonsController.HiringButtons[i];
+            IUnitHiringButton button = _unitHiringController.UnitHiringButtonsController.HiringButtons[i];
 
             if (button == null)
                 continue;
 
-            button.SetPosition(_currentCell.GameObject.transform.position);
-            button.ButtonWasPressed += ExitBuildMode;
+            _unitHiringController.SetSpawnPositionProvider(null);
+
+            button.ButtonWasPressed -= ResetSelectedCell;
         }
     }
 
@@ -95,11 +101,16 @@ public class BuildModeController : IBuildModeController, IDisposable, IInitializ
         _isActiveBuildMode = !_isActiveBuildMode;
 
         if (_isActiveBuildMode)
+        {
             _playerInput.SelectionUnit.Disable();
+        }
         else
-            _playerInput.SelectionUnit.Enable();
-        
+        {
+            ToggleWindowUnitHiring(_isActiveBuildMode);
 
+            _playerInput.SelectionUnit.Enable();
+        }
+        
         _gridManager.ToggleGridActivity(_isActiveBuildMode);
     }
 
@@ -115,27 +126,39 @@ public class BuildModeController : IBuildModeController, IDisposable, IInitializ
         if (_currentCell == null)
             return;
 
-        Debug.Log($"_currentCell in BuildModeController = {_currentCell}");
+        _currentCellPosition = _currentCell.GameObject.transform.position;
 
-        _windowHiringUnitsController.ToggleWindowHiringUnits(_isActiveBuildMode);
+        ToggleWindowUnitHiring(_isActiveBuildMode);
 
         SubscribeButtonEvents();
     }
 
-    private void OnDeselectCell(InputAction.CallbackContext context)
+    private Vector3 OnGetCellPosition()
     {
-        ExitBuildMode();
+        return _currentCellPosition;
     }
 
-    private void ExitBuildMode()
+    private void OnDeselectCell(InputAction.CallbackContext context)
+    {
+        ResetSelectedCell();
+    }
+
+    private void ResetSelectedCell()
     {
         _buildModeInputHandler.ResetCurrentCell();
 
-        _windowHiringUnitsController.ToggleWindowHiringUnits(_isActiveBuildMode);
+        ToggleWindowUnitHiring(false);
 
         _currentCell = null;
 
         UnsubscribeButtonEvents();
+    }
+
+    private void ToggleWindowUnitHiring(bool canOpen)
+    {
+        _isOpenWindowUnitHiring = canOpen;
+
+        _windowUnitsHiringController.ToggleWindowUnitsHiring(_isOpenWindowUnitHiring);
     }
 
 }

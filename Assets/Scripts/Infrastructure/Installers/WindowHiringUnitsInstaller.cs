@@ -15,16 +15,16 @@ public class WindowHiringUnitsInstaller : MonoInstaller
 
     private void BindWindowHiringUnitsManager()
     {
-        Container.Bind<IWindowHiringUnitsManager>()
-            .To<WindowHiringUnitsManager>()
+        Container.Bind<IWindowUnitsHiringManager>()
+            .To<WindowUnitsHiringManager>()
             .AsSingle()
             .WithArguments(_windowPrefab);
     }
 
     private void BindWindowHiringUnitsController()
     {
-        Container.Bind<IWindowHiringUnitsController>()
-            .To<WindowHiringUnitsController>()
+        Container.Bind<IWindowUnitsHiringController>()
+            .To<WindowUnitsHiringController>()
             .AsSingle();
     }
 }

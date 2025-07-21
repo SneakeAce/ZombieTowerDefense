@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class WindowHiringUnitsView : MonoBehaviour
+public class WindowUnitsHiringView : MonoBehaviour
 {
     [SerializeField] private List<Button> _hireUnitButtons = new List<Button>();
 

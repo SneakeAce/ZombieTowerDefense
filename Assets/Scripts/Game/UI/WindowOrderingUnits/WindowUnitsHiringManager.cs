@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.AddressableAssets;
 using Zenject;
 
-public class WindowHiringUnitsManager : IWindowHiringUnitsManager
+public class WindowUnitsHiringManager : IWindowUnitsHiringManager
 {
     private AssetReference _windowPrefab;
     private Vector3 _spawnPositionCanvas = new Vector3(0, 0, 0);
@@ -12,10 +12,10 @@ public class WindowHiringUnitsManager : IWindowHiringUnitsManager
     private DiContainer _container;
     private IAsyncObjectFactory _asyncObjectFactory;
 
-    private WindowHiringUnitsView _windowHiringUnitsView;
+    private WindowUnitsHiringView _windowHiringUnitsView;
     private Canvas _windowHiringCanvas;
 
-    public WindowHiringUnitsManager(AssetReference windowPrefab, DiContainer container, 
+    public WindowUnitsHiringManager(AssetReference windowPrefab, DiContainer container, 
         IAsyncObjectFactory asyncObjectFactory)
     {
         _windowPrefab = windowPrefab;
@@ -35,7 +35,7 @@ public class WindowHiringUnitsManager : IWindowHiringUnitsManager
         if (_windowHiringCanvas == null)
             throw new NullReferenceException("WindowOrderingUnitsCanvas is Null!");
 
-        _windowHiringUnitsView = _windowHiringCanvas.GetComponent<WindowHiringUnitsView>();
+        _windowHiringUnitsView = _windowHiringCanvas.GetComponent<WindowUnitsHiringView>();
 
         if (_windowHiringUnitsView == null)
             throw new NullReferenceException("WindowOrderingUnitsView is Null!");
@@ -45,7 +45,7 @@ public class WindowHiringUnitsManager : IWindowHiringUnitsManager
 
     private void BindWindowHiringUnitsView()
     {
-        _container.Bind<WindowHiringUnitsView>()
+        _container.Bind<WindowUnitsHiringView>()
             .FromInstance(_windowHiringUnitsView)
             .AsSingle();
     }

@@ -6,25 +6,30 @@ using Zenject;
 public class FirstLevelSceneBootstrapper : IInitializable
 {
     private ICameraManager _cameraManager;
-    private IWindowHiringUnitsManager _windowHiringUnitsManager;
+    private IWindowUnitsHiringManager _windowHiringUnitsManager;
 
-    private IHiringUnitButtonsController _buttonsController;
-    private IWindowHiringUnitsController _windowHiringUnitsController;
+    private IUnitHiringController _unitHiringController;
+    private IUnitHiringButtonsController _unitHiringButtonsController;
+    private IWindowUnitsHiringController _windowHiringUnitsController;
     private IBuildModeController _buildModeController;
+
     private IInitializer _initializer;
 
     private List<IInitialize> _initializeList = new List<IInitialize>();
 
     public FirstLevelSceneBootstrapper(ICameraManager cameraManager, 
-        IWindowHiringUnitsManager windowHiringUnitsManager, IHiringUnitButtonsController buttonsController,
-        IWindowHiringUnitsController windowHiringUnitsController, IBuildModeController buildModeController, 
-        IInitializer initializer)
+        IWindowUnitsHiringManager windowHiringUnitsManager, IUnitHiringButtonsController buttonsController,
+        IWindowUnitsHiringController windowHiringUnitsController, IBuildModeController buildModeController,
+        IUnitHiringController unitHiringController, IInitializer initializer)
     {
         _cameraManager = cameraManager;
+
         _windowHiringUnitsManager = windowHiringUnitsManager;
-        _buttonsController = buttonsController;
+        _unitHiringButtonsController = buttonsController;
         _windowHiringUnitsController = windowHiringUnitsController;
         _buildModeController = buildModeController;
+        _unitHiringController = unitHiringController;
+
         _initializer = initializer;
 
         FillInitializeList();
@@ -39,7 +44,8 @@ public class FirstLevelSceneBootstrapper : IInitializable
     {
         _initializeList.Add(_buildModeController);
         _initializeList.Add(_windowHiringUnitsController);
-        _initializeList.Add(_buttonsController);
+        _initializeList.Add(_unitHiringButtonsController);
+        _initializeList.Add(_unitHiringController);
     }
 
     private async UniTask LoadManagersAsync()

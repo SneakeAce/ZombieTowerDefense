@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public interface IWindowHiringUnitsManager : IUIManager
+public interface IWindowUnitsHiringManager : IUIManager
 {
     public Canvas WindowOrderingCanvas { get; }
 }

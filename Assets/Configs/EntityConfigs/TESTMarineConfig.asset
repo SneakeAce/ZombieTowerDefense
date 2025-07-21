@@ -20,7 +20,7 @@ MonoBehaviour:
     m_EditorAssetChanged: 0
   <UnitType>k__BackingField: 1
   <MoveStats>k__BackingField:
-    <MoveSpeed>k__BackingField: 5
+    <MoveSpeed>k__BackingField: 2
   <HealthStats>k__BackingField:
     <BaseValueHealth>k__BackingField: 12
     <BaseValueRegenerationHealth>k__BackingField: 31

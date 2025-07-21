@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Configs/HireUnitButtonConfig/HireUnitButtonConfig", fileName = "HireUnitButtonConfig")]
-public class HireUnitButtonConfig : ScriptableObject
+public class UnitHireButtonConfig : ScriptableObject
 {
     [field: SerializeField] public UnitType UnitType { get; private set; }
     [field: SerializeField] public float HiringTime { get; private set; }

@@ -3,7 +3,7 @@ using Zenject;
 
 public class HireUnitSystemInstaller : MonoInstaller
 {
-    [SerializeField] private HireUnitButtonConfigsLibrary _configsLibrary;
+    [SerializeField] private UnitHireButtonConfigsLibrary _configsLibrary;
 
     public override void InstallBindings()
     {
@@ -29,12 +29,16 @@ public class HireUnitSystemInstaller : MonoInstaller
 
     private void BindHireUnitSystem()
     {
-        Container.Bind<HireUnitButtonConfigsLibrary>()
+        Container.Bind<UnitHireButtonConfigsLibrary>()
             .FromInstance(_configsLibrary)
             .AsSingle();
 
-        Container.Bind<IHiringUnitButtonsController>()
-            .To<HiringUnitButtonsController>()
+        Container.Bind<IUnitHiringButtonsController>()
+            .To<UnitHiringButtonsController>()
+            .AsSingle();
+
+        Container.Bind<IUnitHiringController>()
+            .To<UnitHiringController>()
             .AsSingle();
     }
 }

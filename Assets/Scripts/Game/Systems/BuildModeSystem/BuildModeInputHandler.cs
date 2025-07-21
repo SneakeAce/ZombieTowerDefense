@@ -73,7 +73,7 @@ public class BuildModeInputHandler
     {
         if (_previousCell == null || _previousCell.IsEmpty == false || _previousCell.IsSelected)
             return null;
-         
+
         if (_currentSelectedCell != null)
             return _currentSelectedCell;
 

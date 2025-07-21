@@ -3,7 +3,7 @@ using UnityEngine;
 
 [CreateAssetMenu(menuName = "Configs/HireUnitButtonConfig/HireUnitButtonConfigsLibrary", fileName = "HireUnitButtonConfigsLibrary")]
 
-public class HireUnitButtonConfigsLibrary : ScriptableObject
+public class UnitHireButtonConfigsLibrary : ScriptableObject
 {
-    [field: SerializeField] public List<HireUnitButtonConfig> Configs { get; private set; }
+    [field: SerializeField] public List<UnitHireButtonConfig> Configs { get; private set; }
 }

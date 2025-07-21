@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d9eba6c65edfbaa489735979f32f9a7f, type: 3}
+  m_Script: {fileID: 11500000, guid: 73a00ba248dcb8d4090e2ee819c5d962, type: 3}
   m_Name: HireUnitButtonConfig
   m_EditorClassIdentifier: 
   <UnitType>k__BackingField: 1
-  <HiringTime>k__BackingField: 1
-  <HiringCost>k__BackingField: 10
+  <HiringTime>k__BackingField: 0
+  <HiringCost>k__BackingField: 0
