@@ -525,7 +525,7 @@ GameObject:
   - component: {fileID: 1045376368}
   - component: {fileID: 1045376367}
   - component: {fileID: 1045376371}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: TEST_Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -650,7 +650,7 @@ GameObject:
   - component: {fileID: 1151504810}
   - component: {fileID: 1151504809}
   - component: {fileID: 1151504813}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TEST_Ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}

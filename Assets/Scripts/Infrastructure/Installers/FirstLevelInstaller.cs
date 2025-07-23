@@ -48,6 +48,6 @@ public class FirstLevelInstaller : MonoInstaller
 
         Container.Bind<IGridCellFactory>().To<GridCellFactory>().AsSingle();
 
-        Container.Bind<IGridManager>().To<GridManager>().AsSingle().NonLazy();
+        Container.Bind<IGridManager>().To<GridManager>().AsSingle();
     }
 }

@@ -14,6 +14,8 @@ public class BuildModeInputHandler
     private IGridCell _currentSelectedCell;
     private BuildModeInputHandlerConfig _config;
 
+    private bool _isWorking = true;
+
     public BuildModeInputHandler(BuildModeInputHandlerConfig config)
     {
         _config = config;
@@ -30,6 +32,9 @@ public class BuildModeInputHandler
 
     public void CursorMoved(InputAction.CallbackContext context)
     {
+        if (_isWorking == false)
+            return;
+
         _currentMousePosition = context.ReadValue<Vector2>();
         Ray ray = Camera.main.ScreenPointToRay(_currentMousePosition);
 
@@ -82,6 +87,8 @@ public class BuildModeInputHandler
         _currentSelectedCell.SelectCell(_colorSelectedCell);
         _currentSelectedCell.OccupyCell();
 
+        _isWorking = false;
+
         return _currentSelectedCell;
     }
 
@@ -93,5 +100,7 @@ public class BuildModeInputHandler
         _currentSelectedCell.DeselectCell();
 
         _currentSelectedCell = null;
+
+        _isWorking = true;
     }
 }

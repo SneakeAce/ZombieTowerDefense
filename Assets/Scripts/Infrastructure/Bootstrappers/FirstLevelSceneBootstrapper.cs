@@ -6,24 +6,27 @@ using Zenject;
 public class FirstLevelSceneBootstrapper : IInitializable
 {
     private ICameraManager _cameraManager;
-    private IWindowUnitsHiringManager _windowHiringUnitsManager;
 
+    private IGridManager _gridManager;
+    private IWindowUnitsHiringManager _windowHiringUnitsManager;
     private IUnitHiringController _unitHiringController;
     private IUnitHiringButtonsController _unitHiringButtonsController;
     private IWindowUnitsHiringController _windowHiringUnitsController;
     private IBuildModeController _buildModeController;
 
+
     private IInitializer _initializer;
 
     private List<IInitialize> _initializeList = new List<IInitialize>();
 
-    public FirstLevelSceneBootstrapper(ICameraManager cameraManager, 
+    public FirstLevelSceneBootstrapper(ICameraManager cameraManager, IGridManager gridManager,
         IWindowUnitsHiringManager windowHiringUnitsManager, IUnitHiringButtonsController buttonsController,
         IWindowUnitsHiringController windowHiringUnitsController, IBuildModeController buildModeController,
         IUnitHiringController unitHiringController, IInitializer initializer)
     {
         _cameraManager = cameraManager;
 
+        _gridManager = gridManager;
         _windowHiringUnitsManager = windowHiringUnitsManager;
         _unitHiringButtonsController = buttonsController;
         _windowHiringUnitsController = windowHiringUnitsController;
@@ -42,6 +45,7 @@ public class FirstLevelSceneBootstrapper : IInitializable
 
     private void FillInitializeList()
     {
+        _initializeList.Add(_gridManager);
         _initializeList.Add(_buildModeController);
         _initializeList.Add(_windowHiringUnitsController);
         _initializeList.Add(_unitHiringButtonsController);

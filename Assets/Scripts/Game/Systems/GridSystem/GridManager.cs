@@ -17,6 +17,10 @@ public class GridManager : IGridManager
     private Quaternion _rotationCell;
     private Vector3 _spawnPositionContainer = new Vector3(0f, 0f, 0f);
 
+    private LayerMask _groundLayer;
+    private LayerMask _obstacleLayer;
+
+    private GridCell _cellPrefab;
     private GameObject _cellContainerPrefab;
     private GameObject _cellContainer;
 
@@ -24,14 +28,11 @@ public class GridManager : IGridManager
     {
         _config = config;
         _cellfactory = cellFactory;
+    }
 
-        _gridWidth = _config.GridManagerStats.GridWidth;
-        _gridHeight = _config.GridManagerStats.GridHeight;
-
-        _cellSize = _config.GridManagerStats.CellSize;
-        _rotationCell = _config.GridManagerStats.RotationCell;
-
-        _cellContainerPrefab = _config.GridManagerStats.CellContainer;
+    public void Initialize()
+    {
+        SetUpGridParameters();
 
         GeneratedGrid();
     }
@@ -39,6 +40,18 @@ public class GridManager : IGridManager
     public void ToggleGridActivity(bool isActive)
     {
         _cellContainer.SetActive(isActive);
+    }
+
+    private void SetUpGridParameters()
+    {
+        _gridWidth = _config.GridManagerStats.GridWidth;
+        _gridHeight = _config.GridManagerStats.GridHeight;
+        _cellSize = _config.GridManagerStats.CellSize;
+        _rotationCell = _config.GridManagerStats.RotationCell;
+        _groundLayer = _config.GridManagerStats.GroundLayer;
+        _obstacleLayer = _config.GridManagerStats.ObstacleLayer;
+        _cellPrefab = _config.GridManagerStats.GridCellPrefab;
+        _cellContainerPrefab = _config.GridManagerStats.CellContainer;
     }
 
     private void GeneratedGrid()
@@ -59,8 +72,10 @@ public class GridManager : IGridManager
 
                 GridCellCreatingArguments arguments = new GridCellCreatingArguments(positionCell,
                     rotationCell,
-                    _cellContainer.transform, 
-                    _config.GridManagerStats.GridCellPrefab);
+                    _cellContainer.transform,
+                    _cellPrefab,
+                    _groundLayer, 
+                    _obstacleLayer);
 
                 GridCell cell = _cellfactory.CreateObject<GridCell, GridCellCreatingArguments>(arguments);
 

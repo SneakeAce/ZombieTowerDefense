@@ -45,16 +45,21 @@ public struct PoolCreatingArguments : IFactoryArguments
 
 public struct GridCellCreatingArguments : IFactoryArguments
 {
-    public GridCellCreatingArguments(Vector3 position, Quaternion rotation, Transform parent, GridCell gridCellPrefab)
+    public GridCellCreatingArguments(Vector3 position, Quaternion rotation, Transform parent, GridCell gridCellPrefab,
+        LayerMask groundLayer, LayerMask obstacleLayer)
     {
         Position = position;
         Rotation = rotation;
         Parent = parent;
         GridCellPrefab = gridCellPrefab;
+        GroundLayer = groundLayer;
+        ObstacleLayer = obstacleLayer;
     }
 
     public Vector3 Position { get; }
     public Quaternion Rotation { get; }
     public Transform Parent { get; }
     public GridCell GridCellPrefab { get; }
+    public LayerMask GroundLayer { get; }
+    public LayerMask ObstacleLayer { get; }
 }
