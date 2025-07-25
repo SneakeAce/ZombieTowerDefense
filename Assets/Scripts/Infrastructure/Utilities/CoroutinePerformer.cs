@@ -1,13 +1,14 @@
+using System.Collections;
 using UnityEngine;
 
 public class CoroutinePerformer : MonoBehaviour, ICoroutinePerformer
 {
-    public void StartRoutine(Coroutine routine)
+    public Coroutine StartRoutine(IEnumerator routine)
     {
-        StartRoutine(routine);
+        return StartCoroutine(routine);
     }
 
-    public void StopRoutine(Coroutine routine)
+    public void StopRoutine(IEnumerator routine)
     {
         StopCoroutine(routine);
     }

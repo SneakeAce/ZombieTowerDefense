@@ -14,12 +14,12 @@ public class HireUnitSystemInstaller : MonoInstaller
 
     private void BindSpawnUnitSystem()
     {
-        Container.Bind<IPlayerControlledUnitsFactory>()
-            .To<PlayerControlledUnitsFactory>()
+        Container.Bind<IPlayerUnitsFactory>()
+            .To<PlayerUnitFactory>()
             .AsSingle();
 
         Container.Bind<IPlayerUnitSpawner>()
-            .To<PlayerControlledUnitSpawner>()
+            .To<PlayerUnitSpawner>()
             .AsSingle();
 
         Container.Bind<IPlayerUnitSpawnerManager>()

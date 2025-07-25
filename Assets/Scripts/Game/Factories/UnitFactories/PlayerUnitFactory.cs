@@ -2,15 +2,15 @@ using System;
 using Zenject;
 using Object = UnityEngine.Object;
 
-public class PlayerControlledUnitsFactory : IPlayerControlledUnitsFactory
+public class PlayerUnitFactory : IPlayerUnitsFactory
 {
     private DiContainer _container;
-    private IPoolConfig<PlayerUnitConfig> _unitConfigs;
+    private IConfigsProvider _configsProvider;
 
-    public PlayerControlledUnitsFactory(DiContainer container, IPoolConfig<PlayerUnitConfig> unitConfigs)
+    public PlayerUnitFactory(DiContainer container, IConfigsProvider configsProvider)
     {
         _container = container;
-        _unitConfigs = unitConfigs;
+        _configsProvider = configsProvider;
     }
 
     public T CreateObject<T, TArgs>(TArgs args) 
@@ -26,10 +26,12 @@ public class PlayerControlledUnitsFactory : IPlayerControlledUnitsFactory
             throw new NullReferenceException("Unit is Null!");
 
         _container.Inject(unitT);
+
+        ILibraryConfigs<PlayerUnitConfig> unitLibraryConfigs = _configsProvider.GetLibrary<PlayerUnitConfig>();
         
         if (unitT is Unit unit)
         {
-            foreach (var config in _unitConfigs.Configs)
+            foreach (var config in unitLibraryConfigs.Configs)
             {
                 unit.SetConfig(config);
                 unit.transform.position = spawnArgs.SpawnPosition;

@@ -14,7 +14,6 @@ public class FirstLevelSceneBootstrapper : IInitializable
     private IWindowUnitsHiringController _windowHiringUnitsController;
     private IBuildModeController _buildModeController;
 
-
     private IInitializer _initializer;
 
     private List<IInitialize> _initializeList = new List<IInitialize>();

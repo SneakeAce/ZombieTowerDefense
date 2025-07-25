@@ -40,6 +40,6 @@ public class Unit : MonoBehaviour, IUnit, IInitialize
         _navMeshAgent = GetComponent<NavMeshAgent>();
         _unitStateMachine = GetComponent<UnitStateMachine>();
 
-        _navMeshAgent.speed = _config.MoveStats.MoveSpeed;
+        _navMeshAgent.speed = _config.UnitMainStats.MoveStats.MoveSpeed;
     }
 }

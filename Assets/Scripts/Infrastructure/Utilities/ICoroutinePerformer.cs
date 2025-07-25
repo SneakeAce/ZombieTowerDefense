@@ -1,7 +1,8 @@
+using System.Collections;
 using UnityEngine;
 
 public interface ICoroutinePerformer
 {
-    void StartRoutine(Coroutine routine);
-    void StopRoutine(Coroutine routine);
+    Coroutine StartRoutine(IEnumerator routine);
+    void StopRoutine(IEnumerator routine);
 }

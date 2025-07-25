@@ -12,19 +12,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d6c43e37bd10814bbb4954f00fced27, type: 3}
   m_Name: TESTMarineConfig
   m_EditorClassIdentifier: 
-  <Prefab>k__BackingField:
-    m_AssetGUID: e9daa590996fb5f4daea14c0dcf788d4
-    m_SubObjectName: 
-    m_SubObjectType: 
-    m_SubObjectGUID: 
-    m_EditorAssetChanged: 0
-  <UnitType>k__BackingField: 1
-  <MoveStats>k__BackingField:
-    <MoveSpeed>k__BackingField: 2
-  <HealthStats>k__BackingField:
-    <BaseValueHealth>k__BackingField: 12
-    <BaseValueRegenerationHealth>k__BackingField: 31
-    <BaseDelayRegenerationHealth>k__BackingField: 3
-  <AttackStats>k__BackingField:
-    <BaseDelayBetweenAttack>k__BackingField: 12
-    <BaseValueDamage>k__BackingField: 123
+  <UnitMainStats>k__BackingField:
+    <Prefab>k__BackingField:
+      m_AssetGUID: e9daa590996fb5f4daea14c0dcf788d4
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_SubObjectGUID: 
+      m_EditorAssetChanged: 0
+    <UnitType>k__BackingField: 1
+    <MoveStats>k__BackingField:
+      <MoveSpeed>k__BackingField: 2
+    <HealthStats>k__BackingField:
+      <BaseValueHealth>k__BackingField: 2
+      <BaseValueRegenerationHealth>k__BackingField: 2
+      <BaseDelayRegenerationHealth>k__BackingField: 2
+    <AttackStats>k__BackingField:
+      <BaseDelayBetweenAttack>k__BackingField: 2
+      <BaseValueDamage>k__BackingField: 2
+    <HireUnitStats>k__BackingField:
+      <HiringCost>k__BackingField: 2
+      <HiringTime>k__BackingField: 2

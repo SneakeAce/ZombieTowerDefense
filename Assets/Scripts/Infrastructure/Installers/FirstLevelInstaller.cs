@@ -3,7 +3,7 @@ using Zenject;
 
 public class FirstLevelInstaller : MonoInstaller
 {
-    [SerializeField] private PlayerControlledUnitConfigs _unitConfig;
+    [SerializeField] private PlayerUnitConfigsLibrary _unitConfig;
     [SerializeField] private GridManagerConfig _gridManagerConfig;
 
     public override void InstallBindings()
@@ -12,7 +12,6 @@ public class FirstLevelInstaller : MonoInstaller
 
         BindGridManager();
     }
-
 
     private void BindServices()
     {
@@ -29,11 +28,6 @@ public class FirstLevelInstaller : MonoInstaller
         Container.Bind<SelectUnit>()
             .AsSingle()
             .NonLazy();
-
-        Container.Bind<IPoolConfig<PlayerUnitConfig>>()
-            .To<PlayerControlledUnitConfigs>()
-            .FromInstance(_unitConfig)
-            .AsSingle();
 
         Container.Bind<IAsyncPoolFactory>()
             .To<PlayerUnitPoolsFactory>()

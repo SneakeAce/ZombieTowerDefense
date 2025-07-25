@@ -1,7 +1,6 @@
 using Cysharp.Threading.Tasks;
 using Zenject;
 using UnityEngine;
-using System.Collections.Generic;
 
 public class MainMenuSceneBootstrapper : IInitializable
 {

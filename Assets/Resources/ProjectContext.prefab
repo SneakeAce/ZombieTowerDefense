@@ -75,3 +75,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _preformerPrefab: {fileID: 8144621075239444713, guid: 68d16ea4beaefec4aba45fad3d6ae084, type: 3}
+  _configsLibraryLabel:
+    m_LabelString: ConfigsLibrary

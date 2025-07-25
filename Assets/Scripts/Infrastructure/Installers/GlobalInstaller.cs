@@ -1,9 +1,11 @@
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 using Zenject;
 
 public class GlobalInstaller : MonoInstaller
 {
     [SerializeField] private CoroutinePerformer _preformerPrefab;
+    [SerializeField] private AssetLabelReference _configsLibraryLabel;
 
     public override void InstallBindings()
     {
@@ -13,7 +15,11 @@ public class GlobalInstaller : MonoInstaller
 
         BindInitializer();
 
+        BindConfigsProvider();
+
         BindCoroutinePerformer();
+
+        BindGlobalBootstrapper();
     }
 
     private void BindAssetProvider() => Container.Bind<IAssetProvider>().To<AssetProvider>().AsSingle();
@@ -35,5 +41,23 @@ public class GlobalInstaller : MonoInstaller
             .To<CoroutinePerformer>()
             .FromInstance(performer)
             .AsSingle();
+    }
+
+    private void BindConfigsProvider()
+    {
+        Container.Bind<ConfigsLoader>()
+            .AsSingle()
+            .WithArguments(_configsLibraryLabel);
+
+        Container.Bind<IConfigsProvider>()
+            .To<ConfigsProvider>()
+            .AsSingle();
+    }
+
+    private void BindGlobalBootstrapper()
+    {
+        Container.BindInterfacesAndSelfTo<GlobalBootstrapper>()
+        .AsSingle()
+        .NonLazy();
     }
 }
