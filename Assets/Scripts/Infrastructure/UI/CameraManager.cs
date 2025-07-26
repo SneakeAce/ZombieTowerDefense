@@ -2,21 +2,23 @@ using System;
 using Cysharp.Threading.Tasks;
 using Unity.Cinemachine;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CameraManager : ICameraManager
 {
-    private SpawnCameraConfig _spawnCameraData;
+    private SpawnCameraStats _spawnCameraData;
 
     private IAsyncObjectFactory _sceneObjectFactory;
+    private IConfigsProvider _configsProvider;
 
     private Camera _mainCamera;
     private CinemachineCamera _cinemachineVirtualCamera;
 
-    public CameraManager(SpawnCameraConfig spawnCameraData, IAsyncObjectFactory sceneObjectFactory)
+    public CameraManager(IAsyncObjectFactory sceneObjectFactory, IConfigsProvider configsProvider)
     {
-        _spawnCameraData = spawnCameraData;
-
         _sceneObjectFactory = sceneObjectFactory;
+        _configsProvider = configsProvider;
+        // Реализовать получение конфига в зависимости от того, на какой сцене мы находимся SceneManager.GetActiveScene();
     }
 
     public Camera MainCamera => _mainCamera;
@@ -24,12 +26,19 @@ public class CameraManager : ICameraManager
 
     public async UniTask LoadAndCreateCameraAsync()
     {
+        GetConfig();
+
         await CreateMainCamera();
 
         await CreateVirtualCamera();
+    }
 
-        //сделать контроллер для камеры, где будет вешаться персонаж
-    } 
+    private void GetConfig()
+    {
+        var config = _configsProvider.GetSceneConfig();
+
+        _spawnCameraData = config.CameraData;
+    }
 
     private async UniTask CreateMainCamera()
     {

@@ -16,5 +16,5 @@ MonoBehaviour:
   - <PoolSize>k__BackingField: 10
     <CanExpand>k__BackingField: 0
     <UnitTypeInPool>k__BackingField: 1
-    <PoolContainer>k__BackingField: {fileID: 0}
-  <PoolType>k__BackingField: 1
+  <ContainerForPoolsPrefab>k__BackingField: {fileID: 1529446653509413227, guid: 7f66abcb2a4b804499489eb99fe7aaf1, type: 3}
+  <PoolType>k__BackingField: 2

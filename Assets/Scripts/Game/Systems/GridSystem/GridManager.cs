@@ -6,6 +6,7 @@ public class GridManager : IGridManager
     private const float DefaultCellYPosition = -0.97f;
 
     private IGridCellFactory _cellfactory;
+    private IConfigsProvider _configsProvider;
 
     private GridManagerConfig _config;
     private GridCell[,] _gridCells; // ƒвойной массив дл€ хранени€ €чеек сетки
@@ -24,14 +25,16 @@ public class GridManager : IGridManager
     private GameObject _cellContainerPrefab;
     private GameObject _cellContainer;
 
-    public GridManager(GridManagerConfig config, IGridCellFactory cellFactory)
+    public GridManager(IConfigsProvider configsProvider, IGridCellFactory cellFactory)
     {
-        _config = config;
+        _configsProvider = configsProvider;
         _cellfactory = cellFactory;
     }
 
     public void Initialize()
     {
+        GetConfig();
+
         SetUpGridParameters();
 
         GeneratedGrid();
@@ -41,6 +44,8 @@ public class GridManager : IGridManager
     {
         _cellContainer.SetActive(isActive);
     }
+
+    private void GetConfig() => _config = _configsProvider.GetSingleConfig<GridManagerConfig>();
 
     private void SetUpGridParameters()
     {

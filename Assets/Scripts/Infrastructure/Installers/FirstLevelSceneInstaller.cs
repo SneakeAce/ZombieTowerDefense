@@ -3,15 +3,34 @@ using Zenject;
 
 public class FirstLevelSceneInstaller : MonoInstaller
 {
-    [SerializeField] private FirstLevelSceneConfig _firstLevelSceneConfig;
+    [SerializeField] private GameObject _containerRootPrefab;
+
+    private GameObject _containerRoot;
 
     public override void InstallBindings()
     {
+        CreateContainerRoot();
+
+        BindContainerCreator();
+
         BindSceneObjectFactory();
 
         BindSceneComponents();
+    }
 
-        BindFirstLevelSceneConfig();
+    private void CreateContainerRoot()
+    {
+        _containerRoot = Container.InstantiatePrefab(_containerRootPrefab);
+    }
+
+    private void BindContainerCreator()
+    {
+        Container.Bind<IContainersCreator>()
+            .To<ContainersCreator>()
+            .FromNewComponentOnNewGameObject()
+            .WithGameObjectName("ContainersCreator")
+            .AsSingle()
+            .WithArguments(_containerRoot);
     }
 
     private void BindSceneObjectFactory()
@@ -25,18 +44,6 @@ public class FirstLevelSceneInstaller : MonoInstaller
     {
         Container.Bind<ICameraManager>()
             .To<CameraManager>()
-            .AsSingle()
-            .WithArguments(_firstLevelSceneConfig.SpawnCameraData);
-
-        Container.BindInterfacesAndSelfTo<FirstLevelSceneBootstrapper>()
-            .AsSingle()
-            .NonLazy();
-    }
-
-    private void BindFirstLevelSceneConfig()
-    {
-        Container.Bind<FirstLevelSceneConfig>()
-           .FromInstance(_firstLevelSceneConfig)
-           .AsSingle();
+            .AsSingle();
     }
 }

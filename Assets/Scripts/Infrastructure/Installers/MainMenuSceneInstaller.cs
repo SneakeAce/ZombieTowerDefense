@@ -4,12 +4,10 @@ using Zenject;
 
 public class MainMenuSceneInstaller : MonoInstaller
 {
-    [SerializeField] private MainMenuSceneConfig _mainMenuSceneConfig;
+    [SerializeField] private AssetReference _mainMenuCanvasPrefab; 
 
     public override void InstallBindings()
     {
-        BindMainMenuConfig();
-
         BindSceneObjectFactory();
 
         BindSceneComponents();
@@ -28,13 +26,12 @@ public class MainMenuSceneInstaller : MonoInstaller
     {
         Container.Bind<ICameraManager>()
             .To<CameraManager>()
-            .AsSingle()
-            .WithArguments(_mainMenuSceneConfig.SpawnCameraData);
+            .AsSingle();
 
         Container.Bind<IMainMenuManager>()
             .To<MainMenuManager>()
             .AsSingle()
-            .WithArguments(_mainMenuSceneConfig.MainMenuCanvasPrefab);
+            .WithArguments(_mainMenuCanvasPrefab);
 
         Container.Bind<IMainMenuController>()
             .To<MainMenuController>()
@@ -50,12 +47,5 @@ public class MainMenuSceneInstaller : MonoInstaller
         Container.Bind<ISceneLoader>()
             .To<FirstLevelSceneLoader>()
             .AsSingle();
-    }
-
-    private void BindMainMenuConfig()
-    {
-        Container.Bind<MainMenuSceneConfig>()
-           .FromInstance(_mainMenuSceneConfig)
-           .AsSingle();
     }
 }

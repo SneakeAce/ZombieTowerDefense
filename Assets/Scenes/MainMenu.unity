@@ -275,7 +275,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 080a419881d569542b9c2e5833987bd0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _mainMenuSceneConfig: {fileID: 11400000, guid: e9a7c9146f4671847bbc8f0e12148145, type: 2}
+  _mainMenuCanvasPrefab:
+    m_AssetGUID: 16aa1c038fa6a8d42a46a607dbfcf15d
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_SubObjectGUID: 
+    m_EditorAssetChanged: 0
 --- !u!1 &1325761246
 GameObject:
   m_ObjectHideFlags: 0

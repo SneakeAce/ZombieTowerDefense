@@ -1,21 +1,19 @@
-using UnityEngine;
 using Zenject;
 
 public class FirstLevelInstaller : MonoInstaller
 {
-    [SerializeField] private PlayerUnitConfigsLibrary _unitConfig;
-    [SerializeField] private GridManagerConfig _gridManagerConfig;
-
     public override void InstallBindings()
     {
         BindServices();
 
-        BindGridManager();
+        BindPoolManagerAndAsyncPoolFactories();
+
+        BindBootstrapper();
     }
 
     private void BindServices()
     {
-        Container.Bind<IUnitHealth>()
+        Container.Bind<IUnitHealth>() // Убрать эо безобразие!!!
             .To<UnitHealth>()
             .AsTransient();
 
@@ -28,7 +26,10 @@ public class FirstLevelInstaller : MonoInstaller
         Container.Bind<SelectUnit>()
             .AsSingle()
             .NonLazy();
+    }
 
+    private void BindPoolManagerAndAsyncPoolFactories()
+    {
         Container.Bind<IAsyncPoolFactory>()
             .To<PlayerUnitPoolsFactory>()
             .AsSingle();
@@ -36,12 +37,10 @@ public class FirstLevelInstaller : MonoInstaller
         Container.Bind<IPoolManager>().To<PoolManager>().AsSingle();
     }
 
-    private void BindGridManager()
+    private void BindBootstrapper()
     {
-        Container.Bind<GridManagerConfig>().FromInstance(_gridManagerConfig).AsSingle();
-
-        Container.Bind<IGridCellFactory>().To<GridCellFactory>().AsSingle();
-
-        Container.Bind<IGridManager>().To<GridManager>().AsSingle();
+        Container.BindInterfacesAndSelfTo<FirstLevelSceneBootstrapper>()
+            .AsSingle()
+            .NonLazy();
     }
 }

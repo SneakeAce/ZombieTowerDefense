@@ -1,15 +1,12 @@
-using UnityEngine;
 using Zenject;
 
 public class HireUnitSystemInstaller : MonoInstaller
 {
-    [SerializeField] private UnitHireButtonConfigsLibrary _configsLibrary;
-
     public override void InstallBindings()
     {
         BindSpawnUnitSystem();
 
-        BindHireUnitSystem();
+        BindUnitHireSystem();
     }
 
     private void BindSpawnUnitSystem()
@@ -27,12 +24,8 @@ public class HireUnitSystemInstaller : MonoInstaller
             .AsSingle();
     }
 
-    private void BindHireUnitSystem()
+    private void BindUnitHireSystem()
     {
-        Container.Bind<UnitHireButtonConfigsLibrary>()
-            .FromInstance(_configsLibrary)
-            .AsSingle();
-
         Container.Bind<IUnitHiringButtonsController>()
             .To<UnitHiringButtonsController>()
             .AsSingle();

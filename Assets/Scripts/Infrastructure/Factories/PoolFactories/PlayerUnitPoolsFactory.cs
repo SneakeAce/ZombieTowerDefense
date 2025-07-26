@@ -6,17 +6,21 @@ using UnityEngine;
 public class PlayerUnitPoolsFactory : IAsyncPoolFactory
 {
     private readonly IConfigsProvider _configsProvider;
+    private readonly IContainersCreator _containersCreator;
     private readonly ILibraryConfigs<PlayerUnitConfig> _unitConfigsLibrary;
     private readonly ILibraryConfigs<PoolsConfig> _poolConfigsLibrary;
 
     private PoolType _poolType;
 
-    public PlayerUnitPoolsFactory(IConfigsProvider configsProvider)
+    private Transform _playerUnitPoolContainer;
+
+    public PlayerUnitPoolsFactory(IConfigsProvider configsProvider, IContainersCreator containersCreator)
     {
         _configsProvider = configsProvider;
+        _containersCreator = containersCreator;
 
-        _unitConfigsLibrary = _configsProvider.GetLibrary<PlayerUnitConfig>();
-        _poolConfigsLibrary = _configsProvider.GetLibrary<PoolsConfig>();
+        _unitConfigsLibrary = _configsProvider.GetConfigsLibrary<PlayerUnitConfig>();
+        _poolConfigsLibrary = _configsProvider.GetConfigsLibrary<PoolsConfig>();
     }
 
     public PoolType PoolType => _poolType;
@@ -34,6 +38,11 @@ public class PlayerUnitPoolsFactory : IAsyncPoolFactory
                 playerUnitsPoolsConfig = poolsConfig as PlayerUnitsPoolsConfig;
 
                 _poolType = playerUnitsPoolsConfig.PoolType;
+
+                _playerUnitPoolContainer = _containersCreator.CreateContainer(
+                    playerUnitsPoolsConfig.ContainerForPoolsPrefab, "PlayerUnitPoolContainer");
+
+                _playerUnitPoolContainer.parent = _containersCreator.ContainerRoot.transform;
 
                 break;
             }
@@ -54,10 +63,15 @@ public class PlayerUnitPoolsFactory : IAsyncPoolFactory
                 continue;
             }
 
+            Transform poolContainer = _containersCreator.CreateContainer(
+                _playerUnitPoolContainer.gameObject, unitType.ToString() + "UnitPool");
+
+            poolContainer.parent = _playerUnitPoolContainer;
+
             PoolCreatingArguments poolArgs = new PoolCreatingArguments(
                 poolStats.PoolSize,
                 poolStats.CanExpand,
-                poolStats.PoolContainer);
+                poolContainer);
 
             ObjectPool<Unit> pool = new ObjectPool<Unit>(unitConfig.UnitMainStats.Prefab, poolArgs);
 

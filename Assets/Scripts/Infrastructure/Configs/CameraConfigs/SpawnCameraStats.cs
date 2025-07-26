@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.AddressableAssets;
 
 [Serializable]
-public class SpawnCameraConfig
+public class SpawnCameraStats
 {
     [field: SerializeField] public AssetReference CameraPrefab { get; private set; }
     [field: SerializeField] public Vector3 MainCameraSpawnPosition { get; private set; }

@@ -27,7 +27,7 @@ public class PlayerUnitFactory : IPlayerUnitsFactory
 
         _container.Inject(unitT);
 
-        ILibraryConfigs<PlayerUnitConfig> unitLibraryConfigs = _configsProvider.GetLibrary<PlayerUnitConfig>();
+        ILibraryConfigs<PlayerUnitConfig> unitLibraryConfigs = _configsProvider.GetConfigsLibrary<PlayerUnitConfig>();
         
         if (unitT is Unit unit)
         {

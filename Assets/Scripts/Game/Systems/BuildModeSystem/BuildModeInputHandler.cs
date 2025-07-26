@@ -3,6 +3,9 @@ using UnityEngine.InputSystem;
 
 public class BuildModeInputHandler
 {
+    private IConfigsProvider _configsProvider;
+    private BuildModeInputHandlerConfig _config;
+
     private LayerMask _cellLayer;
 
     private Color _colorAvailableCell;
@@ -12,17 +15,18 @@ public class BuildModeInputHandler
     private Vector2 _currentMousePosition;
     private IGridCell _previousCell;
     private IGridCell _currentSelectedCell;
-    private BuildModeInputHandlerConfig _config;
 
     private bool _isWorking = true;
 
-    public BuildModeInputHandler(BuildModeInputHandlerConfig config)
+    public BuildModeInputHandler(IConfigsProvider configsProvider)
     {
-        _config = config;
+        _configsProvider = configsProvider;
     }
 
     public void Initialize()
     {
+        GetConfig();
+
         _cellLayer = _config.CellLayer;
 
         _colorAvailableCell = _config.ColorAvailableCell;
@@ -103,4 +107,6 @@ public class BuildModeInputHandler
 
         _isWorking = true;
     }
+
+    private void GetConfig() => _config = _configsProvider.GetSingleConfig<BuildModeInputHandlerConfig>();
 }

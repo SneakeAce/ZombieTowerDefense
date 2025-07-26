@@ -339,11 +339,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _scriptableObjectInstallers: []
   _monoInstallers:
-  - {fileID: 851059612}
-  - {fileID: 851059617}
   - {fileID: 851059615}
+  - {fileID: 851059617}
   - {fileID: 851059616}
   - {fileID: 851059618}
+  - {fileID: 851059612}
   _installerPrefabs: []
   _autoRun: 1
   OnPreInstall:
@@ -389,6 +389,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _firstLevelSceneConfig: {fileID: 11400000, guid: 7eea7d3f6e83b2d4182d5df78a26e686, type: 2}
+  _containerRootPrefab: {fileID: 642755491730220603, guid: 359ba796ed35ef94eab0decc8c889ba4, type: 3}
 --- !u!114 &851059616
 MonoBehaviour:
   m_ObjectHideFlags: 0

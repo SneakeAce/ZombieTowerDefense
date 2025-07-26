@@ -1,11 +1,24 @@
-public class PlayerInputManager
+public class PlayerInputManager : IInitialize
 {
+    private PlayerInput _playerInput;
+
     public PlayerInputManager(PlayerInput playerInput)
     {
-        playerInput.Enable();
-
-        playerInput.SelectionUnit.Disable();
-        playerInput.BuildMode.Disable();
-        playerInput.HireUnits.Disable();
+        _playerInput = playerInput;
     }
+
+    public void Initialize()
+    {
+        ActivatePlayerInput();
+    }
+
+    private void ActivatePlayerInput()
+    {
+        _playerInput.Enable();
+
+        _playerInput.SelectionUnit.Disable();
+        _playerInput.BuildMode.Disable();
+        _playerInput.HireUnits.Disable();
+    }
+
 }

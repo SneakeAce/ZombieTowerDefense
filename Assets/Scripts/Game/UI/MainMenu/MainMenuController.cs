@@ -1,35 +1,48 @@
+using UnityEngine;
+
 public class MainMenuController : IMainMenuController, IInitialize
 {
     private IMainMenuManager _mainMenuManager;
     private ICameraManager _cameraManager;
     private ISceneLoader _sceneLoader;
+    private IConfigsProvider _configsProvider;
 
-    private MainMenuSceneConfig _mainMenuSceneConfig;
+    private MainMenuSceneConfig _config;
 
-    public MainMenuController(IMainMenuManager mainMenuManager, ICameraManager cameraManager, 
-        MainMenuSceneConfig mainMenuSceneConfig, ISceneLoader sceneLoader)
+    public MainMenuController(IMainMenuManager mainMenuManager, ICameraManager cameraManager,
+        IConfigsProvider configsProvider, ISceneLoader sceneLoader)
     {
         UnityEngine.Debug.Log("MainMenuController");
 
         _mainMenuManager = mainMenuManager;
         _cameraManager = cameraManager;
-        _mainMenuSceneConfig = mainMenuSceneConfig;
+        _configsProvider = configsProvider;
         _sceneLoader = sceneLoader;
     }
 
     public void Initialize()
     {
-        UnityEngine.Debug.Log("MainMenuController / Initialize");
+        GetConfig();
 
         _mainMenuManager.MainMenuCanvas.worldCamera = _cameraManager.MainCamera;
-        UnityEngine.Debug.Log($"MainMenuController /  _mainMenuCanvas.worldCamera = {_mainMenuManager.MainMenuCanvas.worldCamera}");
 
         _mainMenuManager.MainMenuView.StartLevelButton.onClick.AddListener(OnClickStartLevelButton);
     }
 
+    private void GetConfig() 
+    {
+        var sceneConfig = _configsProvider.GetSceneConfig();
+
+        if (sceneConfig is MainMenuSceneConfig config)
+            _config = config;
+        else
+            Debug.LogError("[MainMenuController] GetConfig - sceneConfig is not MainMenuConfig.");
+    }
+
+
     private void OnClickStartLevelButton()
     {
         UnityEngine.Debug.Log("MainMenuController / OnClickStartLevelButton");
-        _sceneLoader.LoadSceneAsync(_mainMenuSceneConfig.SceneReference).Forget();
+        _sceneLoader.LoadSceneAsync(_config.FirstLevelSceneReference).Forget();
     }
 }

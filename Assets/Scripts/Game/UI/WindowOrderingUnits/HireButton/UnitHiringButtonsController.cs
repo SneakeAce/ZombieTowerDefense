@@ -1,30 +1,38 @@
 using System.Collections.Generic;
-using Zenject;
 
 public class UnitHiringButtonsController : IUnitHiringButtonsController
 {
     private IPlayerUnitSpawnerManager _playerUnitSpawnerManager;
+    private IConfigsProvider _configsProvider;
 
-    [Inject] private LazyInject<WindowUnitsHiringView> _lazyView;
     private WindowUnitsHiringView _view;
 
-    private UnitHireButtonConfigsLibrary _configs;
+    private ILibraryConfigs<UnitHireButtonConfig> _configs;
 
     private List<IUnitHiringButton> _hiringButtons = new List<IUnitHiringButton>();
 
-    public UnitHiringButtonsController(UnitHireButtonConfigsLibrary configs,
-        IPlayerUnitSpawnerManager playerUnitSpawnerManager)
+    public UnitHiringButtonsController(IConfigsProvider configsProvider,
+        IPlayerUnitSpawnerManager playerUnitSpawnerManager,
+        WindowUnitsHiringView windowUnitsHiringView)
     {
         _playerUnitSpawnerManager = playerUnitSpawnerManager;
-        _configs = configs;
+        _view = windowUnitsHiringView;
+        _configsProvider = configsProvider;
     }
 
     public List<IUnitHiringButton> HiringButtons => _hiringButtons;
 
     public void Initialize()
     {
-        _view = _lazyView.Value;
+        GetConfigsLibrary();
 
+        InitializeButton();
+    }
+
+    private void GetConfigsLibrary() => _configs = _configsProvider.GetConfigsLibrary<UnitHireButtonConfig>();
+
+    private void InitializeButton()
+    {
         for (int i = 0; i < _view.HireUnitButtons.Count; i++)
         {
             var button = _view.HireUnitButtons[i];

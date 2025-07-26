@@ -1,22 +1,25 @@
-using UnityEngine;
 using Zenject;
 
 public class BuildModeInstaller : MonoInstaller
 {
-    [SerializeField] private BuildModeInputHandlerConfig _configHandler;
-
     public override void InstallBindings()
     {
+        BindGridManager();
+
         BindBuildModeComponents();
+    }
+
+    private void BindGridManager()
+    {
+        Container.Bind<IGridCellFactory>().To<GridCellFactory>().AsSingle();
+
+        Container.Bind<IGridManager>().To<GridManager>().AsSingle();
     }
 
     private void BindBuildModeComponents()
     {
-        Container.Bind<BuildModeInputHandlerConfig>().FromInstance(_configHandler).AsSingle();
-
         Container.Bind<BuildModeInputHandler>().AsSingle();
 
         Container.Bind<IBuildModeController>().To<BuildModeController>().AsSingle().NonLazy();
     }
-
 }

@@ -10,23 +10,28 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
-  m_Name: ConfigsLibraryLocalGroup
+  m_Name: SingleConfigsLocalGroup
   m_EditorClassIdentifier: 
-  m_GroupName: ConfigsLibraryLocalGroup
-  m_GUID: b767d59aafcc90e4d9cd001ccee0c35a
+  m_GroupName: SingleConfigsLocalGroup
+  m_GUID: 43d1358dbc2aa334da6e78c24f7bb786
   m_SerializeEntries:
-  - m_GUID: 114c6443e7a873f49892904e9a8c1bf0
-    m_Address: HireUnitButtonConfigsLibrary
+  - m_GUID: 3e95a89d6885dc64581653a88abe9b9f
+    m_Address: BulidModeInputHandlerConfig
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 4af578c6688303e4a8b784b2378388ed
-    m_Address: PoolConfigsLibrary
+  - m_GUID: 7eea7d3f6e83b2d4182d5df78a26e686
+    m_Address: FirstLevelSceneConfig
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: cc9835ef2f10469448f174c995a21cfd
-    m_Address: PlayerUnitConfigsLibrary
+  - m_GUID: bb6995422326c7f448c1c80360b44d06
+    m_Address: GridManagerConfig
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e9a7c9146f4671847bbc8f0e12148145
+    m_Address: MainMenuSceneConfig
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -34,5 +39,5 @@ MonoBehaviour:
   m_Settings: {fileID: 11400000, guid: ba0ca54040b73e041bf9db42304602bb, type: 2}
   m_SchemaSet:
     m_Schemas:
-    - {fileID: 11400000, guid: 01f3cf98b631afe4fb7c735bbe2e5795, type: 2}
-    - {fileID: 11400000, guid: 6a1f70fb50bc9a44b84d9a020ee1814e, type: 2}
+    - {fileID: 11400000, guid: e931f02c5de747c418b184b981d7c538, type: 2}
+    - {fileID: 11400000, guid: d43567096cef7f64790616695e0a55fc, type: 2}

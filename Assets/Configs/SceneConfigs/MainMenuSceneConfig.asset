@@ -12,18 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d7c72c6f715bc946b483a00c471ad58, type: 3}
   m_Name: MainMenuSceneConfig
   m_EditorClassIdentifier: 
-  <SceneReference>k__BackingField:
-    m_AssetGUID: 99c9720ab356a0642a771bea13969a05
-    m_SubObjectName: 
-    m_SubObjectType: 
-    m_SubObjectGUID: 
-    m_EditorAssetChanged: 1
-  <MainMenuCanvasPrefab>k__BackingField:
-    m_AssetGUID: 16aa1c038fa6a8d42a46a607dbfcf15d
-    m_SubObjectName: 
-    m_SubObjectType: 
-    m_SubObjectGUID: 
-    m_EditorAssetChanged: 0
   <SpawnCameraData>k__BackingField:
     <CameraPrefab>k__BackingField:
       m_AssetGUID: 81b88205ddba17040b049a577a306e2b
@@ -41,3 +29,16 @@ MonoBehaviour:
       m_EditorAssetChanged: 0
     <VirtualCameraSpawnPosition>k__BackingField: {x: 0, y: 0, z: 0}
     <VirtualCameraRotation>k__BackingField: {x: 0, y: 0, z: 0, w: 0}
+  <Id>k__BackingField: 2
+  <FirstLevelSceneReference>k__BackingField:
+    m_AssetGUID: 99c9720ab356a0642a771bea13969a05
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_SubObjectGUID: 
+    m_EditorAssetChanged: 0
+  <MainMenuCanvasPrefab>k__BackingField:
+    m_AssetGUID: 16aa1c038fa6a8d42a46a607dbfcf15d
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_SubObjectGUID: 
+    m_EditorAssetChanged: 0
