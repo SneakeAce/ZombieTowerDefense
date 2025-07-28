@@ -15,7 +15,7 @@ MonoBehaviour:
   m_DefaultGroup: c9f5cafabe8294741a3b526ef09ec80f
   m_currentHash:
     serializedVersion: 2
-    Hash: 00000000000000000000000000000000
+    Hash: 1886317deb8171d2d041f90d3c228e6b
   m_OptimizeCatalogSize: 0
   m_BuildRemoteCatalog: 0
   m_CatalogRequestsTimeout: 0
@@ -100,7 +100,9 @@ MonoBehaviour:
     m_ProfileVersion: 1
   m_LabelTable:
     m_LabelNames:
+    - ConfigsLibrary
     - ObjectConfig
+    - SceneConfig
   m_SchemaTemplates: []
   m_GroupTemplateObjects:
   - {fileID: 11400000, guid: d5f6b701136d4cb4bbde0720957a7d41, type: 2}

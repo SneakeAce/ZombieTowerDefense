@@ -7,30 +7,44 @@ using Zenject;
 public class GlobalBootstrapper : IInitializable
 {
     private PlayerInputManager _playerInputManager;
+    private MainMenuSceneBootstrapper _mainMenuBootstrapper;
+    private ConfigsLoader _configsLoader;
 
     private IConfigsProvider _configsProvider;
     private IInitializer _initializer;
-    private ConfigsLoader _configsLoader;
 
-    public GlobalBootstrapper(IConfigsProvider configsProvider, ConfigsLoader configsLoader,
-        PlayerInputManager playerInputManager, IInitializer initializer)
+    private List<IInitialize> _initializeList = new List<IInitialize>();
+
+    public GlobalBootstrapper(IConfigsProvider configsProvider, IInitializer initializer, 
+        MainMenuSceneBootstrapper mainMenuBootstrapper,
+        ConfigsLoader configsLoader, PlayerInputManager playerInputManager)
     {
         _configsProvider = configsProvider;
+        _initializer = initializer;
+
+        _mainMenuBootstrapper = mainMenuBootstrapper;
         _configsLoader = configsLoader;
         _playerInputManager = playerInputManager;
-        _initializer = initializer;
     }
 
     public void Initialize()
     {
-        LoadManagersAsync().Forget();
+        FillInitializeList();
 
-        _initializer.Initialize(_playerInputManager);
+        LoadManagersAsync().Forget();
+    }
+
+    private void FillInitializeList()
+    {
+        _initializeList.Add(_playerInputManager);
+        _initializeList.Add(_mainMenuBootstrapper);
     }
 
     private async UniTask LoadManagersAsync()
     {
         await LoadAllConfigs();
+
+        _initializer.Initialize(_initializeList);
 
         Debug.Log("GlobalBootstrapper LoadManagersAsync end");
     }

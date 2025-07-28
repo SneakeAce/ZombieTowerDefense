@@ -18,6 +18,8 @@ public class GlobalInstaller : MonoInstaller
         BindCoroutinePerformer();
 
         BindGlobalBootstrapper();
+
+        BindMainMenuBootstrapper();
     }
 
     private void BindPlayerInput()
@@ -61,5 +63,11 @@ public class GlobalInstaller : MonoInstaller
         Container.BindInterfacesAndSelfTo<GlobalBootstrapper>()
         .AsSingle()
         .NonLazy();
+    }
+
+    private void BindMainMenuBootstrapper()
+    {
+        Container.BindInterfacesAndSelfTo<MainMenuSceneBootstrapper>()
+            .AsSingle();
     }
 }

@@ -12,13 +12,15 @@ public class GridCell : MonoBehaviour, IGridCell
     public GameObject GameObject => this.gameObject;
     public IUnit CurrentUnit { get; private set; }
 
-    private void Start()
+    public void Initialize()
     {
         IsEmpty = true;
         WalkableCell = true;
         IsSelected = false;
         
         _cellMaterial = GetComponent<MeshRenderer>().material;
+
+        Debug.Log($"CellMaterial in GridCell = {_cellMaterial}");
         _defaultColor = _cellMaterial.color;
     }
 

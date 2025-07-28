@@ -36,10 +36,6 @@ public class MainMenuSceneInstaller : MonoInstaller
         Container.Bind<IMainMenuController>()
             .To<MainMenuController>()
             .AsSingle();
-            
-        Container.BindInterfacesAndSelfTo<MainMenuSceneBootstrapper>()
-            .AsSingle()
-            .NonLazy();
     }
 
     private void BindFirstLevelSceneLoader()

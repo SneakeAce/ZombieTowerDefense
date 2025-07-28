@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public interface IGridCell
+public interface IGridCell : IInitialize
 {
     bool IsEmpty { get; }
     bool WalkableCell { get; }

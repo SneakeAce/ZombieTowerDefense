@@ -18,22 +18,26 @@ MonoBehaviour:
   - m_GUID: 3e95a89d6885dc64581653a88abe9b9f
     m_Address: BulidModeInputHandlerConfig
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - ObjectConfig
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 7eea7d3f6e83b2d4182d5df78a26e686
     m_Address: FirstLevelSceneConfig
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - SceneConfig
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: bb6995422326c7f448c1c80360b44d06
     m_Address: GridManagerConfig
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - ObjectConfig
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: e9a7c9146f4671847bbc8f0e12148145
     m_Address: MainMenuSceneConfig
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - SceneConfig
     FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: ba0ca54040b73e041bf9db42304602bb, type: 2}

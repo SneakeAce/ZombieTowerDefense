@@ -1,8 +1,7 @@
 using Cysharp.Threading.Tasks;
-using Zenject;
 using UnityEngine;
 
-public class MainMenuSceneBootstrapper : IInitializable
+public class MainMenuSceneBootstrapper : IInitialize
 {
     private IMainMenuManager _mainMenuManager;
     private ICameraManager _cameraManager;

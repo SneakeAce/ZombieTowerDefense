@@ -13,10 +13,6 @@ public class FirstLevelInstaller : MonoInstaller
 
     private void BindServices()
     {
-        Container.Bind<IUnitHealth>() // Убрать эо безобразие!!!
-            .To<UnitHealth>()
-            .AsTransient();
-
         Container.Bind<ICommandInvoker>()
             .To<CommandInvoker>()
             .AsSingle();

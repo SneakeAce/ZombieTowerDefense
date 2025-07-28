@@ -12,11 +12,9 @@ public class UnitHiringButtonsController : IUnitHiringButtonsController
     private List<IUnitHiringButton> _hiringButtons = new List<IUnitHiringButton>();
 
     public UnitHiringButtonsController(IConfigsProvider configsProvider,
-        IPlayerUnitSpawnerManager playerUnitSpawnerManager,
-        WindowUnitsHiringView windowUnitsHiringView)
+        IPlayerUnitSpawnerManager playerUnitSpawnerManager)
     {
         _playerUnitSpawnerManager = playerUnitSpawnerManager;
-        _view = windowUnitsHiringView;
         _configsProvider = configsProvider;
     }
 
@@ -27,6 +25,11 @@ public class UnitHiringButtonsController : IUnitHiringButtonsController
         GetConfigsLibrary();
 
         InitializeButton();
+    }
+
+    public void GetView(WindowUnitsHiringView view)
+    {
+        _view = view;
     }
 
     private void GetConfigsLibrary() => _configs = _configsProvider.GetConfigsLibrary<UnitHireButtonConfig>();

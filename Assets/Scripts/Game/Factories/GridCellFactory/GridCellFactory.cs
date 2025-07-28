@@ -1,5 +1,4 @@
 using System;
-using UnityEditor.PackageManager;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
@@ -38,6 +37,8 @@ public class GridCellFactory : IGridCellFactory
 
         GameObject cellObject = GameObject.Instantiate(cellPrefab);
 
+        IGridCell iGridCell = cellObject.GetComponent<IGridCell>();
+
         cellObject.name = cellPrefab.name + "_" + _countCells.ToString();
         _countCells++;
 
@@ -49,6 +50,8 @@ public class GridCellFactory : IGridCellFactory
 
         if (cellT == null)
             throw new NullReferenceException("Cell is null!");
+
+        iGridCell.Initialize();
 
         return cellT;
     }

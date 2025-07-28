@@ -18,17 +18,20 @@ MonoBehaviour:
   - m_GUID: 114c6443e7a873f49892904e9a8c1bf0
     m_Address: HireUnitButtonConfigsLibrary
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - ConfigsLibrary
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 4af578c6688303e4a8b784b2378388ed
     m_Address: PoolConfigsLibrary
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - ConfigsLibrary
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: cc9835ef2f10469448f174c995a21cfd
     m_Address: PlayerUnitConfigsLibrary
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - ConfigsLibrary
     FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: ba0ca54040b73e041bf9db42304602bb, type: 2}

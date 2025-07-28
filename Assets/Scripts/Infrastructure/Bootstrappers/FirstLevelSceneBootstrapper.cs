@@ -19,7 +19,7 @@ public class FirstLevelSceneBootstrapper : IInitializable
     private IInitializer _initializer;
 
     private List<IInitialize> _initializeList = new List<IInitialize>();
-
+    
     public FirstLevelSceneBootstrapper(ICameraManager cameraManager, IGridManager gridManager,
         IWindowUnitsHiringManager windowHiringUnitsManager, IUnitHiringButtonsController buttonsController,
         IWindowUnitsHiringController windowHiringUnitsController, IBuildModeController buildModeController,
@@ -55,6 +55,8 @@ public class FirstLevelSceneBootstrapper : IInitializable
 
     private async UniTask LoadManagersAsync()
     {
+        _windowUnitsHiringManager.BindWindowDone += _unitHiringButtonsController.GetView;
+
         await _cameraManager.LoadAndCreateCameraAsync();
         await _windowUnitsHiringManager.LoadPrefabAsync();
 

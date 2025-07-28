@@ -35,7 +35,9 @@ public class GridManager : IGridManager
     {
         GetConfig();
 
+        Debug.Log($"GridConfig = {_config}");
         SetUpGridParameters();
+        Debug.Log($"CellPrefab = {_cellPrefab}");
 
         GeneratedGrid();
     }

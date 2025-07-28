@@ -12,7 +12,7 @@ public class WindowUnitsHiringManager : IWindowUnitsHiringManager
     private DiContainer _container;
     private IAsyncObjectFactory _asyncObjectFactory;
 
-    private WindowUnitsHiringView _windowHiringUnitsView;
+    private WindowUnitsHiringView _windowUnitsHiringView;
     private Canvas _windowHiringCanvas;
 
     public WindowUnitsHiringManager(AssetReference windowPrefab, DiContainer container, 
@@ -24,6 +24,7 @@ public class WindowUnitsHiringManager : IWindowUnitsHiringManager
     }
 
     public Canvas WindowOrderingCanvas => _windowHiringCanvas;
+    public event Action<WindowUnitsHiringView> BindWindowDone;
 
     public async UniTask LoadPrefabAsync()
     {
@@ -35,9 +36,9 @@ public class WindowUnitsHiringManager : IWindowUnitsHiringManager
         if (_windowHiringCanvas == null)
             throw new NullReferenceException("WindowOrderingUnitsCanvas is Null!");
 
-        _windowHiringUnitsView = _windowHiringCanvas.GetComponent<WindowUnitsHiringView>();
+        _windowUnitsHiringView = _windowHiringCanvas.GetComponent<WindowUnitsHiringView>();
 
-        if (_windowHiringUnitsView == null)
+        if (_windowUnitsHiringView == null)
             throw new NullReferenceException("WindowOrderingUnitsView is Null!");
 
         BindWindowHiringUnitsView();
@@ -45,8 +46,12 @@ public class WindowUnitsHiringManager : IWindowUnitsHiringManager
 
     private void BindWindowHiringUnitsView()
     {
-        _container.Bind<WindowUnitsHiringView>()
-            .FromInstance(_windowHiringUnitsView)
-            .AsSingle();
+        Debug.Log("BindWindowHiringUnitsView");
+
+        //_container.Bind<WindowUnitsHiringView>()
+        //    .FromInstance(_windowHiringUnitsView)
+        //    .AsSingle();
+
+        BindWindowDone?.Invoke(_windowUnitsHiringView);
     }
 }

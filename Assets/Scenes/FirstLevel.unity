@@ -323,8 +323,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e119dbf25bda463429f0cd17bd8c85b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _unitConfig: {fileID: 11400000, guid: cc9835ef2f10469448f174c995a21cfd, type: 2}
-  _gridManagerConfig: {fileID: 11400000, guid: bb6995422326c7f448c1c80360b44d06, type: 2}
 --- !u!114 &851059613
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -339,8 +337,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _scriptableObjectInstallers: []
   _monoInstallers:
-  - {fileID: 851059615}
   - {fileID: 851059617}
+  - {fileID: 851059615}
   - {fileID: 851059616}
   - {fileID: 851059618}
   - {fileID: 851059612}
@@ -388,7 +386,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03b6a107fe601ad4c8d797a5539611f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _firstLevelSceneConfig: {fileID: 11400000, guid: 7eea7d3f6e83b2d4182d5df78a26e686, type: 2}
   _containerRootPrefab: {fileID: 642755491730220603, guid: 359ba796ed35ef94eab0decc8c889ba4, type: 3}
 --- !u!114 &851059616
 MonoBehaviour:
@@ -402,7 +399,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75496636af0aae44cb1d46c2753a5b87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _configsLibrary: {fileID: 11400000, guid: 114c6443e7a873f49892904e9a8c1bf0, type: 2}
 --- !u!114 &851059617
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -433,7 +429,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 095444f796707a946aed2bfece0a6ffd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _configHandler: {fileID: 11400000, guid: 3e95a89d6885dc64581653a88abe9b9f, type: 2}
 --- !u!1 &990336537
 GameObject:
   m_ObjectHideFlags: 0

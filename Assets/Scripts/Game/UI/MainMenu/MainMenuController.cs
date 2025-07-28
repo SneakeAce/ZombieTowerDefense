@@ -39,7 +39,6 @@ public class MainMenuController : IMainMenuController, IInitialize
             Debug.LogError("[MainMenuController] GetConfig - sceneConfig is not MainMenuConfig.");
     }
 
-
     private void OnClickStartLevelButton()
     {
         UnityEngine.Debug.Log("MainMenuController / OnClickStartLevelButton");
