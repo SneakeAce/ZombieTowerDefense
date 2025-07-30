@@ -1,0 +1,57 @@
+using System;
+using Cysharp.Threading.Tasks;
+using UnityEngine;
+using UnityEngine.AddressableAssets;
+using Zenject;
+
+public class WindowUnitsHiringManager : IWindowUnitsHiringManager
+{
+    private AssetReference _windowPrefab;
+    private Vector3 _spawnPositionCanvas = new Vector3(0, 0, 0);
+
+    private DiContainer _container;
+    private IAsyncObjectFactory _asyncObjectFactory;
+
+    private WindowUnitsHiringView _windowUnitsHiringView;
+    private Canvas _windowHiringCanvas;
+
+    public WindowUnitsHiringManager(AssetReference windowPrefab, DiContainer container, 
+        IAsyncObjectFactory asyncObjectFactory)
+    {
+        _windowPrefab = windowPrefab;
+        _container = container;
+        _asyncObjectFactory = asyncObjectFactory;
+    }
+
+    public Canvas WindowOrderingCanvas => _windowHiringCanvas;
+    public event Action<WindowUnitsHiringView> BindWindowDone;
+
+    public async UniTask LoadPrefabAsync()
+    {
+        ObjectSpawnArguments objectSpawnArguments = new ObjectSpawnArguments(_windowPrefab,
+            _spawnPositionCanvas, Quaternion.identity);
+
+        _windowHiringCanvas = await _asyncObjectFactory.CreateAsync<Canvas, ObjectSpawnArguments>(objectSpawnArguments);
+
+        if (_windowHiringCanvas == null)
+            throw new NullReferenceException("WindowOrderingUnitsCanvas is Null!");
+
+        _windowUnitsHiringView = _windowHiringCanvas.GetComponent<WindowUnitsHiringView>();
+
+        if (_windowUnitsHiringView == null)
+            throw new NullReferenceException("WindowOrderingUnitsView is Null!");
+
+        BindWindowHiringUnitsView();
+    }
+
+    private void BindWindowHiringUnitsView()
+    {
+        Debug.Log("BindWindowHiringUnitsView");
+
+        //_container.Bind<WindowUnitsHiringView>()
+        //    .FromInstance(_windowHiringUnitsView)
+        //    .AsSingle();
+
+        BindWindowDone?.Invoke(_windowUnitsHiringView);
+    }
+}

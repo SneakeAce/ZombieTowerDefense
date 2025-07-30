@@ -27,5 +27,6 @@ MonoBehaviour:
       m_SubObjectType: 
       m_SubObjectGUID: 
       m_EditorAssetChanged: 0
-    <VirtualCameraSpawnPosition>k__BackingField: {x: 0, y: 7, z: -5}
-    <VirtualCameraRotation>k__BackingField: {x: 0.57357645, y: 0, z: 0, w: 0.81915206}
+    <VirtualCameraSpawnPosition>k__BackingField: {x: 0, y: 7, z: -4}
+    <VirtualCameraRotation>k__BackingField: {x: 0.53729963, y: 0, z: 0, w: 0.8433914}
+  <Id>k__BackingField: 4

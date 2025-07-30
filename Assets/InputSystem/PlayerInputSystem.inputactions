@@ -68,6 +68,122 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "HireUnits",
+            "id": "04b3d4c1-97d3-4fd9-a1f7-064cf9e884aa",
+            "actions": [
+                {
+                    "name": "CreateMarineUnit",
+                    "type": "Button",
+                    "id": "30b221d5-145c-4d4d-b2e5-c35d827910b9",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "fae45d0c-22d4-44c9-9f0c-0680f27d7fe6",
+                    "path": "<Keyboard>/1",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CreateMarineUnit",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "BuildMode",
+            "id": "c285b686-ee43-4458-a468-51f6a7897cf0",
+            "actions": [
+                {
+                    "name": "MousePosition",
+                    "type": "Value",
+                    "id": "b1b30ac0-38c7-4110-aa60-d386c9c414c1",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "SelectCell",
+                    "type": "Button",
+                    "id": "e1ca4afc-4b9e-4052-98f1-1c84ab8b90e1",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "DeselectCell",
+                    "type": "Button",
+                    "id": "72808ec8-061f-4e36-9e5e-21c2453cfb7a",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ActivateBuildMode",
+                    "type": "Button",
+                    "id": "7357d4e1-2bd8-4e70-925e-d9e6d4e9cfe9",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "ec3542eb-b9f7-44eb-b567-166379a8c73e",
+                    "path": "<Mouse>/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MousePosition",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d0bf82ea-9756-44ef-b5d7-d3db4ed51a06",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SelectCell",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "358b70c7-5f36-454f-b865-cb14b946fb14",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "DeselectCell",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "64345e78-a3d4-4b81-ace2-f935833e4821",
+                    "path": "<Keyboard>/b",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ActivateBuildMode",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": [

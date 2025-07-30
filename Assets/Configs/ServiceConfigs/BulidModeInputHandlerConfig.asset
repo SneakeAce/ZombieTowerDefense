@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc149605f2ed4cf44b8b48f099471c44, type: 3}
+  m_Name: BulidModeInputHandlerConfig
+  m_EditorClassIdentifier: 
+  <CellLayer>k__BackingField:
+    serializedVersion: 2
+    m_Bits: 256
+  <ColorAvailableCell>k__BackingField: {r: 0.34996784, g: 0.93207544, b: 0.36794832, a: 0.6666667}
+  <ColorUnavailableCell>k__BackingField: {r: 1, g: 0.2471698, b: 0.2471698, a: 0.6666667}
+  <ColorSelectedCell>k__BackingField: {r: 0.20340014, g: 1, b: 0, a: 0.6666667}

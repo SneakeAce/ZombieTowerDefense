@@ -1,0 +1,96 @@
+using UnityEngine;
+
+public class GridManager : IGridManager
+{
+    private const int OffsetFromCenter = 2;
+    private const float DefaultCellYPosition = -0.97f;
+
+    private IGridCellFactory _cellfactory;
+    private IConfigsProvider _configsProvider;
+
+    private GridManagerConfig _config;
+    private GridCell[,] _gridCells; // ƒвойной массив дл€ хранени€ €чеек сетки
+
+    private int _gridWidth;
+    private int _gridHeight;
+    private float _cellSize;
+
+    private Quaternion _rotationCell;
+    private Vector3 _spawnPositionContainer = new Vector3(0f, 0f, 0f);
+
+    private LayerMask _groundLayer;
+    private LayerMask _obstacleLayer;
+
+    private GridCell _cellPrefab;
+    private GameObject _cellContainerPrefab;
+    private GameObject _cellContainer;
+
+    public GridManager(IConfigsProvider configsProvider, IGridCellFactory cellFactory)
+    {
+        _configsProvider = configsProvider;
+        _cellfactory = cellFactory;
+    }
+
+    public void Initialize()
+    {
+        GetConfig();
+
+        Debug.Log($"GridConfig = {_config}");
+        SetUpGridParameters();
+        Debug.Log($"CellPrefab = {_cellPrefab}");
+
+        GeneratedGrid();
+    }
+
+    public void ToggleGridActivity(bool isActive)
+    {
+        _cellContainer.SetActive(isActive);
+    }
+
+    private void GetConfig() => _config = _configsProvider.GetSingleConfig<GridManagerConfig>();
+
+    private void SetUpGridParameters()
+    {
+        _gridWidth = _config.GridManagerStats.GridWidth;
+        _gridHeight = _config.GridManagerStats.GridHeight;
+        _cellSize = _config.GridManagerStats.CellSize;
+        _rotationCell = _config.GridManagerStats.RotationCell;
+        _groundLayer = _config.GridManagerStats.GroundLayer;
+        _obstacleLayer = _config.GridManagerStats.ObstacleLayer;
+        _cellPrefab = _config.GridManagerStats.GridCellPrefab;
+        _cellContainerPrefab = _config.GridManagerStats.CellContainer;
+    }
+
+    private void GeneratedGrid()
+    {
+        _cellContainer = GameObject.Instantiate(_cellContainerPrefab, _spawnPositionContainer, Quaternion.identity);
+
+        _gridCells = new GridCell[_config.GridManagerStats.GridWidth, _config.GridManagerStats.GridHeight];
+
+        for (int x = 0; x < _gridWidth; x++)
+        {
+            for (int y = 0; y < _gridHeight; y++)
+            {
+                float posX = (x - _gridWidth / OffsetFromCenter) * _cellSize;
+                float posZ = (y - _gridHeight / OffsetFromCenter) * _cellSize;
+
+                Vector3 positionCell = new Vector3(posX, DefaultCellYPosition, posZ);
+                Quaternion rotationCell = _rotationCell;
+
+                GridCellCreatingArguments arguments = new GridCellCreatingArguments(positionCell,
+                    rotationCell,
+                    _cellContainer.transform,
+                    _cellPrefab,
+                    _groundLayer, 
+                    _obstacleLayer);
+
+                GridCell cell = _cellfactory.CreateObject<GridCell, GridCellCreatingArguments>(arguments);
+
+                _gridCells[x, y] = cell;
+            }
+        }
+
+        ToggleGridActivity(false);
+    }
+
+}

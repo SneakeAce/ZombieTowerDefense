@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03cb2ebf12fc5fb40a524188dfecae40, type: 3}
+  m_Name: GridManagerConfig
+  m_EditorClassIdentifier: 
+  <GridManagerStats>k__BackingField:
+    <GridWidth>k__BackingField: 20
+    <GridHeight>k__BackingField: 20
+    <CellSize>k__BackingField: 1
+    <GroundLayer>k__BackingField:
+      serializedVersion: 2
+      m_Bits: 128
+    <ObstacleLayer>k__BackingField:
+      serializedVersion: 2
+      m_Bits: 1552
+    <RotationCell>k__BackingField: {x: 0.70710677, y: 0, z: 0, w: 0.70710677}
+    <GridCellPrefab>k__BackingField: {fileID: 7548486974758233012, guid: b39a2b64a77010340961ff53c26b9034, type: 3}
+    <CellContainer>k__BackingField: {fileID: 7423838424102264465, guid: c3893ac8a36ea7c4487ec1a1ce4565ae, type: 3}
