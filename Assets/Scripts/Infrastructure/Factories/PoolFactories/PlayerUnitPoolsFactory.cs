@@ -73,7 +73,7 @@ public class PlayerUnitPoolsFactory : IAsyncPoolFactory
                 poolStats.CanExpand,
                 poolContainer);
 
-            ObjectPool<Unit> pool = new ObjectPool<Unit>(unitConfig.UnitMainStats.Prefab, poolArgs);
+            ObjectPool<PlayerUnit> pool = new ObjectPool<PlayerUnit>(unitConfig.UnitMainStats.Prefab, poolArgs);
 
             if (pool == null)
                 throw new NullReferenceException("Pool is null after creation! In PlayerUnitPoolsFactory");

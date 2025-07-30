@@ -7,9 +7,11 @@ public class PoolManager : IPoolManager
 {
     private readonly Dictionary<PoolType, Dictionary<int, IObjectPool>> _pools = new Dictionary<PoolType, Dictionary<int, IObjectPool>>();
 
+    private readonly List<IAsyncPoolFactory> _poolFactories;
+
     public PoolManager(List<IAsyncPoolFactory> poolFactories)
     {
-        CreatePoolsAsync(poolFactories).Forget();
+        _poolFactories = poolFactories ?? throw new ArgumentNullException(nameof(poolFactories));
     }
 
     public Dictionary<PoolType, Dictionary<int, IObjectPool>> AvailablePools => _pools;
@@ -30,13 +32,13 @@ public class PoolManager : IPoolManager
         throw new KeyNotFoundException($"Pool not found: {poolType} -> {type}");
     }
 
-    private async UniTask CreatePoolsAsync(List<IAsyncPoolFactory> poolFactories)
+    public async UniTask CreatePoolsAsync()
     {
-        for (int i = 0; i < poolFactories.Count; i++)
+        for (int i = 0; i < _poolFactories.Count; i++)
         {
-            Dictionary<int, IObjectPool> pools = await poolFactories[i].CreateAsync();
+            Dictionary<int, IObjectPool> pools = await _poolFactories[i].CreateAsync();
 
-            _pools.Add(poolFactories[i].PoolType, pools);
+            _pools.Add(_poolFactories[i].PoolType, pools);
         }
     }
 }

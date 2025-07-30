@@ -5,6 +5,7 @@ using Zenject;
 
 public class FirstLevelSceneBootstrapper : IInitializable
 {
+    private IPoolManager _poolManager;
     private ICameraManager _cameraManager;
 
     private IGridManager _gridManager;
@@ -20,11 +21,13 @@ public class FirstLevelSceneBootstrapper : IInitializable
 
     private List<IInitialize> _initializeList = new List<IInitialize>();
     
-    public FirstLevelSceneBootstrapper(ICameraManager cameraManager, IGridManager gridManager,
+    public FirstLevelSceneBootstrapper(IPoolManager poolManager, ICameraManager cameraManager, IGridManager gridManager,
         IWindowUnitsHiringManager windowHiringUnitsManager, IUnitHiringButtonsController buttonsController,
         IWindowUnitsHiringController windowHiringUnitsController, IBuildModeController buildModeController,
         IUnitHiringController unitHiringController, IInitializer initializer)
     {
+        _poolManager = poolManager;
+
         _cameraManager = cameraManager;
 
         _gridManager = gridManager;
@@ -55,6 +58,8 @@ public class FirstLevelSceneBootstrapper : IInitializable
 
     private async UniTask LoadManagersAsync()
     {
+        await _poolManager.CreatePoolsAsync();
+
         _windowUnitsHiringManager.BindWindowDone += _unitHiringButtonsController.GetView;
 
         await _cameraManager.LoadAndCreateCameraAsync();

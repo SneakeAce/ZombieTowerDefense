@@ -2,7 +2,6 @@ using System;
 using Cysharp.Threading.Tasks;
 using Unity.Cinemachine;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class CameraManager : ICameraManager
 {
@@ -18,7 +17,6 @@ public class CameraManager : ICameraManager
     {
         _sceneObjectFactory = sceneObjectFactory;
         _configsProvider = configsProvider;
-        // Реализовать получение конфига в зависимости от того, на какой сцене мы находимся SceneManager.GetActiveScene();
     }
 
     public Camera MainCamera => _mainCamera;

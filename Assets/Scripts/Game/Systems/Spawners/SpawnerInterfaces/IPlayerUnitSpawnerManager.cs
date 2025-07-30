@@ -1,6 +1,3 @@
-using UnityEngine;
-
-public interface IPlayerUnitSpawnerManager
+public interface IPlayerUnitSpawnerManager : IUnitSpawnerManager
 {
-    void OnTrySpawn(CreateUnitData createUnitData);
 }

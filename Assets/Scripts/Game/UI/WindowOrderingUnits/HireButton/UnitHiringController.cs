@@ -69,7 +69,7 @@ public class UnitHiringController : IUnitHiringController
 
         CreateUnitData createUnitData = new CreateUnitData(config.UnitMainStats.UnitType,
             positionToMove, spawnPosition, Quaternion.identity,
-            config.UnitMainStats.HireUnitStats.HiringTime, config.UnitMainStats.HireUnitStats.HiringCost);
+            config.UnitHiringStats.HiringTime, config.UnitHiringStats.HiringCost);
 
         _playerUnitSpawnerManager.OnTrySpawn(createUnitData);
     }

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System;
+using Cysharp.Threading.Tasks;
 
 public interface IPoolManager
 {
@@ -7,4 +8,6 @@ public interface IPoolManager
 
     IObjectPool GetPool<TEnum>(PoolType poolType, TEnum type)
         where TEnum : Enum;
+
+    UniTask CreatePoolsAsync();
 }

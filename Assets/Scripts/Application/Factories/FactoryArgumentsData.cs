@@ -17,16 +17,18 @@ public struct ObjectSpawnArguments : IFactoryArguments
 
 public struct UnitSpawnArguments : IFactoryArguments
 {
-    public UnitSpawnArguments(IObjectPool pool, Vector3 spawnPosition, Quaternion spawnRotation)
+    public UnitSpawnArguments(IObjectPool pool, Vector3 spawnPosition, Quaternion spawnRotation, PoolType poolType)
     {
         Pool = pool;
         SpawnPosition = spawnPosition;
         SpawnRotation = spawnRotation;
+        UnitPoolType = poolType;
     }
 
     public IObjectPool Pool { get; }
     public Vector3 SpawnPosition { get; }
     public Quaternion SpawnRotation { get; }
+    public PoolType UnitPoolType { get; }
 }
 
 public struct PoolCreatingArguments : IFactoryArguments

@@ -29,6 +29,6 @@ MonoBehaviour:
     <AttackStats>k__BackingField:
       <BaseDelayBetweenAttack>k__BackingField: 11
       <BaseValueDamage>k__BackingField: 22
-    <HireUnitStats>k__BackingField:
-      <HiringCost>k__BackingField: 0
-      <HiringTime>k__BackingField: 5
+  <UnitHiringStats>k__BackingField:
+    <HiringCost>k__BackingField: 0
+    <HiringTime>k__BackingField: 4

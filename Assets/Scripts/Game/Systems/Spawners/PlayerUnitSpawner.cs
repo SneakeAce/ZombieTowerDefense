@@ -1,41 +1,29 @@
 using System.Collections;
 using UnityEngine;
 
-public class PlayerUnitSpawner : IPlayerUnitSpawner
+public class PlayerUnitSpawner : UnitSpawner, IPlayerUnitSpawner
 {
-    private IPoolManager _poolManager;
-    private IPlayerUnitsFactory _playerUnitFactory;
-    private ICommandInvoker _commandInvoker;
-
-    private ICoroutinePerformer _coroutinePerformer;
-    private Coroutine _createUnitCoroutine; // Сделать массив корутин, чтобы можно было нанимать несколько юнитов одновременно.
-
-    public PlayerUnitSpawner(ICoroutinePerformer coroutinePerformer, IPoolManager poolManager,
-        IPlayerUnitsFactory playerUnitFactory, ICommandInvoker commandInvoker)
+    public PlayerUnitSpawner(ICoroutinePerformer coroutinePerformer, IPoolManager poolManager, 
+        IUnitsFactory playerUnitFactory, ICommandInvoker commandInvoker) 
+        : base(coroutinePerformer, poolManager, playerUnitFactory, commandInvoker)
     {
-        _coroutinePerformer = coroutinePerformer;
-        _poolManager = poolManager;
-        _playerUnitFactory = playerUnitFactory;
-        _commandInvoker = commandInvoker;
     }
 
-    public void CreateUnit(CreateUnitData createUnitData)
+    protected override IEnumerator CreateUnitJob(CreateUnitData createUnitData)
     {
-        _createUnitCoroutine = _coroutinePerformer.StartRoutine(CreateUnitJob(createUnitData));
-    }
+        _poolType = PoolType.PlayerUnitPool;
 
-    private IEnumerator CreateUnitJob(CreateUnitData createUnitData)
-    {
-        IObjectPool currentObjectPool = _poolManager.GetPool<UnitType>(PoolType.PlayerUnitPool, createUnitData.UnitType);
+        IObjectPool currentObjectPool = _poolManager.GetPool<UnitType>(_poolType, createUnitData.UnitType);
 
         UnitSpawnArguments factoryArguments = new UnitSpawnArguments(
             currentObjectPool, 
             createUnitData.SpawnPosition, 
-            createUnitData.SpawnRotation);
+            createUnitData.SpawnRotation,
+            _poolType);
 
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(createUnitData.HiringTime);
 
-        Unit unit = _playerUnitFactory.CreateObject<Unit, UnitSpawnArguments>(factoryArguments);
+        PlayerUnit unit = _unitFactory.CreateObject<PlayerUnit, UnitSpawnArguments>(factoryArguments);
 
         if (unit == null)
             yield break;
