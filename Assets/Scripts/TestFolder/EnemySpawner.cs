@@ -11,7 +11,7 @@ public class EnemySpawner : IEnemySpawner
         _coroutinePerformer = coroutinePerformer;
     }
 
-    public void CreateUnit(UnitType unitType, Vector3 positionToMove)
+    public void CreateUnit(CreateUnitData createUnitData)
     {
         throw new System.NotImplementedException();
     }

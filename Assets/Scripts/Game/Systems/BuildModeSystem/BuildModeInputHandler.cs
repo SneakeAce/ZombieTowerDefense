@@ -46,6 +46,9 @@ public class BuildModeInputHandler
         {
             IGridCell currentCell = hit.collider.GetComponent<IGridCell>();
 
+            if (currentCell.IsEmpty == false)
+                return;
+
             if (currentCell != null && currentCell != _previousCell)
             {
                 if (_previousCell != null && _currentSelectedCell != null && _currentSelectedCell == _previousCell)
@@ -57,10 +60,7 @@ public class BuildModeInputHandler
                 _previousCell?.SetDefaultColor(); 
                 _previousCell = currentCell;
 
-                if (currentCell.IsEmpty)
-                    currentCell.SetColor(_colorAvailableCell);
-                else
-                    currentCell.SetColor(_colorUnavailableCell);
+                currentCell.SetColor(_colorAvailableCell);
             }
         }
         else
@@ -102,6 +102,7 @@ public class BuildModeInputHandler
             return;
 
         _currentSelectedCell.DeselectCell();
+        _currentSelectedCell.FreeCell();
 
         _currentSelectedCell = null;
 

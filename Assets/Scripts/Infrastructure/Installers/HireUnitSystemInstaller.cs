@@ -4,6 +4,8 @@ public class HireUnitSystemInstaller : MonoInstaller
 {
     public override void InstallBindings()
     {
+        BindUnitComponents();
+
         BindSpawnUnitSystem();
 
         BindUnitHireSystem();
@@ -22,6 +24,14 @@ public class HireUnitSystemInstaller : MonoInstaller
         Container.Bind<IPlayerUnitSpawnerManager>()
             .To<PlayerUnitSpawnerManager>()
             .AsSingle();
+    }
+
+    // Temporary method!
+    private void BindUnitComponents() 
+    {
+        Container.Bind<IUnitHealth>()
+            .To<UnitHealth>()
+            .AsTransient();
     }
 
     private void BindUnitHireSystem()

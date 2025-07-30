@@ -4,6 +4,9 @@ using UnityEngine.InputSystem;
 
 public class BuildModeController : IBuildModeController, IDisposable
 {
+    // Temporary spawn position untill the Headquarters is ready.
+    private Vector3 _tempSpawnPositionUnit = new Vector3(3.1f, 0f, 0f); 
+
     private PlayerInput _playerInput;
 
     private IGridCell _currentCell;
@@ -75,7 +78,8 @@ public class BuildModeController : IBuildModeController, IDisposable
             if (button == null)
                 continue;
 
-            _unitHiringController.SetSpawnPositionProvider(OnGetCellPosition);
+            _unitHiringController.SetPositionToMoveProvider(OnGetCellPosition);
+            _unitHiringController.SetSpawnPositionProvider(OnReturnTempSpawnPosition);
 
             button.ButtonWasPressed += ResetSelectedCell;
         }
@@ -90,6 +94,7 @@ public class BuildModeController : IBuildModeController, IDisposable
             if (button == null)
                 continue;
 
+            _unitHiringController.SetPositionToMoveProvider(null);
             _unitHiringController.SetSpawnPositionProvider(null);
 
             button.ButtonWasPressed -= ResetSelectedCell;
@@ -136,6 +141,11 @@ public class BuildModeController : IBuildModeController, IDisposable
     private Vector3 OnGetCellPosition()
     {
         return _currentCellPosition;
+    }
+
+    private Vector3 OnReturnTempSpawnPosition()
+    {
+        return _tempSpawnPositionUnit;
     }
 
     private void OnDeselectCell(InputAction.CallbackContext context)

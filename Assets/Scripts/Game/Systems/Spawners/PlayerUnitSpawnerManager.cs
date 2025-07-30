@@ -1,5 +1,3 @@
-using UnityEngine;
-
 public class PlayerUnitSpawnerManager : IPlayerUnitSpawnerManager
 {
     private IPlayerUnitSpawner _unitSpawner;
@@ -9,8 +7,8 @@ public class PlayerUnitSpawnerManager : IPlayerUnitSpawnerManager
         _unitSpawner = unitSpawner;
     }
 
-    public void OnTrySpawn(UnitType unitType, Vector3 positionToMove)
+    public void OnTrySpawn(CreateUnitData createUnitData)
     {
-        _unitSpawner.CreateUnit(unitType, positionToMove);
+        _unitSpawner.CreateUnit(createUnitData);
     }
 }

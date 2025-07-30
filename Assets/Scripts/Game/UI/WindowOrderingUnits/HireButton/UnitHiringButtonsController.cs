@@ -2,7 +2,6 @@ using System.Collections.Generic;
 
 public class UnitHiringButtonsController : IUnitHiringButtonsController
 {
-    private IPlayerUnitSpawnerManager _playerUnitSpawnerManager;
     private IConfigsProvider _configsProvider;
 
     private WindowUnitsHiringView _view;
@@ -11,10 +10,8 @@ public class UnitHiringButtonsController : IUnitHiringButtonsController
 
     private List<IUnitHiringButton> _hiringButtons = new List<IUnitHiringButton>();
 
-    public UnitHiringButtonsController(IConfigsProvider configsProvider,
-        IPlayerUnitSpawnerManager playerUnitSpawnerManager)
+    public UnitHiringButtonsController(IConfigsProvider configsProvider)
     {
-        _playerUnitSpawnerManager = playerUnitSpawnerManager;
         _configsProvider = configsProvider;
     }
 

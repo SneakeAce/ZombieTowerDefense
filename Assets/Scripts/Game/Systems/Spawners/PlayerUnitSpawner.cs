@@ -7,7 +7,7 @@ public class PlayerUnitSpawner : IPlayerUnitSpawner
     private IPlayerUnitsFactory _playerUnitFactory;
     private ICommandInvoker _commandInvoker;
 
-    private ICoroutinePerformer _coroutinePerformer; // пока не используется
+    private ICoroutinePerformer _coroutinePerformer;
     private Coroutine _createUnitCoroutine; // Сделать массив корутин, чтобы можно было нанимать несколько юнитов одновременно.
 
     public PlayerUnitSpawner(ICoroutinePerformer coroutinePerformer, IPoolManager poolManager,
@@ -19,16 +19,19 @@ public class PlayerUnitSpawner : IPlayerUnitSpawner
         _commandInvoker = commandInvoker;
     }
 
-    public void CreateUnit(UnitType unitType, Vector3 positionToMove)
+    public void CreateUnit(CreateUnitData createUnitData)
     {
-        _createUnitCoroutine = _coroutinePerformer.StartRoutine(CreateUnitJob(unitType, positionToMove));
+        _createUnitCoroutine = _coroutinePerformer.StartRoutine(CreateUnitJob(createUnitData));
     }
 
-    private IEnumerator CreateUnitJob(UnitType unitType, Vector3 positionToMove)
+    private IEnumerator CreateUnitJob(CreateUnitData createUnitData)
     {
-        IObjectPool currentObjectPool = _poolManager.GetPool<UnitType>(PoolType.PlayerUnitPool, unitType);
+        IObjectPool currentObjectPool = _poolManager.GetPool<UnitType>(PoolType.PlayerUnitPool, createUnitData.UnitType);
 
-        UnitSpawnArguments factoryArguments = new UnitSpawnArguments(currentObjectPool, new Vector3(3.1f, 0f, 0f), Quaternion.identity);
+        UnitSpawnArguments factoryArguments = new UnitSpawnArguments(
+            currentObjectPool, 
+            createUnitData.SpawnPosition, 
+            createUnitData.SpawnRotation);
 
         yield return new WaitForSeconds(2f);
 
@@ -39,7 +42,7 @@ public class PlayerUnitSpawner : IPlayerUnitSpawner
 
         unit.Initialize();
 
-        _commandInvoker.AddCommand(new MoveCommand(unit, positionToMove));
+        _commandInvoker.AddCommand(new MoveCommand(unit, createUnitData.PositionToMove));
 
         _commandInvoker.ExecuteCommand();
     }
