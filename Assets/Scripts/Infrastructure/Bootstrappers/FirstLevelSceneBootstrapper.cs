@@ -20,11 +20,13 @@ public class FirstLevelSceneBootstrapper : IInitializable
     private IInitializer _initializer;
 
     private List<IInitialize> _initializeList = new List<IInitialize>();
-    
+
+    private EnemyUnitSpawnerController _enemySpawnerController;
+
     public FirstLevelSceneBootstrapper(IPoolManager poolManager, ICameraManager cameraManager, IGridManager gridManager,
         IWindowUnitsHiringManager windowHiringUnitsManager, IUnitHiringButtonsController buttonsController,
         IWindowUnitsHiringController windowHiringUnitsController, IBuildModeController buildModeController,
-        IUnitHiringController unitHiringController, IInitializer initializer)
+        IUnitHiringController unitHiringController, IInitializer initializer, EnemyUnitSpawnerController enemySpawnerController)
     {
         _poolManager = poolManager;
 
@@ -38,6 +40,8 @@ public class FirstLevelSceneBootstrapper : IInitializable
         _unitHiringController = unitHiringController;
 
         _initializer = initializer;
+
+        _enemySpawnerController = enemySpawnerController;
 
         FillInitializeList();
     }
@@ -54,6 +58,7 @@ public class FirstLevelSceneBootstrapper : IInitializable
         _initializeList.Add(_windowHiringUnitsController);
         _initializeList.Add(_unitHiringButtonsController);
         _initializeList.Add(_unitHiringController);
+        _initializeList.Add(_enemySpawnerController);
     }
 
     private async UniTask LoadManagersAsync()

@@ -27,6 +27,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - SceneConfig
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a51148b80f6942c4e85c6e00a92d893c
+    m_Address: EnemySpawnerConfig
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ObjectConfig
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: bb6995422326c7f448c1c80360b44d06
     m_Address: GridManagerConfig
     m_ReadOnly: 0

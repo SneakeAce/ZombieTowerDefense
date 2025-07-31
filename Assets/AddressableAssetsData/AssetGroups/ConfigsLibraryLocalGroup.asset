@@ -33,6 +33,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - ConfigsLibrary
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d963489e6f9fff34f86521139b771a7a
+    m_Address: Assets/Configs/EnemyUnitConfigsLibrary.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ConfigsLibrary
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: ba0ca54040b73e041bf9db42304602bb, type: 2}
   m_SchemaSet:

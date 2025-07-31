@@ -8,7 +8,7 @@ public class CoroutinePerformer : MonoBehaviour, ICoroutinePerformer
         return StartCoroutine(routine);
     }
 
-    public void StopRoutine(IEnumerator routine)
+    public void StopRoutine(Coroutine routine)
     {
         StopCoroutine(routine);
     }

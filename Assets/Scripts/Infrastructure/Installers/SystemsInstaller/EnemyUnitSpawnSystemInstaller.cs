@@ -13,8 +13,7 @@ public class EnemyUnitSpawnSystemInstaller : Installer
             .To<EnemyUnitSpawner>()
             .AsSingle();
 
-        Container.Bind<IEnemyUnitSpawnerManager>()
-            .To<EnemyUnitSpawnerManager>()
+        Container.Bind<EnemyUnitSpawnerController>()
             .AsSingle();
     }
 }
