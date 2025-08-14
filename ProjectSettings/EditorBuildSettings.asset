@@ -6,10 +6,10 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/MainMenu.unity
+    path: Assets/ZombieTowerDefense/Scenes/MainMenu.unity
     guid: 6e7d764221dcc57449e599baa023ec27
   - enabled: 1
-    path: Assets/Scenes/FirstLevel.unity
+    path: Assets/ZombieTowerDefense/Scenes/FirstLevel.unity
     guid: 99c9720ab356a0642a771bea13969a05
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: 7f22036fbc26f974ab6f5d2e38ed173c, type: 2}
