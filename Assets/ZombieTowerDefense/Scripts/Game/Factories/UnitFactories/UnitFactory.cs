@@ -18,14 +18,12 @@ public class UnitFactory : IUnitsFactory
         where TArgs : IFactoryArguments
     {
         if (args is not UnitSpawnArguments spawnArgs)
-            throw new ArgumentException("Invalid arguments provided for SceneObjectFactory.");
+            throw new ArgumentException("Invalid arguments provided for UnitsFactory.");
 
         T unitT = (T)spawnArgs.Pool.GetObjectFromPool();
 
         if (unitT == null)
-            throw new NullReferenceException("Unit is Null!");
-
-        _container.Inject(unitT);
+            throw new ArgumentNullException("Unit is Null!");
 
         switch (spawnArgs.UnitPoolType)
         {
@@ -40,6 +38,8 @@ public class UnitFactory : IUnitsFactory
                         playerUnit.SetConfig(config);
                         playerUnit.transform.position = spawnArgs.SpawnPosition;
                         playerUnit.transform.rotation = spawnArgs.SpawnRotation;
+
+                        _container.Inject(playerUnit);
                     }
                 }
                 break;
@@ -55,6 +55,8 @@ public class UnitFactory : IUnitsFactory
                         enemyUnit.SetConfig(config);
                         enemyUnit.transform.position = spawnArgs.SpawnPosition;
                         enemyUnit.transform.rotation = spawnArgs.SpawnRotation;
+
+                        _container.Inject(enemyUnit);
                     }
                 }
                 break;

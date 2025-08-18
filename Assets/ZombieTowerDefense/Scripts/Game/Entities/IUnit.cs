@@ -8,7 +8,6 @@ public interface IUnit : IInitialize
     Collider Collider { get; }
     Animator Animator { get; }
     NavMeshAgent NavMeshAgent { get; }
-    UnitConfig UnitConfig { get; }
     IUnitHealth Health { get; }
     IUnitStateMachine UnitStateMachine { get; }
     bool IsSelected { get; set; }

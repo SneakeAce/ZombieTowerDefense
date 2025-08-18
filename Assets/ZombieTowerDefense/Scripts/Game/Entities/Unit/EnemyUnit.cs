@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using Zenject;
 
-public class EnemyUnit : MonoBehaviour, IUnit
+public class EnemyUnit : MonoBehaviour, IEnemyUnit
 {
     private Rigidbody _rigidbody;
     private Collider _collider;

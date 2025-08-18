@@ -31,6 +31,22 @@ public struct UnitSpawnArguments : IFactoryArguments
     public PoolType UnitPoolType { get; }
 }
 
+public struct WeaponSpawnArguments : IFactoryArguments
+{
+    public WeaponSpawnArguments(GameObject parent, WeaponConfig config, Vector3 spawnPosition, Quaternion spawnRotation)
+    {
+        Parent = parent;
+        Config = config;
+        SpawnPosition = spawnPosition;
+        SpawnRotation = spawnRotation;
+    }
+
+    public GameObject Parent { get; }
+    public WeaponConfig Config { get; }
+    public Vector3 SpawnPosition { get; }
+    public Quaternion SpawnRotation { get; }
+}
+    
 public struct PoolCreatingArguments : IFactoryArguments
 {
     public PoolCreatingArguments(int poolSize, bool canExpandPool, Transform container)

@@ -34,7 +34,7 @@ public class SelectUnit : IDisposable
 
         if (Physics.Raycast(ray, out RaycastHit hitInfo, _unitLayer))
         {
-            if (hitInfo.collider.TryGetComponent(out IUnit unit))
+            if (hitInfo.collider.TryGetComponent(out IPlayerUnit unit))
             {
                 unit.IsSelected = true;
 

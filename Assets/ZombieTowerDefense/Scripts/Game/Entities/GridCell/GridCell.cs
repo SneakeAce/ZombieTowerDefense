@@ -10,7 +10,7 @@ public class GridCell : MonoBehaviour, IGridCell
     public bool IsSelected { get; private set; }
 
     public GameObject GameObject => this.gameObject;
-    public IUnit CurrentUnit { get; private set; }
+    public IPlayerUnit CurrentUnit { get; private set; }
 
     public void Initialize()
     {
@@ -24,7 +24,7 @@ public class GridCell : MonoBehaviour, IGridCell
         _defaultColor = _cellMaterial.color;
     }
 
-    public void SetUnit(IUnit unit) => CurrentUnit = unit;
+    public void SetUnit(IPlayerUnit unit) => CurrentUnit = unit;
 
     public void SetColor(Color color) => _cellMaterial.color = color;
     

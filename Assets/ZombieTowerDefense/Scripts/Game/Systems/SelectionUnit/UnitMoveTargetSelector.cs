@@ -7,7 +7,7 @@ public class UnitMoveTargetSelector : IDisposable, IInitialize
     private PlayerInput _playerInput;
     private LayerMask _groundLayer = 1 << 7;
     private ICommandInvoker _commandInvoker;
-    private IUnit _unit;
+    private IPlayerUnit _unit;
 
     public UnitMoveTargetSelector(PlayerInput playerInput, ICommandInvoker commandInvoker)
     {   
@@ -26,7 +26,7 @@ public class UnitMoveTargetSelector : IDisposable, IInitialize
 
     }
 
-    public void SetUnit(IUnit unit) => _unit = unit;
+    public void SetUnit(IPlayerUnit unit) => _unit = unit;
     
     private void OnChooseMoveTarget(InputAction.CallbackContext context)
     {

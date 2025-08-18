@@ -1,10 +1,8 @@
 using System;
 
-public interface IUnitHealth
+public interface IUnitHealth : IDamageable
 {
-    void TakeDamage();
-
     event Action<float> CurrentValueChanged;
     event Action<float> MaxValueChanged;
-    event Action<IUnit> UnitDied;
+    event Action<IPlayerUnit> UnitDied;
 }

@@ -4,6 +4,10 @@ public class PlayerUnitSpawnSystemInstaller : Installer
 {
     public override void InstallBindings()
     {
+        BindWeaponFactory();
+
+        BindUnitBuilder();
+
         BindPlayerUnitSpawnSystem();
     }
 
@@ -16,5 +20,15 @@ public class PlayerUnitSpawnSystemInstaller : Installer
         Container.Bind<IPlayerUnitSpawnerManager>()
             .To<PlayerUnitSpawnerManager>()
             .AsSingle();
+    }
+
+    private void BindWeaponFactory()
+    {
+        Container.Bind<IWeaponFactory>().To<WeaponFactory>().AsSingle();
+    }
+
+    private void BindUnitBuilder()
+    {
+        Container.Bind<IUnitBuilder>().To<PlayerUnitBuilder>().AsSingle();
     }
 }
