@@ -3,10 +3,13 @@ using UnityEngine;
 
 public class PlayerUnitSpawner : UnitSpawner, IPlayerUnitSpawner
 {
+    private IUnitBuilder _unitBuilder;
+
     public PlayerUnitSpawner(ICoroutinePerformer coroutinePerformer, IPoolManager poolManager, 
-        IUnitsFactory playerUnitFactory, ICommandInvoker commandInvoker) 
+        IUnitsFactory playerUnitFactory, ICommandInvoker commandInvoker, IUnitBuilder unitBuilder) 
         : base(coroutinePerformer, poolManager, playerUnitFactory, commandInvoker)
     {
+        _unitBuilder = unitBuilder;
     }
 
     protected override IEnumerator CreateUnitJob(ICreateUnitData createUnitData)
@@ -23,7 +26,7 @@ public class PlayerUnitSpawner : UnitSpawner, IPlayerUnitSpawner
 
         yield return new WaitForSeconds(createUnitData.HiringTime);
 
-        PlayerUnit unit = _unitFactory.CreateObject<PlayerUnit, UnitSpawnArguments>(factoryArguments);
+        PlayerUnit unit = _unitBuilder.Build<PlayerUnit>(factoryArguments);
 
         if (unit == null)
             yield break;

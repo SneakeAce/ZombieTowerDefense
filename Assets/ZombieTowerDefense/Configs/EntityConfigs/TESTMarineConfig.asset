@@ -21,14 +21,16 @@ MonoBehaviour:
       m_EditorAssetChanged: 0
     <MoveStats>k__BackingField:
       <MoveSpeed>k__BackingField: 4
+      <RotationSpeed>k__BackingField: 2
     <HealthStats>k__BackingField:
       <BaseValueHealth>k__BackingField: 66
       <BaseValueRegenerationHealth>k__BackingField: 4
       <BaseDelayRegenerationHealth>k__BackingField: 22
-    <AttackStats>k__BackingField:
-      <BaseDelayBetweenAttack>k__BackingField: 11
-      <BaseValueDamage>k__BackingField: 22
-  <Type>k__BackingField: 1
+  <UnitWeapon>k__BackingField:
+    <WeaponConfig>k__BackingField: {fileID: 11400000, guid: c07e9dd69e25151479cc045f463719ba, type: 2}
+    <SpawnPosition>k__BackingField: {x: 0.15, y: 0.2, z: 0.5}
+    <SpawnRotation>k__BackingField: {x: 0, y: 0.70710677, z: 0, w: 0.70710677}
   <UnitHiringStats>k__BackingField:
     <HiringCost>k__BackingField: 0
-    <HiringTime>k__BackingField: 4
+    <HiringTime>k__BackingField: 1
+  <Type>k__BackingField: 1

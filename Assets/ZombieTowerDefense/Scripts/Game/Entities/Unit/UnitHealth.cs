@@ -3,12 +3,14 @@ using UnityEngine;
 
 public class UnitHealth : IUnitHealth
 {
+
+
     public event Action<float> CurrentValueChanged;
     public event Action<float> MaxValueChanged;
-    public event Action<IUnit> UnitDied;
+    public event Action<IPlayerUnit> UnitDied;
 
-    public void TakeDamage()
+    public void TakeDamage(DamageData damageData)
     {
-        throw new NotImplementedException();
+        Debug.Log($"Taking damage = {damageData.Damage}");
     }
 }

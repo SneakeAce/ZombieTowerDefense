@@ -15,6 +15,6 @@ MonoBehaviour:
   <ListEnemiesInSpawner>k__BackingField:
   - <EnemyUnitType>k__BackingField: 1
     <SpawnCountPerOnce>k__BackingField: 1
-    <MaxCountEnemyByType>k__BackingField: 10
+    <MaxCountEnemyByType>k__BackingField: 1
     <TimeBetweenSpawn>k__BackingField: 2
   <TimeBetweenStartSpawn>k__BackingField: 10

@@ -11,6 +11,11 @@ public class CoroutinePerformer : MonoBehaviour, ICoroutinePerformer
     public void StopRoutine(Coroutine routine)
     {
         StopCoroutine(routine);
+    }    
+    
+    public void StopRoutine(IEnumerator routine)
+    {
+        StopCoroutine(routine);
     }
 
     private void Awake() => DontDestroyOnLoad(this);

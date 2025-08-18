@@ -6,9 +6,9 @@ public interface IGridCell : IInitialize
     bool WalkableCell { get; }
     bool IsSelected { get; }
     GameObject GameObject { get; }
-    IUnit CurrentUnit { get; }
+    IPlayerUnit CurrentUnit { get; }
 
-    void SetUnit(IUnit unit);
+    void SetUnit(IPlayerUnit unit);
     void SetColor(Color color);
     void SetDefaultColor();
     void OccupyCell();

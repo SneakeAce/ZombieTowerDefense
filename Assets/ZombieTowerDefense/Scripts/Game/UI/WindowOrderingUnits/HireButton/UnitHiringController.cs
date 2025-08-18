@@ -67,6 +67,8 @@ public class UnitHiringController : IUnitHiringController
         Vector3 positionToMove = _setPositionToMove.Invoke();
         Vector3 spawnPosition = _setSpawnPosition.Invoke();
 
+        Debug.Log($"UnitSpawnPosition = {spawnPosition}");
+
         CreateUnitData<PlayerUnitType> createUnitData = new CreateUnitData<PlayerUnitType>(config.UnitType,
             positionToMove, spawnPosition, Quaternion.identity,
             config.UnitHiringStats.HiringTime, config.UnitHiringStats.HiringCost);
